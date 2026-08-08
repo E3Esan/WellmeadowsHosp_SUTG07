@@ -3,95 +3,104 @@
 
 (a) Create and maintain records recording the details of members of staff (Personnel
 Officer).
+
 (b) Search for staff who have particular qualifications or previous work experience
 (Personnel Officer).
+
 (c) Produce a report listing the details of staff allocated to each ward (Personnel Officer
 and Charge Nurse).
+
 (d) Create and maintain records recording the details of patients referred to the hospital
 (all staff).
-Figure B.6
-Wellmeadows
-Hospital ward
-requisition form.
-B.3.2
-B.3 The Wellmeadows Hospital Case Study | 1267
+
 (e) Create and maintain records recording the details of patients referred to the outpatient clinic (Charge Nurse).
+
 (f) Produce a report listing the details of patients referred to the out-patient clinic
 (Charge Nurse and Medical Director).
+
 (g) Create and maintain records recording the details of patients referred to a particular
 ward (Charge Nurse).
+
 (h) Produce a report listing the details of patients currently located in a particular ward
 (Charge Nurse and Medical Director).
+
 (i) Produce a report listing the details of patients currently on the waiting list for a particular ward (Charge Nurse and Medical Director).
+
 (j) Create and maintain records recording the details of medication given to a particular
 patient (Charge Nurse).
+
 (k) Produce a report listing the details of medication for a particular patient (Charge
 Nurse).
+
 (l) Create and maintain records recording the details of suppliers for the hospital
 (Medical Director).
+
 (m) Create and maintain records detailing requisitions for supplies for particular wards
 (Charge Nurse).
+
 (n) Produce a report listing the details of supplies provided to specific wards (Charge
 Nurse and Medical Director).
 -->
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8"><title>Wellmeadows Hospital System</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
-:root{--steel:#4a6fa5;--steel-dk:#33507a;--steel-lt:#eef2f8;--bd:#d3ddec;--ok:#2e8b57;--warn:#c0392b;}
-*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
-body{margin:0;background:#f4f7fb;color:#22303f}
-header{background:linear-gradient(90deg,var(--steel-dk),var(--steel));color:#fff;padding:14px 22px;display:flex;justify-content:space-between;align-items:center}
-header h1{margin:0;font-size:20px;letter-spacing:.5px}
-header span{font-size:12px;opacity:.85}
-nav{display:flex;flex-wrap:wrap;background:#fff;border-bottom:2px solid var(--bd);padding:0 10px}
-nav button{background:none;border:none;padding:12px 14px;cursor:pointer;font-size:13.5px;color:#456;border-bottom:3px solid transparent}
-nav button.active{color:var(--steel-dk);border-bottom:3px solid var(--steel);font-weight:600}
-nav button:hover{background:var(--steel-lt)}
-main{padding:20px;max-width:1300px;margin:auto}
-.page{display:none}.page.active{display:block}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
-.card{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(50,80,120,.08)}
-.card b{display:block;font-size:26px;color:var(--steel-dk)}
-.card span{font-size:12px;color:#678}
-h2{color:var(--steel-dk);border-bottom:2px solid var(--bd);padding-bottom:6px;font-size:18px}
-table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;margin-top:8px}
-th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left}
-th{background:var(--steel-lt);color:var(--steel-dk)}
-tr:hover td{background:#f7fafd}
-.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;background:#fff;border:1px solid var(--bd);padding:14px;border-radius:10px;margin-bottom:16px}
-.grid2 label{font-size:12px;color:#456;display:block;margin-bottom:3px}
-.grid2 input,.grid2 select{width:100%;padding:6px;border:1px solid var(--bd);border-radius:5px;font-size:13px}
-.btnrow{margin-top:10px}
-button.act{background:var(--steel);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px}
-button.act:hover{background:var(--steel-dk)}
-button.del{background:var(--warn);color:#fff;border:none;padding:4px 9px;border-radius:5px;cursor:pointer;font-size:11px}
-.search{padding:7px;border:1px solid var(--bd);border-radius:6px;width:260px;margin:10px 0;font-size:13px}
-.beds{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
-.wardbox{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px}
-.wardbox h3{margin:0 0 6px;font-size:14px;color:var(--steel-dk)}
-.bar{background:#e3eaf3;border-radius:6px;height:10px;overflow:hidden;margin:6px 0}
-.bar div{height:100%;background:var(--steel)}
-.free{color:var(--ok);font-weight:600}.full{color:var(--warn);font-weight:600}
-.tag{background:var(--steel-lt);color:var(--steel-dk);padding:2px 7px;border-radius:10px;font-size:11px}
-#authBtn{background:#fff;color:var(--steel-dk);border:none;padding:7px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
-#authOverlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--steel-dk),var(--steel));display:flex;align-items:center;justify-content:center;z-index:99}
-.authBox{background:#fff;padding:30px 34px;border-radius:12px;width:320px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
-.authBox h2{border:none;margin-top:0}
-.authBox input{width:100%;padding:9px;margin:6px 0;border:1px solid var(--bd);border-radius:6px;font-size:13px}
-.authBox button.act{width:100%;margin-top:8px}
-.authSwitch{text-align:center;font-size:12.5px;margin-top:12px;color:#456}
-.authSwitch a{color:var(--steel);cursor:pointer;font-weight:600}
-.authErr{color:var(--warn);font-size:12px;min-height:16px}.staffWidget{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-bottom:20px}
-.staffCard{background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden;text-align:center;box-shadow:0 1px 3px rgba(50,80,120,.08)}
-.staffCard img{width:100%;height:120px;object-fit:cover;object-position:top center}
-.staffCard .sc-body{padding:8px}
-.staffCard b{display:block;font-size:13px;color:var(--steel-dk)}
-.staffCard span{font-size:11px;color:#678}
-</style></head>
+  :root{--steel:#4a6fa5;--steel-dk:#33507a;--steel-lt:#eef2f8;--bd:#d3ddec;--ok:#2e8b57;--warn:#c0392b;}*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+  body{margin:0;background:#f4f7fb;color:#22303f}
+  header{background:linear-gradient(90deg,var(--steel-dk),var(--steel));color:#fff;padding:14px 22px;display:flex;justify-content:space-between;align-items:center}
+  header h1{margin:0;font-size:20px;letter-spacing:.5px}
+  header span{font-size:12px;opacity:.85}
+  nav{display:flex;flex-wrap:wrap;background:#fff;border-bottom:2px solid var(--bd);padding:0 10px}
+  nav button{background:none;border:none;padding:12px 14px;cursor:pointer;font-size:13.5px;color:#456;border-bottom:3px solid transparent}
+  nav button.active{color:var(--steel-dk);border-bottom:3px solid var(--steel);font-weight:600}
+  nav button:hover{background:var(--steel-lt)}
+  main{padding:20px;max-width:1300px;margin:auto}
+  .page{display:none}.page.active{display:block}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
+  .card{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(50,80,120,.08)}
+  .card b{display:block;font-size:26px;color:var(--steel-dk)}
+  .card span{font-size:12px;color:#678}
+  h2{color:var(--steel-dk);border-bottom:2px solid var(--bd);padding-bottom:6px;font-size:18px}
+  table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;margin-top:8px}
+  th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left}
+  th{background:var(--steel-lt);color:var(--steel-dk)}
+  tr:hover td{background:#f7fafd}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;background:#fff;border:1px solid var(--bd);padding:14px;border-radius:10px;margin-bottom:16px}
+  .grid2 label{font-size:12px;color:#456;display:block;margin-bottom:3px}
+  .grid2 input,.grid2 select{width:100%;padding:6px;border:1px solid var(--bd);border-radius:5px;font-size:13px}
+  .btnrow{margin-top:10px}
+  button.act{background:var(--steel);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px}
+  button.act:hover{background:var(--steel-dk)}
+  button.del{background:var(--warn);color:#fff;border:none;padding:4px 9px;border-radius:5px;cursor:pointer;font-size:11px}
+  .search{padding:7px;border:1px solid var(--bd);border-radius:6px;width:260px;margin:10px 0;font-size:13px}
+  .beds{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+  .wardbox{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px}
+  .wardbox h3{margin:0 0 6px;font-size:14px;color:var(--steel-dk)}
+  .bar{background:#e3eaf3;border-radius:6px;height:10px;overflow:hidden;margin:6px 0}
+  .bar div{height:100%;background:var(--steel)}
+  .free{color:var(--ok);font-weight:600}.full{color:var(--warn);font-weight:600}
+  .tag{background:var(--steel-lt);color:var(--steel-dk);padding:2px 7px;border-radius:10px;font-size:11px}
+  #authBtn{background:#fff;color:var(--steel-dk);border:none;padding:7px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
+  #authOverlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--steel-dk),var(--steel));display:flex;align-items:center;justify-content:center;z-index:99}
+  .authBox{background:#fff;padding:30px 34px;border-radius:12px;width:320px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+  .authBox h2{border:none;margin-top:0}
+  .authBox input{width:100%;padding:9px;margin:6px 0;border:1px solid var(--bd);border-radius:6px;font-size:13px}
+  .authBox button.act{width:100%;margin-top:8px}
+  .authSwitch{text-align:center;font-size:12.5px;margin-top:12px;color:#456}
+  .authSwitch a{color:var(--steel);cursor:pointer;font-weight:600}
+  .authErr{color:var(--warn);font-size:12px;min-height:16px}.staffWidget{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-bottom:20px}
+  .staffCard{background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden;text-align:center;box-shadow:0 1px 3px rgba(50,80,120,.08)}
+  .staffCard img{width:100%;height:120px;object-fit:cover;object-position:top center}
+  .staffCard .sc-body{padding:8px}
+  .staffCard b{display:block;font-size:13px;color:var(--steel-dk)}
+  .staffCard span{font-size:11px;color:#678}
+</style>
+</head>
+
 <body>
 <div id="authOverlay">
  <div class="authBox" id="loginBox">
@@ -165,13 +174,6 @@ button.del{background:var(--warn);color:#fff;border:none;padding:4px 9px;border-
 <table id="t-supplier"></table></div>
 </main>
 
-
-
-
-
-
-
-
 <script>
 // ---------- schema ----------
 const SCHEMA={
@@ -192,11 +194,6 @@ requisition:{fields:['reqNo','requestedBy','ward','itemNo','itemName','dosage','
  labels:['Requisition No','Requested By','Ward','Item/Drug No','Name','Dosage','Method','Cost/Unit','Qty','Date Ordered']},
 supplier:{fields:['supNo','name','address','tel','fax'],labels:['Supplier No','Name','Address','Tel No','Fax No']}
 };
-
-
-
-
-
 
 // ---------- seed data (from case study) ----------
 let DB={
@@ -227,8 +224,6 @@ try{const s=localStorage.getItem('wellmeadowsDB');if(s)DB=JSON.parse(s);}catch(e
 function save(){try{localStorage.setItem('wellmeadowsDB',JSON.stringify(DB));}catch(e){}}
 function idNo(prefix,arr,field){return prefix+(1000+arr.length+1);}
 
-
-
 // ---------- nav ----------
 const PAGES=[['dashboard','Dashboard'],['beds','Bed Monitor'],['wards','Wards'],['staff','Staff'],['patients','Patients'],['outpatients','Outpatients'],['appointments','Appointments'],['medication','Medication'],['supplies','Supplies'],['pharma','Pharmaceuticals'],['requisitions','Requisitions'],['suppliers','Suppliers']];
 document.getElementById('nav').innerHTML=PAGES.map(p=>`<button data-p="${p[0]}" onclick="show('${p[0]}')">${p[1]}</button>`).join('');
@@ -236,8 +231,6 @@ function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remov
  document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.p===p));
  if(p==='dashboard')renderDash(); if(p==='beds')renderBeds();
 }
-
-
 
 // ---------- build forms ----------
 function buildForm(key){
@@ -311,8 +304,6 @@ function renderBeds(){
  }).join('');
 }
 show('dashboard');
-
-
 
 // ---------- auth ----------
 let USERS=JSON.parse(localStorage.getItem('wmUsers')||'[{"user":"admin","pass":"admin123","role":"Medical Director"}]');
