@@ -1,0 +1,342 @@
+<!--
+---------- Requirement ----------
+
+(a) Create and maintain records recording the details of members of staff (Personnel
+Officer).
+(b) Search for staff who have particular qualifications or previous work experience
+(Personnel Officer).
+(c) Produce a report listing the details of staff allocated to each ward (Personnel Officer
+and Charge Nurse).
+(d) Create and maintain records recording the details of patients referred to the hospital
+(all staff).
+Figure B.6
+Wellmeadows
+Hospital ward
+requisition form.
+B.3.2
+B.3 The Wellmeadows Hospital Case Study | 1267
+(e) Create and maintain records recording the details of patients referred to the outpatient clinic (Charge Nurse).
+(f) Produce a report listing the details of patients referred to the out-patient clinic
+(Charge Nurse and Medical Director).
+(g) Create and maintain records recording the details of patients referred to a particular
+ward (Charge Nurse).
+(h) Produce a report listing the details of patients currently located in a particular ward
+(Charge Nurse and Medical Director).
+(i) Produce a report listing the details of patients currently on the waiting list for a particular ward (Charge Nurse and Medical Director).
+(j) Create and maintain records recording the details of medication given to a particular
+patient (Charge Nurse).
+(k) Produce a report listing the details of medication for a particular patient (Charge
+Nurse).
+(l) Create and maintain records recording the details of suppliers for the hospital
+(Medical Director).
+(m) Create and maintain records detailing requisitions for supplies for particular wards
+(Charge Nurse).
+(n) Produce a report listing the details of supplies provided to specific wards (Charge
+Nurse and Medical Director).
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><title>Wellmeadows Hospital System</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+:root{--steel:#4a6fa5;--steel-dk:#33507a;--steel-lt:#eef2f8;--bd:#d3ddec;--ok:#2e8b57;--warn:#c0392b;}
+*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
+body{margin:0;background:#f4f7fb;color:#22303f}
+header{background:linear-gradient(90deg,var(--steel-dk),var(--steel));color:#fff;padding:14px 22px;display:flex;justify-content:space-between;align-items:center}
+header h1{margin:0;font-size:20px;letter-spacing:.5px}
+header span{font-size:12px;opacity:.85}
+nav{display:flex;flex-wrap:wrap;background:#fff;border-bottom:2px solid var(--bd);padding:0 10px}
+nav button{background:none;border:none;padding:12px 14px;cursor:pointer;font-size:13.5px;color:#456;border-bottom:3px solid transparent}
+nav button.active{color:var(--steel-dk);border-bottom:3px solid var(--steel);font-weight:600}
+nav button:hover{background:var(--steel-lt)}
+main{padding:20px;max-width:1300px;margin:auto}
+.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
+.card{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:16px;box-shadow:0 1px 3px rgba(50,80,120,.08)}
+.card b{display:block;font-size:26px;color:var(--steel-dk)}
+.card span{font-size:12px;color:#678}
+h2{color:var(--steel-dk);border-bottom:2px solid var(--bd);padding-bottom:6px;font-size:18px}
+table{width:100%;border-collapse:collapse;background:#fff;font-size:13px;margin-top:8px}
+th,td{border:1px solid var(--bd);padding:7px 9px;text-align:left}
+th{background:var(--steel-lt);color:var(--steel-dk)}
+tr:hover td{background:#f7fafd}
+.grid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;background:#fff;border:1px solid var(--bd);padding:14px;border-radius:10px;margin-bottom:16px}
+.grid2 label{font-size:12px;color:#456;display:block;margin-bottom:3px}
+.grid2 input,.grid2 select{width:100%;padding:6px;border:1px solid var(--bd);border-radius:5px;font-size:13px}
+.btnrow{margin-top:10px}
+button.act{background:var(--steel);color:#fff;border:none;padding:8px 16px;border-radius:6px;cursor:pointer;font-size:13px}
+button.act:hover{background:var(--steel-dk)}
+button.del{background:var(--warn);color:#fff;border:none;padding:4px 9px;border-radius:5px;cursor:pointer;font-size:11px}
+.search{padding:7px;border:1px solid var(--bd);border-radius:6px;width:260px;margin:10px 0;font-size:13px}
+.beds{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.wardbox{background:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px}
+.wardbox h3{margin:0 0 6px;font-size:14px;color:var(--steel-dk)}
+.bar{background:#e3eaf3;border-radius:6px;height:10px;overflow:hidden;margin:6px 0}
+.bar div{height:100%;background:var(--steel)}
+.free{color:var(--ok);font-weight:600}.full{color:var(--warn);font-weight:600}
+.tag{background:var(--steel-lt);color:var(--steel-dk);padding:2px 7px;border-radius:10px;font-size:11px}
+#authBtn{background:#fff;color:var(--steel-dk);border:none;padding:7px 14px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600}
+#authOverlay{position:fixed;inset:0;background:linear-gradient(135deg,var(--steel-dk),var(--steel));display:flex;align-items:center;justify-content:center;z-index:99}
+.authBox{background:#fff;padding:30px 34px;border-radius:12px;width:320px;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+.authBox h2{border:none;margin-top:0}
+.authBox input{width:100%;padding:9px;margin:6px 0;border:1px solid var(--bd);border-radius:6px;font-size:13px}
+.authBox button.act{width:100%;margin-top:8px}
+.authSwitch{text-align:center;font-size:12.5px;margin-top:12px;color:#456}
+.authSwitch a{color:var(--steel);cursor:pointer;font-weight:600}
+.authErr{color:var(--warn);font-size:12px;min-height:16px}.staffWidget{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-bottom:20px}
+.staffCard{background:#fff;border:1px solid var(--bd);border-radius:10px;overflow:hidden;text-align:center;box-shadow:0 1px 3px rgba(50,80,120,.08)}
+.staffCard img{width:100%;height:120px;object-fit:cover;object-position:top center}
+.staffCard .sc-body{padding:8px}
+.staffCard b{display:block;font-size:13px;color:var(--steel-dk)}
+.staffCard span{font-size:11px;color:#678}
+</style></head>
+<body>
+<div id="authOverlay">
+ <div class="authBox" id="loginBox">
+  <h2>🏥 Staff Login</h2>
+  <input id="li-user" placeholder="Username">
+  <input id="li-pass" type="password" placeholder="Password">
+  <div class="authErr" id="li-err"></div>
+  <button class="act" onclick="doLogin()">Login</button>
+  <div class="authSwitch">No account? <a onclick="toggleAuth('register')">Register</a></div>
+ </div>
+ <div class="authBox" id="registerBox" style="display:none">
+  <h2>Create Account</h2>
+  <input id="rg-user" placeholder="Username">
+  <input id="rg-pass" type="password" placeholder="Password">
+  <select id="rg-role" style="width:100%;padding:9px;margin:6px 0;border:1px solid var(--bd);border-radius:6px;font-size:13px">
+   <option>Personnel Officer</option><option>Charge Nurse</option><option>Medical Director</option>
+  </select>
+  <div class="authErr" id="rg-err"></div>
+  <button class="act" onclick="doRegister()">Register</button>
+  <div class="authSwitch">Have an account? <a onclick="toggleAuth('login')">Login</a></div>
+ </div>
+</div>
+<header><h1>🏥 Wellmeadows Hospital</h1><span>Edinburgh • Elderly Care • Management System</span>
+<button id="authBtn" onclick="logout()">Logout</button></header>
+<nav id="nav"></nav>
+<main>
+<div id="dashboard" class="page"><h2>Dashboard</h2><div class="cards" id="dashCards"></div>
+<h2>Staff on Duty</h2><div class="staffWidget" id="staffWidget"></div>
+<h2>Wards Overview</h2><table id="wardOverview"></table></div>
+
+<div id="beds" class="page"><h2>Bed Availability Monitor</h2><div class="beds" id="bedGrid"></div></div>
+
+<div id="wards" class="page"><h2>Wards</h2>
+<div class="grid2" id="f-ward"></div><button class="act" onclick="addRow('ward')">Add Ward</button>
+<input class="search" placeholder="Search wards..." oninput="render('ward',this.value)"><table id="t-ward"></table></div>
+
+<div id="staff" class="page"><h2>Staff</h2>
+<div class="grid2" id="f-staff"></div><button class="act" onclick="addRow('staff')">Add Staff</button>
+<input class="search" placeholder="Search staff (name/position/qualification)..." oninput="render('staff',this.value)"><table id="t-staff"></table></div>
+
+<div id="patients" class="page"><h2>Patients (In-ward / Waiting List)</h2>
+<div class="grid2" id="f-patient"></div><button class="act" onclick="addRow('patient')">Add Patient</button>
+<input class="search" placeholder="Search patients..." oninput="render('patient',this.value)"><table id="t-patient"></table></div>
+
+<div id="outpatients" class="page"><h2>Outpatients</h2>
+<div class="grid2" id="f-outpatient"></div><button class="act" onclick="addRow('outpatient')">Add Outpatient</button>
+<table id="t-outpatient"></table></div>
+
+<div id="appointments" class="page"><h2>Patient Appointments</h2>
+<div class="grid2" id="f-appointment"></div><button class="act" onclick="addRow('appointment')">Add Appointment</button>
+<table id="t-appointment"></table></div>
+
+<div id="medication" class="page"><h2>Patient Medication</h2>
+<div class="grid2" id="f-medication"></div><button class="act" onclick="addRow('medication')">Add Medication Record</button>
+<table id="t-medication"></table></div>
+
+<div id="supplies" class="page"><h2>Surgical / Non-Surgical Supplies</h2>
+<div class="grid2" id="f-supply"></div><button class="act" onclick="addRow('supply')">Add Supply</button>
+<table id="t-supply"></table></div>
+
+<div id="pharma" class="page"><h2>Pharmaceutical Supplies</h2>
+<div class="grid2" id="f-pharma"></div><button class="act" onclick="addRow('pharma')">Add Drug</button>
+<table id="t-pharma"></table></div>
+
+<div id="requisitions" class="page"><h2>Ward Requisitions</h2>
+<div class="grid2" id="f-requisition"></div><button class="act" onclick="addRow('requisition')">Add Requisition</button>
+<table id="t-requisition"></table></div>
+
+<div id="suppliers" class="page"><h2>Suppliers</h2>
+<div class="grid2" id="f-supplier"></div><button class="act" onclick="addRow('supplier')">Add Supplier</button>
+<table id="t-supplier"></table></div>
+</main>
+
+
+
+
+
+
+
+
+<script>
+// ---------- schema ----------
+const SCHEMA={
+ward:{fields:['number','name','location','beds','extn'],labels:['Ward No','Ward Name','Location','Total Beds','Tel Extn']},
+staff:{fields:['staffNo','first','last','address','tel','dob','sex','nin','position','salary','scale','ward','hours','contract','pay','qual','institution','photo','file'],
+ labels:['Staff No','First Name','Last Name','Address','Tel No','DOB','Sex','NIN','Position','Salary','Salary Scale','Ward Assigned','Hours/Week','Perm/Temp','Pay(W/M)','Qualification','Institution','Photo URL','Attachment']},
+patient:{fields:['patNo','first','last','address','tel','dob','sex','marital','kinName','kinRel','ward','bed','waitDate','placedDate','expLeave','actualLeave','status','file'],
+ labels:['Patient No','First Name','Last Name','Address','Tel No','DOB','Sex','Marital Status','Next-of-Kin','Kin Relation','Ward Required','Bed No','Waitlist Date','Date Placed','Expected Leave','Actual Leave','Status','Attachment']},
+outpatient:{fields:['patNo','first','last','address','tel','dob','sex','apptDate','apptTime','file'],
+ labels:['Patient No','First Name','Last Name','Address','Tel No','DOB','Sex','Appt Date','Appt Time','Attachment']},
+appointment:{fields:['apptNo','patNo','consultant','staffNo','date','time','room','file'],
+ labels:['Appointment No','Patient No','Consultant Name','Consultant Staff No','Date','Time','Exam Room','Attachment']},
+medication:{fields:['patNo','patName','ward','bed','drugNo','drugName','dosage','method','units','start','finish'],
+ labels:['Patient No','Patient Name','Ward','Bed No','Drug No','Drug Name','Dosage','Method','Units/Day','Start Date','Finish Date']},
+supply:{fields:['itemNo','name','desc','qty','reorder','cost'],labels:['Item No','Name','Description','Qty in Stock','Reorder Level','Cost/Unit(£)']},
+pharma:{fields:['drugNo','name','desc','dosage','method','qty','reorder','cost'],labels:['Drug No','Name','Description','Dosage','Method','Qty in Stock','Reorder Level','Cost/Unit(£)']},
+requisition:{fields:['reqNo','requestedBy','ward','itemNo','itemName','dosage','method','cost','qty','date'],
+ labels:['Requisition No','Requested By','Ward','Item/Drug No','Name','Dosage','Method','Cost/Unit','Qty','Date Ordered']},
+supplier:{fields:['supNo','name','address','tel','fax'],labels:['Supplier No','Name','Address','Tel No','Fax No']}
+};
+
+
+
+
+
+
+// ---------- seed data (from case study) ----------
+let DB={
+ward:[{number:11,name:'Orthopaedic',location:'Block E',beds:20,extn:7711},{number:12,name:'Cardiology',location:'Block E',beds:18,extn:7712}],
+staff:[{staffNo:'S011',first:'Moira',last:'Samuel',address:'49 School Road, Broxburn',tel:'01506-45633',dob:'1961-05-30',sex:'Female',nin:'WB123423D',position:'Charge Nurse',salary:18760,scale:'1C',ward:11,hours:37.5,contract:'P',pay:'M',qual:'BSc Nursing Studies',institution:'Edinburgh University',photo:'photos/staff2.png'},
+{staffNo:'S098',first:'Carol',last:'Cummings',address:'15 High Street Edinburgh',tel:'0131-334-5677',dob:'1975-02-14',sex:'Female',nin:'',position:'Staff Nurse',salary:15000,scale:'1B',ward:11,hours:37.5,contract:'P',pay:'M',qual:'',institution:'',photo:'photos/staff5.png'},
+{staffNo:'S123',first:'Morgan',last:'Russell',address:'23A George Street Broxburn',tel:'01506-67676',dob:'1980-07-01',sex:'Male',nin:'',position:'Nurse',salary:14000,scale:'1A',ward:11,hours:37.5,contract:'T',pay:'M',qual:'',institution:'',photo:'photos/staff4.png'},
+{staffNo:'S167',first:'Robin',last:'Plevin',address:'7 Glen Terrace Edinburgh',tel:'0131-339-6123',dob:'1978-03-22',sex:'Male',nin:'',position:'Staff Nurse',salary:15200,scale:'1B',ward:11,hours:37.5,contract:'P',pay:'M',qual:'',institution:'',photo:'photos/staff1.png'},
+{staffNo:'S234',first:'Amy',last:"O'Donnell",address:'234 Princes Street Edinburgh',tel:'0131-334-9099',dob:'1985-11-09',sex:'Female',nin:'',position:'Nurse',salary:14000,scale:'1A',ward:11,hours:37.5,contract:'P',pay:'M',qual:'',institution:'',photo:''},
+{staffNo:'S344',first:'Laurence',last:'Burns',address:'1 Apple Drive Edinburgh',tel:'0131-334-9100',dob:'1970-01-15',sex:'Male',nin:'',position:'Consultant',salary:45000,scale:'CON',ward:11,hours:40,contract:'P',pay:'M',qual:'MD',institution:'Edinburgh University',photo:'photos/staff3.png'}],
+patient:[{patNo:'P10451',first:'Robert',last:'Drumtree',address:'',tel:'',dob:'',sex:'',marital:'',kinName:'',kinRel:'',ward:11,bed:84,waitDate:'2004-01-12',placedDate:'2004-01-12',expLeave:'2004-01-17',actualLeave:'2004-01-16',status:'Discharged'},
+{patNo:'P10480',first:'Steven',last:'Parks',address:'',tel:'',dob:'',sex:'',marital:'',kinName:'',kinRel:'',ward:11,bed:79,waitDate:'2004-01-12',placedDate:'2004-01-14',expLeave:'2004-01-18',actualLeave:'2004-01-18',status:'Discharged'},
+{patNo:'P10563',first:'David',last:'Black',address:'',tel:'',dob:'',sex:'',marital:'',kinName:'',kinRel:'',ward:11,bed:80,waitDate:'2004-01-13',placedDate:'2004-01-13',expLeave:'2004-01-27',actualLeave:'',status:'In Ward'},
+{patNo:'P10604',first:'Ian',last:'Thomson',address:'',tel:'',dob:'',sex:'',marital:'',kinName:'',kinRel:'',ward:11,bed:87,waitDate:'2004-01-14',placedDate:'2004-01-15',expLeave:'2004-01-25',actualLeave:'',status:'In Ward'},
+{patNo:'P10787',first:'Peter',last:'Smith',address:'',tel:'',dob:'',sex:'',marital:'',kinName:'',kinRel:'',ward:11,bed:84,waitDate:'2004-01-17',placedDate:'2004-01-17',expLeave:'2004-01-22',actualLeave:'',status:'In Ward'},
+{patNo:'P10234',first:'Anne',last:'Phelps',address:'44 North Bridges, Cannonmills, Edinburgh EH1 5GH',tel:'0131-332-4111',dob:'1933-12-12',sex:'Female',marital:'Single',kinName:'James Phelps',kinRel:'Son',ward:'',bed:'',waitDate:'2004-02-21',placedDate:'',expLeave:'',actualLeave:'',status:'Waiting List'}],
+outpatient:[],
+appointment:[],
+medication:[{patNo:'P10034',patName:'Robert MacDonald',ward:11,bed:84,drugNo:10223,drugName:'Morphine',dosage:'10mg/ml',method:'Oral',units:50,start:'2004-03-24',finish:'2004-04-24'},
+{patNo:'P10034',patName:'Robert MacDonald',ward:11,bed:84,drugNo:10334,drugName:'Tetracycline',dosage:'0.5mg/ml',method:'IV',units:10,start:'2004-03-24',finish:'2004-04-17'},
+{patNo:'P10034',patName:'Robert MacDonald',ward:11,bed:84,drugNo:10223,drugName:'Morphine',dosage:'10mg/ml',method:'Oral',units:10,start:'2004-04-25',finish:'2004-05-02'}],
+supply:[{itemNo:'IT001',name:'Syringes',desc:'Sterile disposable syringes',qty:500,reorder:100,cost:0.15},{itemNo:'IT002',name:'Sterile Dressings',desc:'Wound dressing pads',qty:300,reorder:50,cost:0.8},{itemNo:'IT003',name:'Plastic Bags',desc:'Non-surgical clinical waste bags',qty:1000,reorder:200,cost:0.05},{itemNo:'IT004',name:'Aprons',desc:'Disposable plastic aprons',qty:600,reorder:150,cost:0.1}],
+pharma:[{drugNo:10223,name:'Morphine',desc:'Pain killer',dosage:'10mg/ml',method:'Oral',qty:200,reorder:50,cost:27.75},{drugNo:10334,name:'Tetracycline',desc:'Antibiotic',dosage:'0.5mg/ml',method:'IV',qty:150,reorder:40,cost:12.5}],
+requisition:[{reqNo:'034567712',requestedBy:'Moira Samuel',ward:11,itemNo:10223,itemName:'Morphine',dosage:'10mg/ml',method:'Oral',cost:27.75,qty:50,date:'2004-02-15'}],
+supplier:[{supNo:'SU01',name:'MediSupply Ltd',address:'12 Industrial Est, Edinburgh',tel:'0131-500-1000',fax:'0131-500-1001'},{supNo:'SU02',name:'PharmaCorp UK',address:'8 Fife Road, Glasgow',tel:'0141-600-2000',fax:'0141-600-2001'}]
+};
+try{const s=localStorage.getItem('wellmeadowsDB');if(s)DB=JSON.parse(s);}catch(e){}
+function save(){try{localStorage.setItem('wellmeadowsDB',JSON.stringify(DB));}catch(e){}}
+function idNo(prefix,arr,field){return prefix+(1000+arr.length+1);}
+
+
+
+// ---------- nav ----------
+const PAGES=[['dashboard','Dashboard'],['beds','Bed Monitor'],['wards','Wards'],['staff','Staff'],['patients','Patients'],['outpatients','Outpatients'],['appointments','Appointments'],['medication','Medication'],['supplies','Supplies'],['pharma','Pharmaceuticals'],['requisitions','Requisitions'],['suppliers','Suppliers']];
+document.getElementById('nav').innerHTML=PAGES.map(p=>`<button data-p="${p[0]}" onclick="show('${p[0]}')">${p[1]}</button>`).join('');
+function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById(p).classList.add('active');
+ document.querySelectorAll('nav button').forEach(b=>b.classList.toggle('active',b.dataset.p===p));
+ if(p==='dashboard')renderDash(); if(p==='beds')renderBeds();
+}
+
+
+
+// ---------- build forms ----------
+function buildForm(key){
+ const s=SCHEMA[key],box=document.getElementById('f-'+key);
+ box.innerHTML=s.fields.map((f,i)=>f==='file'
+  ?`<div><label>${s.labels[i]}</label><input type="file" id="in-${key}-${f}"></div>`
+  :`<div><label>${s.labels[i]}</label><input id="in-${key}-${f}"></div>`).join('');
+}
+Object.keys(SCHEMA).forEach(buildForm);
+
+function addRow(key){
+ const s=SCHEMA[key],obj={};
+ const fileField=s.fields.find(f=>f==='file');
+ const fileEl=fileField?document.getElementById('in-'+key+'-file'):null;
+ const finish=()=>{
+  s.fields.forEach(f=>{if(f==='file')return;const el=document.getElementById('in-'+key+'-'+f);obj[f]=el.value;el.value='';});
+  const idField=s.fields[0];
+  if(!obj[idField]) obj[idField]=key.toUpperCase().slice(0,3)+Math.floor(1000+Math.random()*8999);
+  DB[key].push(obj); save(); render(key);
+ };
+ if(fileEl&&fileEl.files&&fileEl.files[0]){
+  const f=fileEl.files[0],r=new FileReader();
+  r.onload=()=>{obj.file=r.result;obj.fileName=f.name;fileEl.value='';finish();};
+  r.readAsDataURL(f);
+ } else {obj.file='';finish();}
+}
+function delRow(key,i){DB[key].splice(i,1);save();render(key);}
+
+function render(key,q){
+ const s=SCHEMA[key],rows=DB[key];
+ const filtered=q?rows.filter(r=>Object.values(r).join(' ').toLowerCase().includes(q.toLowerCase())):rows;
+ let h='<tr>'+s.labels.map(l=>`<th>${l}</th>`).join('')+'<th></th></tr>';
+ filtered.forEach((r)=>{const realIdx=rows.indexOf(r);
+  h+='<tr>'+s.fields.map(f=>f==='file'
+   ?`<td>${r.file?`<a href="${r.file}" download="${r.fileName||'file'}">📎 ${r.fileName||'file'}</a>`:'-'}</td>`
+   :`<td>${r[f]??''}</td>`).join('')+`<td><button class="del" onclick="delRow('${key}',${realIdx})">Del</button></td></tr>`;});
+ document.getElementById('t-'+key).innerHTML=h;
+}
+Object.keys(SCHEMA).forEach(k=>render(k));
+
+// ---------- dashboard ----------
+function renderDash(){
+ const totalBeds=DB.ward.reduce((a,w)=>a+Number(w.beds||0),0);
+ const occupied=DB.patient.filter(p=>p.status==='In Ward').length;
+ const waiting=DB.patient.filter(p=>p.status==='Waiting List').length;
+ const cards=[
+ ['Total Wards',DB.ward.length],['Total Beds',totalBeds],['Occupied Beds',occupied],
+ ['Free Beds',totalBeds-occupied],['Staff Members',DB.staff.length],['Patients on Waitlist',waiting],
+ ['Outpatients',DB.outpatient.length],['Suppliers',DB.supplier.length]];
+ document.getElementById('dashCards').innerHTML=cards.map(c=>`<div class="card"><b>${c[1]}</b><span>${c[0]}</span></div>`).join('');
+ document.getElementById('staffWidget').innerHTML=DB.staff.map(s=>{
+  const img=s.photo?s.photo:'https://api.dicebear.com/7.x/initials/svg?seed='+s.first+s.last+'&backgroundColor=4a6fa5';
+  return `<div class="staffCard"><img src="${img}" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=${s.first}${s.last}&backgroundColor=4a6fa5'"><div class="sc-body"><b>${s.first} ${s.last}</b><span>${s.position} • Ward ${s.ward||'-'}</span></div></div>`;
+ }).join('');
+ let h='<tr><th>Ward No</th><th>Name</th><th>Location</th><th>Beds</th><th>Occupied</th><th>Free</th><th>Charge Nurse</th></tr>';
+ DB.ward.forEach(w=>{
+  const occ=DB.patient.filter(p=>String(p.ward)===String(w.number)&&p.status==='In Ward').length;
+  const cn=DB.staff.find(s=>String(s.ward)===String(w.number)&&s.position==='Charge Nurse');
+  h+=`<tr><td>${w.number}</td><td>${w.name}</td><td>${w.location}</td><td>${w.beds}</td><td>${occ}</td><td>${w.beds-occ}</td><td>${cn?cn.first+' '+cn.last:'-'}</td></tr>`;
+ });
+ document.getElementById('wardOverview').innerHTML=h;
+}
+function renderBeds(){
+ document.getElementById('bedGrid').innerHTML=DB.ward.map(w=>{
+  const occ=DB.patient.filter(p=>String(p.ward)===String(w.number)&&p.status==='In Ward').length;
+  const free=w.beds-occ,pct=Math.min(100,Math.round(occ/w.beds*100));
+  return `<div class="wardbox"><h3>Ward ${w.number} – ${w.name}</h3><span class="tag">${w.location}</span>
+  <div class="bar"><div style="width:${pct}%"></div></div>
+  <div>${occ}/${w.beds} occupied</div>
+  <div class="${free>0?'free':'full'}">${free>0?free+' beds free':'FULL'}</div></div>`;
+ }).join('');
+}
+show('dashboard');
+
+
+
+// ---------- auth ----------
+let USERS=JSON.parse(localStorage.getItem('wmUsers')||'[{"user":"admin","pass":"admin123","role":"Medical Director"}]');
+function saveUsers(){localStorage.setItem('wmUsers',JSON.stringify(USERS));}
+function toggleAuth(which){document.getElementById('loginBox').style.display=which==='login'?'block':'none';document.getElementById('registerBox').style.display=which==='register'?'block':'none';}
+function doLogin(){
+ const u=document.getElementById('li-user').value.trim(),p=document.getElementById('li-pass').value;
+ const found=USERS.find(x=>x.user===u&&x.pass===p);
+ if(!found){document.getElementById('li-err').textContent='Invalid username or password';return;}
+ sessionStorage.setItem('wmSession',JSON.stringify(found));
+ document.getElementById('authOverlay').style.display='none';
+ document.getElementById('authBtn').textContent='Logout ('+found.user+')';
+}
+function doRegister(){
+ const u=document.getElementById('rg-user').value.trim(),p=document.getElementById('rg-pass').value,role=document.getElementById('rg-role').value;
+ if(!u||!p){document.getElementById('rg-err').textContent='Username and password required';return;}
+ if(USERS.find(x=>x.user===u)){document.getElementById('rg-err').textContent='Username already exists';return;}
+ USERS.push({user:u,pass:p,role});saveUsers();
+ document.getElementById('rg-err').textContent='';
+ toggleAuth('login');
+ document.getElementById('li-user').value=u;
+}
+function logout(){sessionStorage.removeItem('wmSession');document.getElementById('authOverlay').style.display='flex';toggleAuth('login');}
+const sess=sessionStorage.getItem('wmSession');
+if(sess){document.getElementById('authOverlay').style.display='none';document.getElementById('authBtn').textContent='Logout ('+JSON.parse(sess).user+')';}
+</script>
+</body></html>
