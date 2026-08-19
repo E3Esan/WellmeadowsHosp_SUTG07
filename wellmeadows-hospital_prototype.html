@@ -48,6 +48,8 @@ Nurse and Medical Director).
 <head>
 <meta charset="UTF-8"><title>Wellmeadows Hospital System</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- CSS styling -->
 <style>
   :root{--steel:#4a6fa5;--steel-dk:#33507a;--steel-lt:#eef2f8;--bd:#d3ddec;--ok:#2e8b57;--warn:#c0392b;}*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif}
   body{margin:0;background:#f4f7fb;color:#22303f}
@@ -102,6 +104,8 @@ Nurse and Medical Director).
 </head>
 
 <body>
+
+<!-- Login page -->
 <div id="authOverlay">
  <div class="authBox" id="loginBox">
   <h2>🏥 Staff Login</h2>
@@ -111,6 +115,8 @@ Nurse and Medical Director).
   <button class="act" onclick="doLogin()">Login</button>
   <div class="authSwitch">No account? <a onclick="toggleAuth('register')">Register</a></div>
  </div>
+
+<!-- Register page-->
  <div class="authBox" id="registerBox" style="display:none">
   <h2>Create Account</h2>
   <input id="rg-user" placeholder="Username">
@@ -123,56 +129,73 @@ Nurse and Medical Director).
   <div class="authSwitch">Have an account? <a onclick="toggleAuth('login')">Login</a></div>
  </div>
 </div>
+
+<!-- Literally header on every page -->
 <header><h1>🏥 Wellmeadows Hospital</h1><span>Edinburgh • Elderly Care • Management System</span>
 <button id="authBtn" onclick="logout()">Logout</button></header>
+
+<!-- Dashboard page -->
 <nav id="nav"></nav>
 <main>
 <div id="dashboard" class="page"><h2>Dashboard</h2><div class="cards" id="dashCards"></div>
 <h2>Staff on Duty</h2><div class="staffWidget" id="staffWidget"></div>
 <h2>Wards Overview</h2><table id="wardOverview"></table></div>
 
+<!-- Bed page -->
 <div id="beds" class="page"><h2>Bed Availability Monitor</h2><div class="beds" id="bedGrid"></div></div>
 
+<!-- Staff page -->
 <div id="wards" class="page"><h2>Wards</h2>
 <div class="grid2" id="f-ward"></div><button class="act" onclick="addRow('ward')">Add Ward</button>
 <input class="search" placeholder="Search wards..." oninput="render('ward',this.value)"><table id="t-ward"></table></div>
 
+<!-- Staff page -->
 <div id="staff" class="page"><h2>Staff</h2>
 <div class="grid2" id="f-staff"></div><button class="act" onclick="addRow('staff')">Add Staff</button>
 <input class="search" placeholder="Search staff (name/position/qualification)..." oninput="render('staff',this.value)"><table id="t-staff"></table></div>
 
+<!-- Patients page-->
 <div id="patients" class="page"><h2>Patients (In-ward / Waiting List)</h2>
 <div class="grid2" id="f-patient"></div><button class="act" onclick="addRow('patient')">Add Patient</button>
 <input class="search" placeholder="Search patients..." oninput="render('patient',this.value)"><table id="t-patient"></table></div>
 
+<!-- Outpatients page -->
 <div id="outpatients" class="page"><h2>Outpatients</h2>
 <div class="grid2" id="f-outpatient"></div><button class="act" onclick="addRow('outpatient')">Add Outpatient</button>
 <table id="t-outpatient"></table></div>
 
+<!-- Patients Appointments page -->
 <div id="appointments" class="page"><h2>Patient Appointments</h2>
 <div class="grid2" id="f-appointment"></div><button class="act" onclick="addRow('appointment')">Add Appointment</button>
 <table id="t-appointment"></table></div>
 
+<!-- Patients Medication page -->
 <div id="medication" class="page"><h2>Patient Medication</h2>
 <div class="grid2" id="f-medication"></div><button class="act" onclick="addRow('medication')">Add Medication Record</button>
 <table id="t-medication"></table></div>
 
+<!-- Surgical / Non-Surgical Supplies page -->
 <div id="supplies" class="page"><h2>Surgical / Non-Surgical Supplies</h2>
 <div class="grid2" id="f-supply"></div><button class="act" onclick="addRow('supply')">Add Supply</button>
 <table id="t-supply"></table></div>
 
+<!-- Pharmaceutical Supplies page-->
 <div id="pharma" class="page"><h2>Pharmaceutical Supplies</h2>
 <div class="grid2" id="f-pharma"></div><button class="act" onclick="addRow('pharma')">Add Drug</button>
 <table id="t-pharma"></table></div>
 
+<!-- Ward Requisitions page -->
 <div id="requisitions" class="page"><h2>Ward Requisitions</h2>
 <div class="grid2" id="f-requisition"></div><button class="act" onclick="addRow('requisition')">Add Requisition</button>
 <table id="t-requisition"></table></div>
 
+<!-- Suppliers page -->
 <div id="suppliers" class="page"><h2>Suppliers</h2>
 <div class="grid2" id="f-supplier"></div><button class="act" onclick="addRow('supplier')">Add Supplier</button>
 <table id="t-supplier"></table></div>
 </main>
+
+
 
 <script>
 // ---------- schema ----------
@@ -194,6 +217,9 @@ requisition:{fields:['reqNo','requestedBy','ward','itemNo','itemName','dosage','
  labels:['Requisition No','Requested By','Ward','Item/Drug No','Name','Dosage','Method','Cost/Unit','Qty','Date Ordered']},
 supplier:{fields:['supNo','name','address','tel','fax'],labels:['Supplier No','Name','Address','Tel No','Fax No']}
 };
+
+
+
 
 // ---------- seed data (from case study) ----------
 let DB={
@@ -224,7 +250,10 @@ try{const s=localStorage.getItem('wellmeadowsDB');if(s)DB=JSON.parse(s);}catch(e
 function save(){try{localStorage.setItem('wellmeadowsDB',JSON.stringify(DB));}catch(e){}}
 function idNo(prefix,arr,field){return prefix+(1000+arr.length+1);}
 
-// ---------- nav ----------
+
+
+
+// ---------- navigator function (top page)----------
 const PAGES=[['dashboard','Dashboard'],['beds','Bed Monitor'],['wards','Wards'],['staff','Staff'],['patients','Patients'],['outpatients','Outpatients'],['appointments','Appointments'],['medication','Medication'],['supplies','Supplies'],['pharma','Pharmaceuticals'],['requisitions','Requisitions'],['suppliers','Suppliers']];
 document.getElementById('nav').innerHTML=PAGES.map(p=>`<button data-p="${p[0]}" onclick="show('${p[0]}')">${p[1]}</button>`).join('');
 function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remove('active'));document.getElementById(p).classList.add('active');
@@ -232,7 +261,9 @@ function show(p){document.querySelectorAll('.page').forEach(e=>e.classList.remov
  if(p==='dashboard')renderDash(); if(p==='beds')renderBeds();
 }
 
-// ---------- build forms ----------
+
+
+// ---------- build forms function ----------
 function buildForm(key){
  const s=SCHEMA[key],box=document.getElementById('f-'+key);
  box.innerHTML=s.fields.map((f,i)=>f==='file'
@@ -271,7 +302,9 @@ function render(key,q){
 }
 Object.keys(SCHEMA).forEach(k=>render(k));
 
-// ---------- dashboard ----------
+
+
+// ---------- dashboard function ----------
 function renderDash(){
  const totalBeds=DB.ward.reduce((a,w)=>a+Number(w.beds||0),0);
  const occupied=DB.patient.filter(p=>p.status==='In Ward').length;
@@ -305,7 +338,9 @@ function renderBeds(){
 }
 show('dashboard');
 
-// ---------- auth ----------
+
+
+// ---------- auth (register function) ----------
 let USERS=JSON.parse(localStorage.getItem('wmUsers')||'[{"user":"admin","pass":"admin123","role":"Medical Director"}]');
 function saveUsers(){localStorage.setItem('wmUsers',JSON.stringify(USERS));}
 function toggleAuth(which){document.getElementById('loginBox').style.display=which==='login'?'block':'none';document.getElementById('registerBox').style.display=which==='register'?'block':'none';}
