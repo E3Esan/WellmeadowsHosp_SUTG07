@@ -81,7 +81,7 @@
 
   body {
     margin: 0;
-    background: #f4f7fb;
+    background: #dfeaf3;
     color: #22303f;
   }
 
@@ -89,20 +89,61 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 18px;
     padding: 14px 22px;
     background: linear-gradient(90deg, var(--primary-dk), var(--primary));
     color: #fff;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 3px 12px rgba(20, 78, 151, 0.2);
   }
 
-  header h1 {
+  .headerBrand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .headerBadge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.8);
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.08);
+    font-size: 22px;
+    transform: rotate(45deg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    flex-shrink: 0;
+  }
+
+  .headerBadge::before {
+    content: "✚";
+    display: block;
+    transform: rotate(-45deg);
+  }
+
+  .headerText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .headerText h1 {
     margin: 0;
     font-size: 20px;
     letter-spacing: 0.5px;
+    line-height: 1.2;
+    font-family: Georgia, 'Times New Roman', serif;
   }
 
-  header span {
+  .headerText span {
     font-size: 12px;
-    opacity: 0.85;
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   nav {
@@ -137,6 +178,7 @@
     max-width: 1300px;
     margin: auto;
     padding: 20px;
+    background: transparent;
   }
 
   .page {
@@ -160,6 +202,14 @@
     border: 1px solid var(--bd);
     border-radius: 10px;
     box-shadow: 0 1px 3px rgba(50, 80, 120, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .card:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-6px);
+    box-shadow: 0 18px 26px rgba(20, 44, 62, 0.12);
+    border-color: rgba(18, 92, 124, 0.25);
   }
 
   .card b {
@@ -259,13 +309,30 @@
     cursor: pointer;
   }
 
+  .searchWrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
   .search {
     width: 260px;
-    margin: 10px 0;
     padding: 7px;
     border: 1px solid var(--bd);
     border-radius: 6px;
     font-size: 13px;
+  }
+
+  .searchType {
+    width: 180px;
+    padding: 7px;
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+    color: #22303f;
   }
 
   .beds {
@@ -279,6 +346,14 @@
     background: #fff;
     border: 1px solid var(--bd);
     border-radius: 10px;
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .wardbox:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-5px);
+    box-shadow: 0 16px 24px rgba(20, 44, 62, 0.12);
+    border-color: rgba(18, 92, 124, 0.24);
   }
 
   .wardbox h3 {
@@ -320,14 +395,84 @@
   }
 
   #authBtn {
-    padding: 7px 14px;
-    border: none;
-    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid rgba(9, 108, 148, 0.15);
+    border-radius: 999px;
     background: #fff;
     color: var(--primary-dk);
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    min-width: 0;
+    box-shadow: 0 6px 18px rgba(17, 64, 82, 0.08);
+  }
+
+  #authBtn .authAvatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1;
+  }
+
+  #userProfileOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(8, 24, 39, 0.38);
+  }
+
+  #userProfileOverlay.show {
+    display: flex;
+  }
+
+  .userProfileBox {
+    width: min(360px, 90vw);
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 20px 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    transition: transform 0.18s ease, box-shadow 0.22s ease;
+  }
+
+  .userProfileBox:hover {
+    transform: perspective(1000px) rotateX(1deg) rotateY(-1deg) translateY(-3px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  }
+
+  .userProfileTop {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .userProfileAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .userProfileMeta {
+    font-size: 12px;
+    color: #567;
   }
 
   #authOverlay {
@@ -337,15 +482,78 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--primary-dk), var(--primary));
+    background: linear-gradient(180deg, #0054b3 0%, #0051a8 100%);
+    overflow: hidden;
+  }
+
+  #authOverlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at center, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 18%, transparent 19%, transparent 100%),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 100%),
+      linear-gradient(rgba(255,255,255,0.03) 0 1px, transparent 1px 100%);
+    background-size: 120px 120px, 32px 32px, 32px 32px;
+    opacity: 0.6;
+  }
+
+  .authBrand {
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 1;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .authBadge {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    border: 3px solid rgba(255,255,255,0.8);
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.08);
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .authBadge::before {
+    content: "✚";
+    display: block;
+    transform: rotate(-45deg);
+  }
+
+  .authBrandText {
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: Georgia, 'Times New Roman', serif;
+    white-space: nowrap;
   }
 
   .authBox {
+    position: relative;
+    z-index: 2;
     width: 320px;
     padding: 30px 34px;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    transition: transform 0.18s ease, box-shadow 0.22s ease;
+  }
+
+  .authBox:hover {
+    transform: perspective(1000px) rotateX(1.5deg) rotateY(-1.5deg) translateY(-4px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
   }
 
   .authBox h2 {
@@ -380,6 +588,38 @@
     cursor: pointer;
   }
 
+  .authFooter {
+    margin-top: 14px;
+    text-align: center;
+    color: rgba(17, 30, 44, 0.72);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  .pageFooter {
+    text-align: center;
+    padding: 16px 12px 24px;
+    color: rgba(17, 30, 44, 0.72);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+  }
+
+  .paymentSummary {
+    margin: 12px 0 16px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #eef6ff, #f8fbff);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    color: var(--primary-dk);
+    font-size: 13px;
+  }
+
+  .paymentSummary strong {
+    font-size: 15px;
+  }
+
   .authErr {
     min-height: 16px;
     color: var(--warn);
@@ -400,6 +640,14 @@
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 1px 3px rgba(50, 80, 120, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .staffCard:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-5px);
+    box-shadow: 0 16px 24px rgba(20, 44, 62, 0.14);
+    border-color: rgba(18, 92, 124, 0.25);
   }
 
   .staffCard img {
@@ -531,6 +779,36 @@
     background: var(--primary-lt);
     border: 1px solid var(--bd);
     border-radius: 10px;
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .supCard:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-4px);
+    box-shadow: 0 14px 22px rgba(20, 44, 62, 0.12);
+    border-color: rgba(18, 92, 124, 0.24);
+  }
+
+  .drugPhoto {
+    width: 110px;
+    height: 110px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #dfeaf6, #eef2f8);
+    border: 1px solid var(--bd);
+    color: var(--primary-dk);
+    font-size: 32px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .drugPhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
   }
 
   .supCard img {
@@ -539,6 +817,16 @@
     border-radius: 50%;
     object-fit: cover;
     object-position: top center;
+  }
+
+  table img {
+    width: 58px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--bd);
+    background: #f7f9fc;
+    display: block;
   }
 
   .wdSectionTitle {
@@ -587,6 +875,10 @@
 
 <!-- Login page -->
 <div id="authOverlay">
+ <div class="authBrand" aria-hidden="true">
+  <div class="authBadge"></div>
+  <div class="authBrandText">Wellmeadow's Hospital</div>
+ </div>
  <div class="authBox" id="loginBox">
   <h2>🏥 Staff Login</h2>
   
@@ -603,35 +895,83 @@
   <button class="act" onclick="doLogin()">Login</button>
   <div class="authSwitch">No account? 
     <a onclick="toggleAuth('register')">Register</a></div>
+  <div class="authFooter">Made by Birth But With Me</div>
  </div>
 
 <!-- Register page-->
  <div class="authBox" id="registerBox" style="display:none">
   <h2>Create Account</h2>
-  <input 
-    id="rg-user"
-    placeholder="Username">
-  <input
-    id="rg-pass"
-    type="password"
-    placeholder="Password"
-  >
-  <select 
-    id="rg-role"
-    style="width:100%;padding:9px;margin:6px 0;border:1px solid var(--bd);border-radius:6px;font-size:13px">
-   <option>Personnel Officer</option><option>Charge Nurse</option><option>Medical Director</option>
+  <input id="rg-user" placeholder="Username">
+  <input id="rg-full-name" placeholder="Full name">
+  <input id="rg-email" type="email" placeholder="Email address">
+  <input id="rg-phone" placeholder="Phone number">
+  <input id="rg-pass" type="password" placeholder="Password">
+  <select id="rg-role" style="width:100%;padding:9px;margin:6px 0;border:1px solid var(--bd);border-radius:6px;font-size:13px">
+   <option>Admin</option>
+   <option>Personnel Officer</option>
+   <option>Charge Nurse</option>
+   <option>Nurse</option>
+   <option>Doctor</option>
+   <option>Medical Director</option>
+   <option>Ward Manager</option>
+   <option>Receptionist</option>
+   <option>Pharmacist</option>
   </select>
 
   <div class="authErr" id="rg-err"></div>
   <button class="act" onclick="doRegister()">Register</button>
-  <div
-    class="authSwitch">Have an account? <a onclick="toggleAuth('login')">Login</a></div>
+  <div class="authSwitch">Have an account? <a onclick="toggleAuth('login')">Login</a></div>
+  <div class="authFooter">Made by Birth But With Me</div>
  </div>
 </div>
 
+<div id="userProfileOverlay">
+  <div class="userProfileBox">
+    <div class="userProfileTop">
+      <div class="userProfileAvatar">👤</div>
+      <div>
+        <div id="profile-username" style="font-size:20px;font-weight:700;color:var(--primary-dk)">User</div>
+        <div class="userProfileMeta" id="profile-role">Role</div>
+      </div>
+    </div>
+    <div style="display:grid;gap:8px;margin:12px 0 16px;">
+      <div><strong>Username:</strong> <span id="profile-user-name">-</span></div>
+      <div><strong>Role:</strong> <span id="profile-user-role">-</span></div>
+    </div>
+
+    <div style="display:grid;gap:8px; margin-bottom:12px;">
+      <div style="font-weight:700; font-size:13px; color:var(--primary-dk)">Profile Information</div>
+      <input id="profile-full-name" placeholder="Full name">
+      <input id="profile-email" placeholder="Email address" type="email">
+      <input id="profile-phone" placeholder="Phone number">
+      <button class="act" onclick="saveProfileSettings()">Save profile info</button>
+    </div>
+
+    <div style="display:grid;gap:8px; margin-bottom:12px;">
+      <div style="font-weight:700; font-size:13px; color:var(--primary-dk)">Change Password</div>
+      <input id="profile-current-pass" type="password" placeholder="Current password">
+      <input id="profile-new-pass" type="password" placeholder="New password">
+      <button class="act" onclick="changePassword()">Update password</button>
+    </div>
+
+    <button class="act" onclick="logout()" style="width:100%">Logout</button>
+  </div>
+</div>
+
 <!-- Literally header on every page -->
-<header><h1>🏥 Wellmeadows Hospital</h1><span>Edinburgh • Elderly Care • Management System</span>
-<button id="authBtn" onclick="logout()">Logout</button></header>
+<header>
+  <div class="headerBrand">
+    <div class="headerBadge" aria-label="Wellmeadows Hospital logo"></div>
+    <div class="headerText">
+      <h1>Wellmeadows Hospital</h1>
+      <span>Edinburgh • Elderly Care • Management System</span>
+    </div>
+  </div>
+  <button id="authBtn" onclick="openUserProfile()">
+    <span class="authAvatar">👤</span>
+    <span id="authBtnUser">User</span>
+  </button>
+</header>
 
 <!-- Dashboard page -->
   <nav id="nav"></nav>
@@ -644,59 +984,111 @@
 
 
   <!-- Bed page -->
-  <div id="beds" class="page"><h2>Bed Availability Monitor</h2><div class="beds" id="bedGrid"></div></div>
+  <div id="beds" class="page"><h2>Bed Availability Monitor</h2><div class="beds" id="bedGrid"></div><div id="bedQueuePanel" style="margin-top:18px"></div></div>
 
   <!-- Wards page -->
   <div id="wards" class="page"><h2>Wards</h2>
-  <div class="grid2" id="f-ward"></div><button class="act" onclick="addRow('ward')">Add Ward</button>
-  <input class="search" placeholder="Search wards..." oninput="render('ward',this.value)"><table id="t-ward"></table></div>
+  <div class="grid2" id="f-ward" style="display:none"></div><button class="act" onclick="openUploadDialog('ward')">Upload</button>
+  <div class="searchWrap">
+    <input class="search" id="search-ward" placeholder="Search wards..." oninput="render('ward', this.value, document.getElementById('type-ward').value)">
+    <select class="searchType" id="type-ward" onchange="render('ward', document.getElementById('search-ward').value, this.value)">
+      <option value="all">All</option>
+      <option value="number">Ward No</option>
+      <option value="name">Ward Name</option>
+      <option value="location">Location</option>
+      <option value="beds">Beds</option>
+    </select>
+  </div>
+  <table id="t-ward"></table></div>
 
 
 
   <!-- Staff page -->
   <div id="staff" class="page"><h2>Staff</h2>
-  <div class="grid2" id="f-staff"></div><button class="act" onclick="addRow('staff')">Add Staff</button>
-  <input class="search" placeholder="Search staff (name/position/qualification)..." oninput="render('staff',this.value)"><table id="t-staff"></table></div>
+  <div class="grid2" id="f-staff" style="display:none"></div><button class="act" onclick="openUploadDialog('staff')">Upload</button>
+  <div class="searchWrap">
+    <input class="search" id="search-staff" placeholder="Search staff (name/position/qualification)..." oninput="render('staff', this.value, document.getElementById('type-staff').value)">
+    <select class="searchType" id="type-staff" onchange="render('staff', document.getElementById('search-staff').value, this.value)">
+      <option value="all">All</option>
+      <option value="staffNo">Staff No</option>
+      <option value="name">Name</option>
+      <option value="position">Position</option>
+      <option value="qual">Qualification</option>
+      <option value="ward">Ward Assigned</option>
+    </select>
+  </div>
+  <table id="t-staff"></table></div>
 
   <!-- Patients page-->
   <div id="patients" class="page"><h2>Patients (In-ward / Waiting List)</h2>
-  <div class="grid2" id="f-patient"></div><button class="act" onclick="addRow('patient')">Add Patient</button>
-  <input class="search" placeholder="Search patients..." oninput="render('patient',this.value)"><table id="t-patient"></table></div>
+  <div class="grid2" id="f-patient" style="display:none"></div><button class="act" onclick="openUploadDialog('patient')">Upload</button>
+  <div class="searchWrap">
+    <input class="search" id="search-patient" placeholder="Search patients..." oninput="render('patient', this.value, document.getElementById('type-patient').value)">
+    <select class="searchType" id="type-patient" onchange="render('patient', document.getElementById('search-patient').value, this.value)">
+      <option value="all">All</option>
+      <option value="patNo">Patient No</option>
+      <option value="name">Name</option>
+      <option value="status">Status</option>
+      <option value="ward">Ward</option>
+      <option value="localDoctor">Local Doctor</option>
+      <option value="allergies">Allergies</option>
+    </select>
+  </div>
+  <table id="t-patient"></table></div>
 
   <!-- Outpatients page -->
   <div id="outpatients" class="page"><h2>Outpatients</h2>
-  <div class="grid2" id="f-outpatient"></div><button class="act" onclick="addRow('outpatient')">Add Outpatient</button>
+  <div class="grid2" id="f-outpatient" style="display:none"></div><button class="act" onclick="openUploadDialog('outpatient')">Upload</button>
+  <div class="searchWrap">
+    <input class="search" id="search-outpatient" placeholder="Search outpatients..." oninput="render('outpatient', this.value, document.getElementById('type-outpatient').value)">
+    <select class="searchType" id="type-outpatient" onchange="render('outpatient', document.getElementById('search-outpatient').value, this.value)">
+      <option value="all">All</option>
+      <option value="patNo">Patient No</option>
+      <option value="name">Name</option>
+      <option value="localDoctor">Local Doctor</option>
+      <option value="apptDate">Appointment Date</option>
+      <option value="apptTime">Appointment Time</option>
+      <option value="status">Status</option>
+    </select>
+  </div>
   <table id="t-outpatient"></table></div>
 
   <!-- Patients Appointments page -->
   <div id="appointments" class="page"><h2>Patient Appointments</h2>
-  <div class="grid2" id="f-appointment"></div><button class="act" onclick="addRow('appointment')">Add Appointment</button>
+  <div class="grid2" id="f-appointment" style="display:none"></div><button class="act" onclick="openUploadDialog('appointment')">Upload</button>
+  <div class="paymentSummary" id="appointmentSummary"></div>
   <table id="t-appointment"></table></div>
 
   <!-- Patients Medication page -->
   <div id="medication" class="page"><h2>Patient Medication</h2>
-  <div class="grid2" id="f-medication"></div><button class="act" onclick="addRow('medication')">Add Medication Record</button>
+  <div class="grid2" id="f-medication" style="display:none"></div><button class="act" onclick="openUploadDialog('medication')">Upload</button>
   <table id="t-medication"></table></div>
 
   <!-- Surgical / Non-Surgical Supplies page -->
   <div id="supplies" class="page"><h2>Surgical / Non-Surgical Supplies</h2>
-  <div class="grid2" id="f-supply"></div><button class="act" onclick="addRow('supply')">Add Supply</button>
+  <div class="grid2" id="f-supply" style="display:none"></div><button class="act" onclick="openUploadDialog('supply')">Upload</button>
+  <div class="paymentSummary" id="supplySummary"></div>
   <table id="t-supply"></table></div>
 
   <!-- Pharmaceutical Supplies page-->
   <div id="pharma" class="page"><h2>Pharmaceutical Supplies</h2>
-  <div class="grid2" id="f-pharma"></div><button class="act" onclick="addRow('pharma')">Add Drug</button>
+  <div class="grid2" id="f-pharma" style="display:none"></div><button class="act" onclick="openUploadDialog('pharma')">Upload</button>
   <table id="t-pharma"></table></div>
 
   <!-- Ward Requisitions page -->
   <div id="requisitions" class="page"><h2>Ward Requisitions</h2>
-  <div class="grid2" id="f-requisition"></div><button class="act" onclick="addRow('requisition')">Add Requisition</button>
+  <div class="grid2" id="f-requisition" style="display:none"></div><button class="act" onclick="openUploadDialog('requisition')">Upload</button>
+  <div class="paymentSummary" id="requisitionSummary"></div>
   <table id="t-requisition"></table></div>
 
   <!-- Suppliers page -->
   <div id="suppliers" class="page"><h2>Suppliers</h2>
-  <div class="grid2" id="f-supplier"></div><button class="act" onclick="addRow('supplier')">Add Supplier</button>
+  <div class="grid2" id="f-supplier" style="display:none"></div><button class="act" onclick="openUploadDialog('supplier')">Upload</button>
   <table id="t-supplier"></table></div>
+
+  <div id="reports" class="page"><h2>Report Hub</h2>
+    <div id="reportHub"></div>
+  </div>
   
   <!-- Print button -->
   <div id="printBtn"><button class="printBtn" onclick="printPDF()"> Print Data</button></div>
@@ -705,6 +1097,8 @@
   <div id="nothingBtn"><button class="NothingBtn" onclick="showNothing()">This Button Can Do Absolutely Nothing</button></div>
 
   </main>
+
+  <div class="pageFooter">Made by Birth But With Me</div>
 
 <!-- Ward Staff Detail modal (opened via Info button on Wards page) -->
 <div class="wdOverlay" id="wardDetailOverlay">
@@ -724,6 +1118,109 @@
  </div>
 </div>
 
+<div class="wdOverlay" id="drugDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closeDrugDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="drug-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="drug-meta"></div>
+   </div>
+  </div>
+  <div id="drug-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="supplyDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closeSupplyDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="supply-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="supply-meta"></div>
+   </div>
+  </div>
+  <div id="supply-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="supplierDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closeSupplierDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="supplier-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="supplier-meta"></div>
+   </div>
+  </div>
+  <div id="supplier-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="patientDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closePatientDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="patient-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="patient-meta"></div>
+   </div>
+  </div>
+  <div id="patient-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="staffDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closeStaffDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="staff-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="staff-meta"></div>
+   </div>
+  </div>
+  <div id="staff-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="appointmentDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closeAppointmentDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="appointment-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="appointment-meta"></div>
+   </div>
+  </div>
+  <div id="appointment-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="medicationDetailOverlay">
+ <div class="wdBox">
+  <button class="wdClose" onclick="closeMedicationDetail()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="medication-title" style="margin:0;border:none;padding:0"></h2>
+    <div class="wdMeta" id="medication-meta"></div>
+   </div>
+  </div>
+  <div id="medication-details"></div>
+ </div>
+</div>
+
+<div class="wdOverlay" id="uploadDialogOverlay">
+ <div class="wdBox" style="max-width:720px;width:min(90vw,720px);">
+  <button class="wdClose" onclick="closeUploadDialog()">✕</button>
+  <div class="wdHead">
+   <div>
+    <h2 id="uploadDialogTitle" style="margin:0;border:none;padding:0">Upload</h2>
+   </div>
+  </div>
+  <div id="uploadDialogBody"></div>
+ </div>
+</div>
+
 <script>
 
 const SCHEMA = {
@@ -732,40 +1229,40 @@ const SCHEMA = {
     labels: ['Ward No', 'Ward Name', 'Location', 'Total Beds', 'Tel Extn']
   },
   staff: {
-    fields: ['staffNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'nin', 'position', 'salary', 'scale', 'ward', 'hours', 'contract', 'pay', 'qual', 'institution', 'photo', 'file'],
-    labels: ['Staff No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'NIN', 'Position', 'Salary', 'Salary Scale', 'Ward Assigned', 'Hours/Week', 'Perm/Temp', 'Pay(W/M)', 'Qualification', 'Institution', 'Photo URL', 'Attachment']
+    fields: ['staffNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'nin', 'position', 'salary', 'scale', 'ward', 'hours', 'contract', 'pay', 'qual', 'institution', 'workExperience', 'photo', 'file'],
+    labels: ['Staff No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'NIN', 'Position', 'Salary', 'Salary Scale', 'Ward Assigned', 'Hours/Week', 'Perm/Temp', 'Pay(W/M)', 'Qualification', 'Institution', 'Working Experience', 'Photo URL', 'Attachment']
   },
   patient: {
-    fields: ['patNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'marital', 'kinName', 'kinRel', 'ward', 'bed', 'waitDate', 'placedDate', 'expLeave', 'actualLeave', 'status', 'file'],
-    labels: ['Patient No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'Marital Status', 'Next-of-Kin', 'Kin Relation', 'Ward Required', 'Bed No', 'Waitlist Date', 'Date Placed', 'Expected Leave', 'Actual Leave', 'Status', 'Attachment']
+    fields: ['patNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'marital', 'kinName', 'kinRel', 'localDoctor', 'allergies', 'medicalRecord', 'ward', 'bed', 'waitDate', 'placedDate', 'expLeave', 'actualLeave', 'status', 'refDoc', 'file'],
+    labels: ['Patient No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'Marital Status', 'Next-of-Kin', 'Kin Relation', 'Local Doctor', 'Allergies', 'Medical Record', 'Ward Required', 'Bed No', 'Waitlist Date', 'Date Placed', 'Expected Leave', 'Actual Leave', 'Status', "Patient's Referral Document", 'Attachment']
   },
   outpatient: {
-    fields: ['patNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'apptDate', 'apptTime', 'file'],
-    labels: ['Patient No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'Appt Date', 'Appt Time', 'Attachment']
+    fields: ['patNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'localDoctor', 'apptDate', 'apptTime', 'refDoc', 'file'],
+    labels: ['Patient No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'Local Doctor', 'Appt Date', 'Appt Time', "Patient's Referral Document", 'Attachment']
   },
   appointment: {
-    fields: ['apptNo', 'patNo', 'consultant', 'staffNo', 'date', 'time', 'room', 'file'],
-    labels: ['Appointment No', 'Patient No', 'Consultant Name', 'Consultant Staff No', 'Date', 'Time', 'Exam Room', 'Attachment']
+    fields: ['apptNo', 'patNo', 'consultant', 'staffNo', 'date', 'time', 'room', 'referral', 'reason', 'localDoctor', 'fee', 'taxRate', 'paymentStatus', 'total', 'uploadedAt', 'refDoc', 'file'],
+    labels: ['Appointment No', 'Patient No', 'Consultant Name', 'Consultant Staff No', 'Date', 'Time', 'Exam Room', 'Referral Source', 'Reason/Notes', 'Local Doctor', 'Fee(£)', 'Tax %', 'Payment Status', 'Total(£)', 'Uploaded At', "Patient's Referral Document", 'Attachment']
   },
   medication: {
     fields: ['patNo', 'patName', 'ward', 'bed', 'drugNo', 'drugName', 'dosage', 'method', 'units', 'start', 'finish'],
     labels: ['Patient No', 'Patient Name', 'Ward', 'Bed No', 'Drug No', 'Drug Name', 'Dosage', 'Method', 'Units/Day', 'Start Date', 'Finish Date']
   },
   supply: {
-    fields: ['itemNo', 'name', 'desc', 'qty', 'reorder', 'cost'],
-    labels: ['Item No', 'Name', 'Description', 'Qty in Stock', 'Reorder Level', 'Cost/Unit(£)']
+    fields: ['itemNo', 'name', 'desc', 'qty', 'reorder', 'cost', 'taxRate', 'paymentStatus', 'total', 'uploadedAt', 'photo', 'file'],
+    labels: ['Item No', 'Name', 'Description', 'Qty in Stock', 'Reorder Level', 'Cost/Unit(£)', 'Tax %', 'Payment Status', 'Total(£)', 'Uploaded At', 'Picture', 'Attachment']
   },
   pharma: {
-    fields: ['drugNo', 'name', 'desc', 'dosage', 'method', 'qty', 'reorder', 'cost'],
-    labels: ['Drug No', 'Name', 'Description', 'Dosage', 'Method', 'Qty in Stock', 'Reorder Level', 'Cost/Unit(£)']
+    fields: ['drugNo', 'name', 'desc', 'dosage', 'method', 'qty', 'reorder', 'cost', 'file'],
+    labels: ['Drug No', 'Name', 'Description', 'Dosage', 'Method', 'Qty in Stock', 'Reorder Level', 'Cost/Unit(£)', 'Product Image']
   },
   requisition: {
-    fields: ['reqNo', 'requestedBy', 'ward', 'itemNo', 'itemName', 'dosage', 'method', 'cost', 'qty', 'date'],
-    labels: ['Requisition No', 'Requested By', 'Ward', 'Item/Drug No', 'Name', 'Dosage', 'Method', 'Cost/Unit', 'Qty', 'Date Ordered']
+    fields: ['reqNo', 'requestedBy', 'ward', 'itemNo', 'itemName', 'dosage', 'method', 'cost', 'qty', 'subtotal', 'tax', 'total', 'status', 'date', 'uploadedAt', 'file'],
+    labels: ['Requisition No', 'Requested By', 'Ward', 'Item/Drug No', 'Name', 'Dosage', 'Method', 'Cost/Unit', 'Qty', 'Subtotal', 'Tax', 'Total', 'Status', 'Date Ordered', 'Uploaded At', 'Attachment']
   },
   supplier: {
-    fields: ['supNo', 'name', 'address', 'tel', 'fax'],
-    labels: ['Supplier No', 'Name', 'Address', 'Tel No', 'Fax No']
+    fields: ['supNo', 'name', 'address', 'tel', 'fax', 'photo', 'file'],
+    labels: ['Supplier No', 'Name', 'Address', 'Tel No', 'Fax No', 'Picture', 'Attachment']
   }
 };
 
@@ -775,44 +1272,62 @@ let DB = {
     { number: 12, name: 'Cardiology', location: 'Block E', beds: 18, extn: 7712 }
   ],
   staff: [
-    { staffNo: 'S011', first: 'Moira', last: 'Samuel', address: '49 School Road, Broxburn', tel: '01506-45633', dob: '1961-05-30', sex: 'Female', nin: 'WB123423D', position: 'Charge Nurse', salary: 18760, scale: '1C', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: 'BSc Nursing Studies', institution: 'Edinburgh University', photo: 'photos/staff2.png' },
-    { staffNo: 'S098', first: 'Carol', last: 'Cummings', address: '15 High Street Edinburgh', tel: '0131-334-5677', dob: '1975-02-14', sex: 'Female', nin: '', position: 'Staff Nurse', salary: 15000, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', photo: 'photos/staff5.png' },
-    { staffNo: 'S123', first: 'Morgan', last: 'Russell', address: '23A George Street Broxburn', tel: '01506-67676', dob: '1980-07-01', sex: 'Male', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'T', pay: 'M', qual: '', institution: '', photo: 'photos/staff4.png' },
-    { staffNo: 'S167', first: 'Robin', last: 'Plevin', address: '7 Glen Terrace Edinburgh', tel: '0131-339-6123', dob: '1978-03-22', sex: 'Male', nin: '', position: 'Staff Nurse', salary: 15200, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', photo: 'photos/staff1.png' },
-    { staffNo: 'S234', first: 'Amy', last: "O'Donnell", address: '234 Princes Street Edinburgh', tel: '0131-334-9099', dob: '1985-11-09', sex: 'Female', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', photo: '' },
-    { staffNo: 'S344', first: 'Laurence', last: 'Burns', address: '1 Apple Drive Edinburgh', tel: '0131-334-9100', dob: '1970-01-15', sex: 'Male', nin: '', position: 'Consultant', salary: 45000, scale: 'CON', ward: 11, hours: 40, contract: 'P', pay: 'M', qual: 'MD', institution: 'Edinburgh University', photo: 'photos/staff3.png' }
+    { staffNo: 'S011', first: 'Moira', last: 'Samuel', address: '49 School Road, Broxburn', tel: '01506-45633', dob: '1961-05-30', sex: 'Female', nin: 'WB123423D', position: 'Charge Nurse', salary: 18760, scale: '1C', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: 'BSc Nursing Studies', institution: 'Edinburgh University', workExperience: '12 years in acute elder care; led nurse training and ward coordination; previous experience in surgical recovery and rehabilitation.', photo: 'photos/staff2.png' },
+    { staffNo: 'S098', first: 'Carol', last: 'Cummings', address: '15 High Street Edinburgh', tel: '0131-334-5677', dob: '1975-02-14', sex: 'Female', nin: '', position: 'Staff Nurse', salary: 15000, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '6 years in general ward nursing; experience with post-op care, patient assessment, and medication administration.', photo: 'photos/staff5.png' },
+    { staffNo: 'S123', first: 'Morgan', last: 'Russell', address: '23A George Street Broxburn', tel: '01506-67676', dob: '1980-07-01', sex: 'Male', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'T', pay: 'M', qual: '', institution: '', workExperience: '4 years in community nursing and emergency support; prior role in district health visiting.', photo: 'photos/staff4.png' },
+    { staffNo: 'S167', first: 'Robin', last: 'Plevin', address: '7 Glen Terrace Edinburgh', tel: '0131-339-6123', dob: '1978-03-22', sex: 'Male', nin: '', position: 'Staff Nurse', salary: 15200, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '8 years in medical and geriatric wards; trained in observation rounds and rehabilitation support.', photo: 'photos/staff1.png' },
+    { staffNo: 'S234', first: 'Amy', last: "O'Donnell", address: '234 Princes Street Edinburgh', tel: '0131-334-9099', dob: '1985-11-09', sex: 'Female', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '3 years in cardiology and elderly inpatient support; experience with medication rounds and patient education.', photo: '' },
+    { staffNo: 'S344', first: 'Laurence', last: 'Burns', address: '1 Apple Drive Edinburgh', tel: '0131-334-9100', dob: '1970-01-15', sex: 'Male', nin: '', position: 'Consultant', salary: 45000, scale: 'CON', ward: 11, hours: 40, contract: 'P', pay: 'M', qual: 'MD', institution: 'Edinburgh University', workExperience: '18 years in specialist medicine; previous consultant posts in general medicine, cardiology, and long-term care oversight.', photo: 'photos/staff3.png' }
   ],
   patient: [
-    { patNo: 'P10451', first: 'Robert', last: 'Drumtree', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', ward: 11, bed: 84, waitDate: '2004-01-12', placedDate: '2004-01-12', expLeave: '2004-01-17', actualLeave: '2004-01-16', status: 'Discharged' },
-    { patNo: 'P10480', first: 'Steven', last: 'Parks', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', ward: 11, bed: 79, waitDate: '2004-01-12', placedDate: '2004-01-14', expLeave: '2004-01-18', actualLeave: '2004-01-18', status: 'Discharged' },
-    { patNo: 'P10563', first: 'David', last: 'Black', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', ward: 11, bed: 80, waitDate: '2004-01-13', placedDate: '2004-01-13', expLeave: '2004-01-27', actualLeave: '', status: 'In Ward' },
-    { patNo: 'P10604', first: 'Ian', last: 'Thomson', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', ward: 11, bed: 87, waitDate: '2004-01-14', placedDate: '2004-01-15', expLeave: '2004-01-25', actualLeave: '', status: 'In Ward' },
-    { patNo: 'P10787', first: 'Peter', last: 'Smith', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', ward: 11, bed: 84, waitDate: '2004-01-17', placedDate: '2004-01-17', expLeave: '2004-01-22', actualLeave: '', status: 'In Ward' },
-    { patNo: 'P10234', first: 'Anne', last: 'Phelps', address: '44 North Bridges, Cannonmills, Edinburgh EH1 5GH', tel: '0131-332-4111', dob: '1933-12-12', sex: 'Female', marital: 'Single', kinName: 'James Phelps', kinRel: 'Son', ward: '', bed: '', waitDate: '2004-02-21', placedDate: '', expLeave: '', actualLeave: '', status: 'Waiting List' }
+    { patNo: 'P10451', first: 'Robert', last: 'Drumtree', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', localDoctor: 'Dr. A. Morrison', allergies: 'Penicillin', medicalRecord: 'History of hip surgery and post-operative pain management. Allergic to penicillin. Regular monitoring for mobility and medication tolerance.', ward: 11, bed: 84, waitDate: '2004-01-12', placedDate: '2004-01-12', expLeave: '2004-01-17', actualLeave: '2004-01-16', status: 'Discharged' },
+    { patNo: 'P10480', first: 'Steven', last: 'Parks', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', localDoctor: 'Dr. S. Patel', allergies: 'None', medicalRecord: 'Post-operative recovery following orthopaedic treatment. No known drug allergies. Mobility improved and discharged on schedule.', ward: 11, bed: 79, waitDate: '2004-01-12', placedDate: '2004-01-14', expLeave: '2004-01-18', actualLeave: '2004-01-18', status: 'Discharged' },
+    { patNo: 'P10563', first: 'David', last: 'Black', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', localDoctor: 'Dr. L. Graham', allergies: 'Peanuts', medicalRecord: 'Diabetes review and wound care treatment. Peanut allergy noted. Requires careful dietary review and medication charting.', ward: 11, bed: 80, waitDate: '2004-01-13', placedDate: '2004-01-13', expLeave: '2004-01-27', actualLeave: '', status: 'In Ward' },
+    { patNo: 'P10604', first: 'Ian', last: 'Thomson', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', localDoctor: 'Dr. H. Singh', allergies: 'Latex', medicalRecord: 'Cardiac monitoring and mobility assessment. Latex allergy needs documentation on all care notes and equipment planning.', ward: 11, bed: 87, waitDate: '2004-01-14', placedDate: '2004-01-15', expLeave: '2004-01-25', actualLeave: '', status: 'In Ward' },
+    { patNo: 'P10787', first: 'Peter', last: 'Smith', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', localDoctor: 'Dr. M. Osborne', allergies: 'Sulphur drugs', medicalRecord: 'Short-stay assessment following infection treatment. Sulphur allergy documented; review antibiotics before prescribing.', ward: 11, bed: 84, waitDate: '2004-01-17', placedDate: '2004-01-17', expLeave: '2004-01-22', actualLeave: '', status: 'In Ward' },
+    { patNo: 'P10234', first: 'Anne', last: 'Phelps', address: '44 North Bridges, Cannonmills, Edinburgh EH1 5GH', tel: '0131-332-4111', dob: '1933-12-12', sex: 'Female', marital: 'Single', kinName: 'James Phelps', kinRel: 'Son', localDoctor: 'Dr. C. Allen', allergies: 'None', medicalRecord: 'Awaiting placement for rehabilitation review. No major allergies. Needs slow mobility support and regular observation.', ward: '', bed: '', waitDate: '2004-02-21', placedDate: '', expLeave: '', actualLeave: '', status: 'Waiting List' }
   ],
   outpatient: [],
-  appointment: [],
+  appointment: [
+    { apptNo: 'A1001', patNo: 'P10563', consultant: 'Dr Laurence Burns', staffNo: 'S344', date: '2004-02-18', time: '09:30', room: 'Room 3', referral: 'GP Referral', reason: 'Post-operative review and mobility assessment', localDoctor: 'Dr. L. Graham', file: '' },
+    { apptNo: 'A1002', patNo: 'P10604', consultant: 'Dr Laurence Burns', staffNo: 'S344', date: '2004-02-20', time: '11:00', room: 'Clinic 2', referral: 'Ward transfer review', reason: 'Cardiac follow-up and treatment planning', localDoctor: 'Dr. H. Singh', file: '' }
+  ],
   medication: [
     { patNo: 'P10034', patName: 'Robert MacDonald', ward: 11, bed: 84, drugNo: 10223, drugName: 'Morphine', dosage: '10mg/ml', method: 'Oral', units: 50, start: '2004-03-24', finish: '2004-04-24' },
     { patNo: 'P10034', patName: 'Robert MacDonald', ward: 11, bed: 84, drugNo: 10334, drugName: 'Tetracycline', dosage: '0.5mg/ml', method: 'IV', units: 10, start: '2004-03-24', finish: '2004-04-17' },
     { patNo: 'P10034', patName: 'Robert MacDonald', ward: 11, bed: 84, drugNo: 10223, drugName: 'Morphine', dosage: '10mg/ml', method: 'Oral', units: 10, start: '2004-04-25', finish: '2004-05-02' }
   ],
   supply: [
-    { itemNo: 'IT001', name: 'Syringes', desc: 'Sterile disposable syringes', qty: 500, reorder: 100, cost: 0.15 },
-    { itemNo: 'IT002', name: 'Sterile Dressings', desc: 'Wound dressing pads', qty: 300, reorder: 50, cost: 0.8 },
-    { itemNo: 'IT003', name: 'Plastic Bags', desc: 'Non-surgical clinical waste bags', qty: 1000, reorder: 200, cost: 0.05 },
-    { itemNo: 'IT004', name: 'Aprons', desc: 'Disposable plastic aprons', qty: 600, reorder: 150, cost: 0.1 }
+    { itemNo: 'IT001', name: 'Syringes', desc: 'Sterile disposable syringes', qty: 500, reorder: 100, cost: 0.15, photo: 'https://placehold.co/120x90/7ea5d8/ffffff?text=Syringes' },
+    { itemNo: 'IT002', name: 'Sterile Dressings', desc: 'Wound dressing pads', qty: 300, reorder: 50, cost: 0.8, photo: 'https://placehold.co/120x90/d8c7b5/ffffff?text=Dressings' },
+    { itemNo: 'IT003', name: 'Plastic Bags', desc: 'Non-surgical clinical waste bags', qty: 1000, reorder: 200, cost: 0.05, photo: 'https://placehold.co/120x90/9fc7b3/ffffff?text=Bags' },
+    { itemNo: 'IT004', name: 'Aprons', desc: 'Disposable plastic aprons', qty: 600, reorder: 150, cost: 0.1, photo: 'https://placehold.co/120x90/dfb5b5/ffffff?text=Aprons' }
   ],
   pharma: [
-    { drugNo: 10223, name: 'Morphine', desc: 'Pain killer', dosage: '10mg/ml', method: 'Oral', qty: 200, reorder: 50, cost: 27.75 },
-    { drugNo: 10334, name: 'Tetracycline', desc: 'Antibiotic', dosage: '0.5mg/ml', method: 'IV', qty: 150, reorder: 40, cost: 12.5 }
+    { drugNo: 10223, name: 'Morphine', desc: 'Strong opioid analgesic for severe pain', dosage: '10mg/ml', method: 'Oral', qty: 200, reorder: 50, cost: 27.75, category: 'Analgesic', uses: 'Severe pain control after surgery or trauma', sideEffects: 'Drowsiness, nausea, constipation, respiratory depression', warnings: 'Use only under clinical supervision; avoid alcohol and sedatives' },
+    { drugNo: 10334, name: 'Tetracycline', desc: 'Broad-spectrum antibiotic', dosage: '0.5mg/ml', method: 'IV', qty: 150, reorder: 40, cost: 12.5, category: 'Antibiotic', uses: 'Treatment of bacterial infections', sideEffects: 'Nausea, photosensitivity, stomach upset', warnings: 'Avoid in pregnancy and with calcium-rich products' },
+    { drugNo: 10401, name: 'Amoxicillin', desc: 'Penicillin-type antibiotic', dosage: '250mg', method: 'Oral', qty: 300, reorder: 80, cost: 8.2, category: 'Antibiotic', uses: 'Respiratory, ear, and urinary tract infections', sideEffects: 'Diarrhoea, rash, nausea', warnings: 'Check for penicillin allergy before administration' },
+    { drugNo: 10402, name: 'Ciprofloxacin', desc: 'Fluoroquinolone antibiotic', dosage: '500mg', method: 'Oral', qty: 180, reorder: 60, cost: 14.4, category: 'Antibiotic', uses: 'Urinary, gastrointestinal, and bone infections', sideEffects: 'Dizziness, tendon irritation, stomach upset', warnings: 'Avoid in pregnancy and use cautiously with tendon disorders' },
+    { drugNo: 10403, name: 'Ceftriaxone', desc: 'Third-generation cephalosporin', dosage: '1g', method: 'IV', qty: 120, reorder: 30, cost: 18.6, category: 'Antibiotic', uses: 'Severe bacterial infections and hospital treatment', sideEffects: 'Injection-site pain, diarrhoea, rash', warnings: 'Monitor for allergic reactions and biliary issues' },
+    { drugNo: 10404, name: 'Lisinopril', desc: 'ACE inhibitor for blood pressure', dosage: '10mg', method: 'Oral', qty: 240, reorder: 75, cost: 6.8, category: 'Cardiovascular', uses: 'Hypertension and heart failure management', sideEffects: 'Cough, dizziness, low blood pressure', warnings: 'Monitor kidney function and potassium levels' },
+    { drugNo: 10405, name: 'Metoprolol', desc: 'Beta-blocker for heart rhythm and blood pressure', dosage: '50mg', method: 'Oral', qty: 260, reorder: 90, cost: 7.3, category: 'Cardiovascular', uses: 'Hypertension, angina, and arrhythmia control', sideEffects: 'Fatigue, slow pulse, dizziness', warnings: 'Use with caution in asthma or bradycardia' },
+    { drugNo: 10406, name: 'Atorvastatin', desc: 'Cholesterol-lowering statin', dosage: '20mg', method: 'Oral', qty: 220, reorder: 70, cost: 9.1, category: 'Lipid regulator', uses: 'Lower LDL cholesterol and reduce cardiovascular risk', sideEffects: 'Muscle aches, nausea, headache', warnings: 'Monitor liver function and avoid grapefruit juice' },
+    { drugNo: 10407, name: 'Paracetamol', desc: 'Pain and fever reliever', dosage: '500mg', method: 'Oral', qty: 500, reorder: 120, cost: 2.15, category: 'Analgesic', uses: 'Mild to moderate pain and fever reduction', sideEffects: 'Rare liver issues with overdose', warnings: 'Do not exceed recommended dose' },
+    { drugNo: 10408, name: 'Ibuprofen', desc: 'Non-steroidal anti-inflammatory drug', dosage: '400mg', method: 'Oral', qty: 350, reorder: 100, cost: 3.1, category: 'Anti-inflammatory', uses: 'Pain and inflammation relief', sideEffects: 'Stomach irritation, heartburn, dizziness', warnings: 'Avoid in kidney disease or gastric ulcers' },
+    { drugNo: 10409, name: 'Salbutamol', desc: 'Bronchodilator for asthma relief', dosage: '2mg/ml', method: 'Inhaled', qty: 160, reorder: 40, cost: 11.2, category: 'Respiratory', uses: 'Relief of bronchospasm and wheezing', sideEffects: 'Tremor, palpitations, anxiety', warnings: 'Use inhaler technique correctly and monitor tachycardia' },
+    { drugNo: 10410, name: 'Omeprazole', desc: 'Proton pump inhibitor', dosage: '20mg', method: 'Oral', qty: 210, reorder: 65, cost: 6.4, category: 'Gastrointestinal', uses: 'Acid reflux, gastric ulcers, dyspepsia', sideEffects: 'Headache, nausea, diarrhoea', warnings: 'Avoid long-term use without review' },
+    { drugNo: 10411, name: 'Metformin', desc: 'Biguanide for type 2 diabetes', dosage: '500mg', method: 'Oral', qty: 240, reorder: 80, cost: 5.6, category: 'Diabetes', uses: 'Glycaemic control in type 2 diabetes', sideEffects: 'Nausea, stomach upset, diarrhoea', warnings: 'Monitor renal function and avoid alcohol misuse' }
   ],
   requisition: [
     { reqNo: '034567712', requestedBy: 'Moira Samuel', ward: 11, itemNo: 10223, itemName: 'Morphine', dosage: '10mg/ml', method: 'Oral', cost: 27.75, qty: 50, date: '2004-02-15' }
   ],
   supplier: [
-    { supNo: 'SU01', name: 'MediSupply Ltd', address: '12 Industrial Est, Edinburgh', tel: '0131-500-1000', fax: '0131-500-1001' },
-    { supNo: 'SU02', name: 'PharmaCorp UK', address: '8 Fife Road, Glasgow', tel: '0141-600-2000', fax: '0141-600-2001' }
+    { supNo: 'SU01', name: 'MediSupply Ltd', address: '12 Industrial Est, Edinburgh', tel: '0131-500-1000', fax: '0131-500-1001', photo: 'https://placehold.co/120x90/4d7ea8/ffffff?text=MediSupply' },
+    { supNo: 'SU02', name: 'PharmaCorp UK', address: '8 Fife Road, Glasgow', tel: '0141-600-2000', fax: '0141-600-2001', photo: 'https://placehold.co/120x90/8b6eb4/ffffff?text=PharmaCorp' }
+  ],
+  bedQueue: [
+    { id: 'Q-1001', patientNo: 'P10234', patientName: 'Anne Phelps', ward: 11, priority: 'Urgent', status: 'Waiting', requestedAt: '2004-02-21' },
+    { id: 'Q-1002', patientNo: 'P10480', patientName: 'Steven Parks', ward: 11, priority: 'Normal', status: 'Waiting', requestedAt: '2004-01-12' }
   ]
 };
 
@@ -825,6 +1340,54 @@ function save() {
   try {
     localStorage.setItem('wellmeadowsDB', JSON.stringify(DB));
   } catch (e) {}
+}
+
+function formatMoney(value) {
+  return '£' + Number(value || 0).toFixed(2);
+}
+
+function calculateTax(amount, taxRate) {
+  return Number(amount || 0) * (Number(taxRate || 0) / 100);
+}
+
+function stampRecord(record) {
+  const now = new Date();
+  record.uploadedAt = now.toISOString();
+  record.createdAt = record.createdAt || now.toISOString();
+  return record;
+}
+
+function normalizePaymentRow(row, key) {
+  if (!row) return row;
+
+  if (key === 'appointment') {
+    const fee = Number(row.fee || 0);
+    const taxRate = Number(row.taxRate || 20);
+    const tax = Number(row.tax ?? calculateTax(fee, taxRate));
+    const total = Number(row.total ?? fee + tax);
+    return { ...row, fee, taxRate, tax, total, paymentStatus: row.paymentStatus || 'Pending' };
+  }
+
+  if (key === 'supply') {
+    const cost = Number(row.cost || 0);
+    const qty = Number(row.qty || 0);
+    const subtotal = Number(row.subtotal ?? cost * qty);
+    const taxRate = Number(row.taxRate || 20);
+    const tax = Number(row.tax ?? calculateTax(subtotal, taxRate));
+    const total = Number(row.total ?? subtotal + tax);
+    return { ...row, cost, qty, subtotal, taxRate, tax, total, paymentStatus: row.paymentStatus || 'Pending' };
+  }
+
+  if (key === 'requisition') {
+    const cost = Number(row.cost || 0);
+    const qty = Number(row.qty || 0);
+    const subtotal = Number(row.subtotal ?? cost * qty);
+    const tax = Number(row.tax ?? calculateTax(subtotal, row.taxRate || 20));
+    const total = Number(row.total ?? subtotal + tax);
+    return { ...row, subtotal, tax, total, status: row.status || 'Pending' };
+  }
+
+  return row;
 }
 
 function idNo(prefix, arr, field) {
@@ -843,7 +1406,8 @@ const PAGES = [
   ['supplies', 'Supplies'],
   ['pharma', 'Pharmaceuticals'],
   ['requisitions', 'Requisitions'],
-  ['suppliers', 'Suppliers']
+  ['suppliers', 'Suppliers'],
+  ['reports', 'Report Hub']
 ];
 
 document.getElementById('nav').innerHTML = PAGES
@@ -861,61 +1425,399 @@ function show(p) {
 
   if (p === 'dashboard') renderDash();
   if (p === 'beds') renderBeds();
+  if (p === 'reports') renderReportsHub();
 }
 
-function buildForm(key) {
+function renderReportsHub() {
+  const reportHub = document.getElementById('reportHub');
+  if (!reportHub) return;
+
+  const reportKeys = [
+    ['ward', 'Wards'],
+    ['staff', 'Staff'],
+    ['patient', 'Patients'],
+    ['outpatient', 'Outpatients'],
+    ['appointment', 'Appointments'],
+    ['medication', 'Medication'],
+    ['supply', 'Supplies'],
+    ['pharma', 'Pharmaceuticals'],
+    ['requisition', 'Requisitions'],
+    ['supplier', 'Suppliers']
+  ];
+
+  reportHub.innerHTML = reportKeys.map(([key, label]) => {
+    const rows = DB[key] || [];
+    const itemCount = rows.length;
+    return `
+      <div style="border:1px solid var(--bd); border-radius:12px; padding:14px; background:#fff; margin-bottom:12px; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px;">
+        <div>
+          <strong>${label}</strong>
+          <div style="font-size:12px; color:#667; margin-top:4px;">${itemCount} record${itemCount === 1 ? '' : 's'}</div>
+        </div>
+        <div style="display:flex; gap:8px; flex-wrap:wrap;">
+          <button class="act" onclick="printReportByKey('${key}')">Print ${label}</button>
+        </div>
+      </div>
+    `;
+  }).join('') + `<div style="margin-top:12px;"><button class="act" onclick="printAllReports()">Print All Reports</button></div>`;
+}
+
+function buildReportTable(key) {
   const schema = SCHEMA[key];
-  const box = document.getElementById('f-' + key);
+  const rows = DB[key] || [];
+  if (!schema || !rows.length) {
+    return '<p>No data available for this report.</p>';
+  }
+
+  const headers = schema.labels.slice(0, Math.min(schema.labels.length, 8));
+  const body = rows.map(row => {
+    const cells = schema.fields.slice(0, Math.min(schema.fields.length, 8)).map(field => {
+      const value = row[field];
+      return `<td>${value === undefined || value === null || value === '' ? '-' : value}</td>`;
+    }).join('');
+    return `<tr>${cells}</tr>`;
+  }).join('');
+
+  return `
+    <table border="1" cellpadding="6" cellspacing="0" style="width:100%; border-collapse:collapse; margin-bottom:18px;">
+      <thead>
+        <tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>
+      </thead>
+      <tbody>${body}</tbody>
+    </table>
+  `;
+}
+
+function printReportByKey(key) {
+  const label = (SCHEMA[key] && SCHEMA[key].labels) ? key.charAt(0).toUpperCase() + key.slice(1) : 'Report';
+  const rows = DB[key] || [];
+  if (!rows.length) {
+    alert('There is no data available for this report.');
+    return;
+  }
+  const win = window.open('', '_blank', 'width=980,height=700');
+  win.document.write(`<!DOCTYPE html><html><head><title>${label} Report</title><style>body{font-family:Arial,sans-serif;margin:24px;} table{border-collapse:collapse;width:100%;} th,td{border:1px solid #ccc;padding:8px;text-align:left;vertical-align:top;} h2{margin-bottom:12px;}</style></head><body><h2>${label} Report</h2>${buildReportTable(key)}</body></html>`);
+  win.document.close();
+  win.focus();
+  win.print();
+}
+
+function printAllReports() {
+  const keys = Object.keys(SCHEMA).filter(key => Array.isArray(DB[key]));
+  const body = keys.map(key => `<h2>${key.charAt(0).toUpperCase() + key.slice(1)} Report</h2>${buildReportTable(key)}`).join('');
+  const win = window.open('', '_blank', 'width=1200,height=800');
+  win.document.write(`<!DOCTYPE html><html><head><title>All Hospital Reports</title><style>body{font-family:Arial,sans-serif;margin:24px;} table{border-collapse:collapse;width:100%;margin-bottom:24px;} th,td{border:1px solid #ccc;padding:8px;text-align:left;vertical-align:top;} h2{margin:0 0 12px;} </style></head><body><h1>Wellmeadows Hospital Report Hub</h1>${body}</body></html>`);
+  win.document.close();
+  win.focus();
+  win.print();
+}
+
+function buildForm(key, targetBox = null, editIndex = null) {
+  const schema = SCHEMA[key];
+  const box = targetBox || document.getElementById('f-' + key);
+  if (!box) return;
+
+  if (key === 'requisition') {
+    const existing = editIndex !== null && DB.requisition[editIndex] ? DB.requisition[editIndex] : null;
+    box.innerHTML = `
+      <div><label>Requisition No</label><input id="in-requisition-reqNo" value="${existing ? (existing.reqNo || '') : ''}"></div>
+      <div><label>Requested By</label><input id="in-requisition-requestedBy" value="${existing ? (existing.requestedBy || '') : ''}"></div>
+      <div><label>Ward</label><input id="in-requisition-ward" value="${existing ? (existing.ward || '') : ''}"></div>
+      <div><label>Date Ordered</label><input id="in-requisition-date" type="date" value="${existing ? (existing.date || '') : ''}"></div>
+      <div style="grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px;">
+        <strong>Items</strong>
+        <button type="button" class="act" onclick="addRequisitionItemRow()">+ Add Item</button>
+      </div>
+      <div id="requisition-item-list" style="grid-column:1/-1;display:grid;gap:10px;"></div>
+      <div><label>Attachment</label><input type="file" id="in-requisition-file"></div>
+    `;
+
+    if (existing) {
+      addRequisitionItemRow(existing);
+    } else {
+      addRequisitionItemRow();
+    }
+    return;
+  }
 
   box.innerHTML = schema.fields
-    .map((field, index) => field === 'file'
-      ? `<div><label>${schema.labels[index]}</label><input type="file" id="in-${key}-${field}"></div>`
-      : `<div><label>${schema.labels[index]}</label><input id="in-${key}-${field}"></div>`)
-    .join('');
+    .map((field, index) => {
+      if (field === 'file' || field === 'refDoc') {
+        return `<div><label>${schema.labels[index]}</label><input type="file" id="in-${key}-${field}"></div>`;
+      }
+      if (field === 'medicalRecord' || field === 'workExperience') {
+        return `<div style="grid-column:1 / -1;"><label>${schema.labels[index]}</label><textarea id="in-${key}-${field}" rows="4" style="width:100%;min-height:90px;resize:vertical;">${(editIndex !== null && DB[key] && DB[key][editIndex] && DB[key][editIndex][field]) || ''}</textarea></div>`;
+      }
+      return `<div><label>${schema.labels[index]}</label><input id="in-${key}-${field}"></div>`;
+    }).join('') + `
+      <div style="display:flex;align-items:flex-end;"><button type="button" class="del" onclick="this.parentElement.parentElement.remove()">Remove</button></div>
+  `;
+}
+
+let requisitionItemCounter = 0;
+
+function addRequisitionItemRow(existing = null) {
+  const list = document.getElementById('requisition-item-list');
+  if (!list) return;
+
+  const row = document.createElement('div');
+  row.className = 'req-item-row';
+  row.style.display = 'grid';
+  row.style.gridTemplateColumns = 'repeat(6, minmax(110px, 1fr))';
+  row.style.gap = '8px';
+  row.style.padding = '10px';
+  row.style.border = '1px solid var(--bd)';
+  row.style.borderRadius = '8px';
+  row.style.background = '#f8fbff';
+
+  const fields = [
+    ['itemNo', 'Item No'],
+    ['itemName', 'Item Name'],
+    ['dosage', 'Dosage'],
+    ['method', 'Method'],
+    ['cost', 'Cost'],
+    ['qty', 'Qty']
+  ];
+
+  const item = existing || {};
+  row.innerHTML = fields.map(([field, label]) => `
+    <div>
+      <label style="display:block;font-size:11px;color:#456;">${label}</label>
+      <input name="${field}" value="${(item[field] ?? '').toString().replace(/"/g, '&quot;')}" style="width:100%;">
+    </div>
+  `).join('') + `
+    <div style="display:flex;align-items:flex-end;">
+      <button type="button" class="del" onclick="this.parentElement.parentElement.remove()">Remove</button>
+    </div>
+  `;
+
+  list.appendChild(row);
+  requisitionItemCounter += 1;
 }
 
 Object.keys(SCHEMA).forEach(buildForm);
 
-function addRow(key) {
+function openUploadDialog(key, editIndex = null) {
+  const titleMap = {
+    ward: editIndex !== null ? 'Edit Ward' : 'Upload Ward',
+    staff: editIndex !== null ? 'Edit Staff' : 'Upload Staff',
+    patient: editIndex !== null ? 'Edit Patient' : 'Upload Patient',
+    outpatient: editIndex !== null ? 'Edit Outpatient' : 'Upload Outpatient',
+    appointment: editIndex !== null ? 'Edit Appointment' : 'Upload Appointment',
+    medication: editIndex !== null ? 'Edit Medication' : 'Upload Medication',
+    supply: editIndex !== null ? 'Edit Supply' : 'Upload Supply',
+    pharma: editIndex !== null ? 'Edit Drug' : 'Upload Drug',
+    requisition: editIndex !== null ? 'Edit Requisition' : 'Upload Requisition',
+    supplier: editIndex !== null ? 'Edit Supplier' : 'Upload Supplier'
+  };
+
+  const overlay = document.getElementById('uploadDialogOverlay');
+  const body = document.getElementById('uploadDialogBody');
+  if (!overlay || !body) return;
+
+  window.__uploadEditContext = { key, index: editIndex };
+  document.getElementById('uploadDialogTitle').textContent = titleMap[key] || 'Upload';
+  body.innerHTML = `
+    <div id="upload-form-root" class="grid2"></div>
+    <div class="btnrow" style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px;">
+      <button class="act" onclick="submitUploadDialog('${key}')">Save</button>
+      <button class="del" onclick="closeUploadDialog()">Cancel</button>
+    </div>
+  `;
+
+  buildForm(key, document.getElementById('upload-form-root'), editIndex);
+  overlay.classList.add('show');
+}
+
+function closeUploadDialog() {
+  const overlay = document.getElementById('uploadDialogOverlay');
+  if (overlay) overlay.classList.remove('show');
+  window.__uploadEditContext = null;
+}
+
+function submitUploadDialog(key) {
+  const editIndex = window.__uploadEditContext && window.__uploadEditContext.key === key ? window.__uploadEditContext.index : null;
+  addRow(key, editIndex);
+  closeUploadDialog();
+}
+
+function addRow(key, editIndex = null) {
+  if (key === 'requisition') {
+    const reqNoEl = document.getElementById('in-requisition-reqNo');
+    const requestedByEl = document.getElementById('in-requisition-requestedBy');
+    const wardEl = document.getElementById('in-requisition-ward');
+    const dateEl = document.getElementById('in-requisition-date');
+    const fileEl = document.getElementById('in-requisition-file');
+    const itemRows = [...document.querySelectorAll('#requisition-item-list .req-item-row')];
+
+    const items = itemRows.map(row => {
+      const vals = {};
+      ['itemNo', 'itemName', 'dosage', 'method', 'cost', 'qty'].forEach(field => {
+        const input = row.querySelector(`input[name="${field}"]`);
+        vals[field] = input ? input.value.trim() : '';
+      });
+      return vals;
+    }).filter(item => item.itemNo || item.itemName || item.dosage || item.method || item.cost || item.qty);
+
+    if (!items.length) {
+      alert('Add at least one requisition item before saving.');
+      return;
+    }
+
+    const finish = () => {
+      const base = {
+        reqNo: reqNoEl ? reqNoEl.value.trim() : '',
+        requestedBy: requestedByEl ? requestedByEl.value.trim() : '',
+        ward: wardEl ? wardEl.value.trim() : '',
+        date: dateEl ? dateEl.value : '',
+        file: '',
+        fileName: '',
+        status: 'Pending',
+        taxRate: 20
+      };
+
+      items.forEach(item => {
+        const qty = Number(item.qty || 0);
+        const cost = Number(item.cost || 0);
+        const subtotal = qty * cost;
+        const tax = calculateTax(subtotal, base.taxRate);
+        const total = subtotal + tax;
+
+        const existing = editIndex !== null && DB.requisition[editIndex] ? DB.requisition[editIndex] : {};
+        const row = stampRecord({
+          ...existing,
+          ...base,
+          itemNo: item.itemNo,
+          itemName: item.itemName,
+          dosage: item.dosage,
+          method: item.method,
+          cost: cost,
+          qty: qty,
+          subtotal: subtotal,
+          tax: tax,
+          total: total,
+        });
+
+        if (!row.reqNo) row.reqNo = 'REQ' + Math.floor(1000 + Math.random() * 9000);
+        if (editIndex !== null) {
+          DB.requisition[editIndex] = row;
+        } else {
+          DB.requisition.push(row);
+        }
+      });
+
+      save();
+      render('requisition');
+      requisitionItemCounter = 0;
+      buildForm('requisition');
+    };
+
+    if (fileEl && fileEl.files && fileEl.files[0]) {
+      const file = fileEl.files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const baseFile = { file: reader.result, fileName: file.name };
+        items.forEach(item => Object.assign(item, baseFile));
+        finish();
+      };
+      reader.readAsDataURL(file);
+      return;
+    }
+
+    finish();
+    return;
+  }
+
   const schema = SCHEMA[key];
   const obj = {};
-  const fileField = schema.fields.find(field => field === 'file');
-  const fileEl = fileField ? document.getElementById('in-' + key + '-file') : null;
+  const fileFields = schema.fields.filter(field => field === 'file' || field === 'refDoc');
+  const fileEls = fileFields.map(field => ({ field, el: document.getElementById('in-' + key + '-' + field) }));
 
   const finish = () => {
+    const current = editIndex !== null && DB[key] && DB[key][editIndex] ? DB[key][editIndex] : {};
+
     schema.fields.forEach(field => {
-      if (field === 'file') return;
+      if (field === 'file' || field === 'refDoc') return;
       const el = document.getElementById('in-' + key + '-' + field);
+      if (!el) return;
       obj[field] = el.value;
       el.value = '';
     });
 
     const idField = schema.fields[0];
     if (!obj[idField]) {
-      obj[idField] = key.toUpperCase().slice(0, 3) + Math.floor(1000 + Math.random() * 8999);
+      obj[idField] = current[idField] || key.toUpperCase().slice(0, 3) + Math.floor(1000 + Math.random() * 8999);
     }
 
-    DB[key].push(obj);
+    if (key === 'pharma' && obj.file) {
+      obj.photo = obj.file;
+    }
+
+    if (key === 'appointment') {
+      const fee = Number(obj.fee || current.fee || 0);
+      const taxRate = Number(obj.taxRate || current.taxRate || 20);
+      obj.tax = calculateTax(fee, taxRate);
+      obj.total = fee + obj.tax;
+      obj.paymentStatus = obj.paymentStatus || current.paymentStatus || 'Pending';
+    }
+
+    if (key === 'supply') {
+      const cost = Number(obj.cost || current.cost || 0);
+      const qty = Number(obj.qty || current.qty || 0);
+      const subtotal = cost * qty;
+      const taxRate = Number(obj.taxRate || current.taxRate || 20);
+      obj.subtotal = subtotal;
+      obj.tax = calculateTax(subtotal, taxRate);
+      obj.total = subtotal + obj.tax;
+      obj.paymentStatus = obj.paymentStatus || current.paymentStatus || 'Pending';
+    }
+
+    const finalRecord = { ...current, ...obj };
+    if (editIndex !== null) {
+      DB[key][editIndex] = stampRecord(finalRecord);
+    } else {
+      DB[key].push(stampRecord(finalRecord));
+    }
     save();
     render(key);
   };
 
-  if (fileEl && fileEl.files && fileEl.files[0]) {
-    const file = fileEl.files[0];
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      obj.file = reader.result;
-      obj.fileName = file.name;
-      fileEl.value = '';
+  const processFile = index => {
+    if (index >= fileEls.length) {
       finish();
-    };
+      return;
+    }
 
-    reader.readAsDataURL(file);
-  } else {
-    obj.file = '';
-    finish();
-  }
+    const { field, el } = fileEls[index];
+    if (!el) {
+      obj[field] = '';
+      obj[field + 'Name'] = '';
+      processFile(index + 1);
+      return;
+    }
+
+    if (el.files && el.files[0]) {
+      const file = el.files[0];
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        obj[field] = reader.result;
+        obj[field + 'Name'] = file.name;
+        if (key === 'pharma' && field === 'file') obj.photo = reader.result;
+        el.value = '';
+        processFile(index + 1);
+      };
+
+      reader.readAsDataURL(file);
+    } else {
+      obj[field] = '';
+      obj[field + 'Name'] = '';
+      el.value = '';
+      processFile(index + 1);
+    }
+  };
+
+  processFile(0);
 }
 
 function delRow(key, index) {
@@ -924,26 +1826,109 @@ function delRow(key, index) {
   render(key);
 }
 
-function render(key, query) {
-  const schema = SCHEMA[key];
-  const rows = DB[key];
-  const filtered = query
-    ? rows.filter(row => Object.values(row).join(' ').toLowerCase().includes(query.toLowerCase()))
-    : rows;
+function getSearchFieldValue(row, field) {
+  if (!row) return '';
 
-  let html = '<tr>' + schema.labels.map(label => `<th>${label}</th>`).join('') + (key === 'ward' ? '<th>Staff</th>' : '') + '<th></th></tr>';
+  const map = {
+    all: () => Object.values(row).join(' '),
+    name: () => [row.first, row.last, row.name, row.itemName, row.patientName].filter(Boolean).join(' '),
+    staffNo: () => row.staffNo || '',
+    position: () => row.position || '',
+    qual: () => row.qual || '',
+    ward: () => `${row.ward || ''} ${row.wardNo || ''}`,
+    patNo: () => row.patNo || '',
+    status: () => row.status || '',
+    localDoctor: () => row.localDoctor || '',
+    allergies: () => row.allergies || '',
+    number: () => row.number || '',
+    location: () => row.location || '',
+    beds: () => row.beds || '',
+    apptDate: () => row.apptDate || row.date || '',
+    apptTime: () => row.apptTime || row.time || '',
+    reqNo: () => row.reqNo || '',
+    itemName: () => row.itemName || '',
+    itemNo: () => row.itemNo || '',
+    requestedBy: () => row.requestedBy || '',
+    supNo: () => row.supNo || ''
+  };
+
+  const fn = map[field] || map.all;
+  return String(fn()).toLowerCase();
+}
+
+function render(key, query = '', filterType = 'all') {
+  const schema = SCHEMA[key];
+  const rows = DB[key] || [];
+  const normalized = rows.map((row, index) => ({ ...normalizePaymentRow(row, key), __index: index }));
+  const searchText = String(query || '').trim().toLowerCase();
+  const filtered = searchText
+    ? normalized.filter(row => getSearchFieldValue(row, filterType).includes(searchText))
+    : normalized;
+
+  let html = '<tr>' + schema.labels.map(label => `<th>${label}</th>`).join('') + (key === 'ward' || key === 'staff' || key === 'patient' || key === 'pharma' || key === 'medication' || key === 'supply' || key === 'supplier' || key === 'appointment' ? '<th>Details</th>' : '') + '<th>Actions</th></tr>';
 
   filtered.forEach(row => {
-    const realIndex = rows.indexOf(row);
+    const realIndex = row.__index;
 
-    html += '<tr>' + schema.fields.map(field => field === 'file'
-      ? `<td>${row.file ? `<a href="${row.file}" download="${row.fileName || 'file'}">📎 ${row.fileName || 'file'}</a>` : '-'}</td>`
-      : `<td>${row[field] ?? ''}</td>`).join('')
+    html += '<tr>' + schema.fields.map(field => {
+      if (field === 'photo') {
+        return `<td>${row.photo ? `<img src="${row.photo}" alt="${row.name || 'image'}" onerror="this.style.display='none'; this.parentElement.innerHTML='-';">` : '-'}</td>`;
+      }
+      if (field === 'file' || field === 'refDoc') {
+        const value = row[field];
+        const name = row[field + 'Name'] || (field === 'refDoc' ? "Patient's Referral Document" : 'file');
+        return `<td>${value ? `<a href="${value}" download="${name}">📎 ${name}</a>` : '-'}</td>`;
+      }
+      if (field === 'total' || field === 'subtotal' || field === 'tax' || field === 'fee') {
+        return `<td>${formatMoney(row[field])}</td>`;
+      }
+      if (field === 'uploadedAt') {
+        return `<td>${row.uploadedAt ? new Date(row.uploadedAt).toLocaleString() : '-'}</td>`;
+      }
+      return `<td>${row[field] ?? ''}</td>`;
+    }).join('')
       + (key === 'ward' ? `<td><button class="infoBtn" onclick="openWardDetail('${row.number}')">ℹ️ Info</button></td>` : '')
-      + `<td><button class="del" onclick="delRow('${key}',${realIndex})">Del</button></td></tr>`;
+      + (key === 'staff' ? `<td><button class="infoBtn" onclick="openStaffDetail('${row.staffNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'patient' ? `<td><button class="infoBtn" onclick="openPatientDetail('${row.patNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'pharma' ? `<td><button class="infoBtn" onclick="openDrugDetail('${row.drugNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'medication' ? `<td><button class="infoBtn" onclick="openMedicationDetail('${row.patNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'supply' ? `<td><button class="infoBtn" onclick="openSupplyDetail('${row.itemNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'supplier' ? `<td><button class="infoBtn" onclick="openSupplierDetail('${row.supNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'appointment' ? `<td><button class="infoBtn" onclick="openAppointmentDetail('${row.apptNo}')">ℹ️ Info</button></td>` : '')
+      + (key === 'requisition'
+        ? `<td><button class="infoBtn" onclick="openUploadDialog('requisition', ${realIndex})">Edit</button> <button class="act" onclick="updateRequisitionStatus(${realIndex}, 'Approved')">Approve</button> <button class="del" onclick="updateRequisitionStatus(${realIndex}, 'Disapproved')">Disapprove</button> <button class="del" onclick="delRow('${key}',${realIndex})">Del</button></td>`
+        : `<td><button class="infoBtn" onclick="openUploadDialog('${key}', ${realIndex})">Edit</button> <button class="del" onclick="delRow('${key}',${realIndex})">Del</button></td>`)
+      + '</tr>';
   });
 
-  document.getElementById('t-' + key).innerHTML = html;
+  const targetTable = document.getElementById('t-' + key);
+  if (targetTable) targetTable.innerHTML = html;
+
+  if (['supply', 'requisition', 'appointment'].includes(key)) renderPaymentSummary(key);
+}
+
+function renderPaymentSummary(key) {
+  const rows = (DB[key] || []).map(row => normalizePaymentRow(row, key));
+  const total = rows.reduce((sum, row) => sum + Number((row.total ?? row.subtotal ?? row.fee ?? 0) || 0), 0);
+  const tax = rows.reduce((sum, row) => sum + Number(row.tax || 0), 0);
+  const summaryEl = document.getElementById(key + 'Summary');
+  if (!summaryEl) return;
+
+  const labels = {
+    supply: 'Supply Payment Summary',
+    requisition: 'Requisition Payment Summary',
+    appointment: 'Appointment Payment Summary'
+  };
+
+  summaryEl.innerHTML = `<strong>${labels[key]}</strong><br>Subtotal: ${formatMoney(total - tax)} &nbsp;•&nbsp; Tax: ${formatMoney(tax)} &nbsp;•&nbsp; Total: ${formatMoney(total)}`;
+}
+
+function updateRequisitionStatus(index, status) {
+  if (!DB.requisition[index]) return;
+  DB.requisition[index].status = status;
+  DB.requisition[index].approvedAt = new Date().toISOString();
+  save();
+  render('requisition');
 }
 
 Object.keys(SCHEMA).forEach(key => render(key));
@@ -971,19 +1956,82 @@ function renderDash() {
   document.getElementById('staffWidget').innerHTML = DB.staff.map(staff => {
     const img = staff.photo || 'https://api.dicebear.com/7.x/initials/svg?seed=' + staff.first + staff.last + '&backgroundColor=4a6fa5';
 
-    return `<div class="staffCard"><img src="${img}" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=${staff.first}${staff.last}&backgroundColor=4a6fa5'"><div class="sc-body"><b>${staff.first} ${staff.last}</b><span>${staff.position} • Ward ${staff.ward || '-'}</span></div></div>`;
+    return `<div class="staffCard"><img src="${img}" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=${staff.first}${staff.last}&backgroundColor=4a6fa5'"><div class="sc-body"><b>${staff.first} ${staff.last}</b><span>${staff.position} • Ward ${staff.ward || '-'}</span><div style="margin-top:8px;"><button class="infoBtn" onclick="openStaffDetail('${staff.staffNo}')">ℹ️ Info</button></div></div></div>`;
   }).join('');
 
-  let html = '<tr><th>Ward No</th><th>Name</th><th>Location</th><th>Beds</th><th>Occupied</th><th>Free</th><th>Charge Nurse</th></tr>';
+  let wardHtml = '<tr><th>Ward No</th><th>Name</th><th>Location</th><th>Beds</th><th>Occupied</th><th>Free</th><th>Charge Nurse</th><th>Info</th></tr>';
 
   DB.ward.forEach(ward => {
     const occupiedBeds = DB.patient.filter(patient => String(patient.ward) === String(ward.number) && patient.status === 'In Ward').length;
     const chargeNurse = DB.staff.find(staff => String(staff.ward) === String(ward.number) && staff.position === 'Charge Nurse');
 
-    html += `<tr><td>${ward.number}</td><td>${ward.name}</td><td>${ward.location}</td><td>${ward.beds}</td><td>${occupiedBeds}</td><td>${ward.beds - occupiedBeds}</td><td>${chargeNurse ? chargeNurse.first + ' ' + chargeNurse.last : '-'}</td></tr>`;
+    wardHtml += `<tr><td>${ward.number}</td><td>${ward.name}</td><td>${ward.location}</td><td>${ward.beds}</td><td>${occupiedBeds}</td><td>${ward.beds - occupiedBeds}</td><td>${chargeNurse ? chargeNurse.first + ' ' + chargeNurse.last : '-'}</td><td><button class="infoBtn" onclick="openWardDetail('${ward.number}')">ℹ️ Info</button></td></tr>`;
   });
 
-  document.getElementById('wardOverview').innerHTML = html;
+  document.getElementById('wardOverview').innerHTML = wardHtml;
+
+  const patientQuick = DB.patient.slice(0, 5).map(patient => `
+    <tr>
+      <td>${patient.patNo || '-'}</td>
+      <td>${patient.first || '-'} ${patient.last || ''}</td>
+      <td>${patient.status || '-'}</td>
+      <td><button class="infoBtn" onclick="openPatientDetail('${patient.patNo}')">ℹ️ Info</button></td>
+    </tr>
+  `).join('');
+
+  const supplierQuick = DB.supplier.map(supplier => `
+    <tr>
+      <td>${supplier.supNo || '-'}</td>
+      <td>${supplier.name || '-'}</td>
+      <td><button class="infoBtn" onclick="openSupplierDetail('${supplier.supNo}')">ℹ️ Info</button></td>
+    </tr>
+  `).join('');
+
+  const medicationQuick = DB.medication.slice(0, 5).map(med => `
+    <tr>
+      <td>${med.patNo || '-'}</td>
+      <td>${med.drugName || '-'}</td>
+      <td>${med.dosage || '-'}</td>
+      <td><button class="infoBtn" onclick="openMedicationDetail('${med.patNo}')">ℹ️ Info</button></td>
+    </tr>
+  `).join('');
+
+  const dashboardInfo = `
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap:16px; margin-top:24px;">
+      <div>
+        <h2>Patient Snapshot</h2>
+        <table>
+          <tr><th>Patient No</th><th>Name</th><th>Status</th><th>Info</th></tr>
+          ${patientQuick || '<tr><td colspan="4">No patients</td></tr>'}
+        </table>
+      </div>
+      <div>
+        <h2>Supplier Directory</h2>
+        <table>
+          <tr><th>Supplier No</th><th>Name</th><th>Info</th></tr>
+          ${supplierQuick || '<tr><td colspan="3">No suppliers</td></tr>'}
+        </table>
+      </div>
+      <div>
+        <h2>Medication Snapshot</h2>
+        <table>
+          <tr><th>Patient</th><th>Drug</th><th>Dose</th><th>Info</th></tr>
+          ${medicationQuick || '<tr><td colspan="4">No medications</td></tr>'}
+        </table>
+      </div>
+    </div>
+  `;
+
+  const dashboardRoot = document.getElementById('dashboard');
+  if (dashboardRoot) {
+    const existing = dashboardRoot.querySelector('#dashboard-info-panel');
+    if (existing) existing.remove();
+
+    const panel = document.createElement('div');
+    panel.id = 'dashboard-info-panel';
+    panel.innerHTML = dashboardInfo;
+    dashboardRoot.appendChild(panel);
+  }
 }
 
 const SHIFTS = ['Early', 'Late', 'Night', 'Off'];
@@ -1058,21 +2106,534 @@ function closeWardDetail() {
   document.getElementById('wardDetailOverlay').classList.remove('show');
 }
 
-document.getElementById('wardDetailOverlay').addEventListener('click', event => {
-  if (event.target.id === 'wardDetailOverlay') closeWardDetail();
+function openDrugDetail(drugNo) {
+  const drug = DB.pharma.find(item => String(item.drugNo) === String(drugNo));
+  if (!drug) return;
+
+  document.getElementById('drug-title').textContent = drug.name + ' (' + drug.drugNo + ')';
+  document.getElementById('drug-meta').innerHTML = `
+    <span>💊 ${drug.category || 'Medication'}</span>
+    <span>📦 ${drug.qty || 0} units in stock</span>
+    <span>🔁 Reorder at ${drug.reorder || 0}</span>
+    <span>£${Number(drug.cost || 0).toFixed(2)} / unit</span>
+  `;
+
+  document.getElementById('drug-details').innerHTML = `
+    <div class="supCard" style="margin-top:8px">
+      <div class="drugPhoto">
+        ${drug.photo
+          ? `<img src="${drug.photo}" alt="${drug.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='💊';">`
+          : '💊'}
+      </div>
+      <div>
+        <b style="display:block;font-size:16px;color:var(--primary-dk)">${drug.name}</b>
+        <span style="font-size:12px;color:#567">${drug.desc || 'Prescription medication'}</span>
+      </div>
+    </div>
+
+    <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Dose</th><td style="padding:8px;border:1px solid var(--bd)">${drug.dosage || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Route</th><td style="padding:8px;border:1px solid var(--bd)">${drug.method || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Primary Use</th><td style="padding:8px;border:1px solid var(--bd)">${drug.uses || 'Not specified'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Common Side Effects</th><td style="padding:8px;border:1px solid var(--bd)">${drug.sideEffects || 'Not specified'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Warnings</th><td style="padding:8px;border:1px solid var(--bd)">${drug.warnings || 'Follow clinical guidance'}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('drugDetailOverlay').classList.add('show');
+}
+
+function closeDrugDetail() {
+  document.getElementById('drugDetailOverlay').classList.remove('show');
+}
+
+function openPatientDetail(patNo) {
+  const patient = DB.patient.find(item => String(item.patNo) === String(patNo));
+  if (!patient) return;
+
+  document.getElementById('patient-title').textContent = patient.first + ' ' + patient.last + ' (' + patient.patNo + ')';
+  document.getElementById('patient-meta').innerHTML = `
+    <span>🏥 ${patient.status || 'Unknown status'}</span>
+    <span>🛏️ ${patient.ward || '-'} / Bed ${patient.bed || '-'}</span>
+    <span>📅 DOB ${patient.dob || '-'}</span>
+  `;
+
+  document.getElementById('patient-details').innerHTML = `
+    <div class="supCard" style="margin-top:8px">
+      <div class="drugPhoto" style="border-radius:50%">👤</div>
+      <div>
+        <b style="display:block;font-size:16px;color:var(--primary-dk)">${patient.first} ${patient.last}</b>
+        <span style="font-size:12px;color:#567">${patient.address || 'No address on file'} • ${patient.tel || 'No phone on file'}</span>
+      </div>
+    </div>
+
+    <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Patient No</th><td style="padding:8px;border:1px solid var(--bd)">${patient.patNo || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Sex</th><td style="padding:8px;border:1px solid var(--bd)">${patient.sex || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Marital Status</th><td style="padding:8px;border:1px solid var(--bd)">${patient.marital || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Next of Kin</th><td style="padding:8px;border:1px solid var(--bd)">${patient.kinName || '-'} (${patient.kinRel || '-'})</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Local Doctor</th><td style="padding:8px;border:1px solid var(--bd)">${patient.localDoctor || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Allergies</th><td style="padding:8px;border:1px solid var(--bd)">${patient.allergies || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Medical Record</th><td style="padding:8px;border:1px solid var(--bd)">${patient.medicalRecord || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Waitlist Date</th><td style="padding:8px;border:1px solid var(--bd)">${patient.waitDate || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Placed Date</th><td style="padding:8px;border:1px solid var(--bd)">${patient.placedDate || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Expected Leave</th><td style="padding:8px;border:1px solid var(--bd)">${patient.expLeave || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Actual Leave</th><td style="padding:8px;border:1px solid var(--bd)">${patient.actualLeave || '-'}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('patientDetailOverlay').classList.add('show');
+}
+
+function closePatientDetail() {
+  document.getElementById('patientDetailOverlay').classList.remove('show');
+}
+
+function openStaffDetail(staffNo) {
+  const staff = DB.staff.find(item => String(item.staffNo) === String(staffNo));
+  if (!staff) return;
+
+  document.getElementById('staff-title').textContent = staff.first + ' ' + staff.last + ' (' + staff.staffNo + ')';
+  document.getElementById('staff-meta').innerHTML = `
+    <span>👤 ${staff.position || 'Staff Member'}</span>
+    <span>🏥 Ward ${staff.ward || '-'}</span>
+    <span>📞 ${staff.tel || '-'}</span>
+  `;
+
+  document.getElementById('staff-details').innerHTML = `
+    <div class="supCard" style="margin-top:8px">
+      <div class="drugPhoto" style="border-radius:50%">
+        ${staff.photo
+          ? `<img src="${staff.photo}" alt="${staff.first} ${staff.last}" onerror="this.style.display='none'; this.parentElement.innerHTML='👤';">`
+          : '👤'}
+      </div>
+      <div>
+        <b style="display:block;font-size:16px;color:var(--primary-dk)">${staff.first} ${staff.last}</b>
+        <span style="font-size:12px;color:#567">${staff.address || 'No address on file'} • ${staff.email || 'No email on file'}</span>
+      </div>
+    </div>
+
+    <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Staff No</th><td style="padding:8px;border:1px solid var(--bd)">${staff.staffNo || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Position</th><td style="padding:8px;border:1px solid var(--bd)">${staff.position || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Address</th><td style="padding:8px;border:1px solid var(--bd)">${staff.address || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">DOB</th><td style="padding:8px;border:1px solid var(--bd)">${staff.dob || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Sex</th><td style="padding:8px;border:1px solid var(--bd)">${staff.sex || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">NIN</th><td style="padding:8px;border:1px solid var(--bd)">${staff.nin || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Qualification</th><td style="padding:8px;border:1px solid var(--bd)">${staff.qual || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Working Experience</th><td style="padding:8px;border:1px solid var(--bd)">${staff.workExperience || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Contract</th><td style="padding:8px;border:1px solid var(--bd)">${staff.contract === 'P' ? 'Permanent' : staff.contract === 'T' ? 'Temporary' : (staff.contract || '-')}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('staffDetailOverlay').classList.add('show');
+}
+
+function closeStaffDetail() {
+  document.getElementById('staffDetailOverlay').classList.remove('show');
+}
+
+function openAppointmentDetail(apptNo) {
+  const appointment = DB.appointment.find(item => String(item.apptNo) === String(apptNo));
+  if (!appointment) return;
+
+  const patient = DB.patient.find(item => String(item.patNo) === String(appointment.patNo)) || {};
+
+  document.getElementById('appointment-title').textContent = 'Appointment ' + appointment.apptNo;
+  document.getElementById('appointment-meta').innerHTML = `
+    <span>👤 ${patient.first || 'Patient'} ${patient.last || ''}</span>
+    <span>📅 ${appointment.date || '-'} • ${appointment.time || '-'}</span>
+    <span>🩺 ${appointment.consultant || '-'}</span>
+  `;
+
+  document.getElementById('appointment-details').innerHTML = `
+    <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Patient No</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.patNo || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Consultant</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.consultant || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Staff No</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.staffNo || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Referral Source</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.referral || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Reason / Notes</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.reason || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Local Doctor</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.localDoctor || patient.localDoctor || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Room</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.room || '-'}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('appointmentDetailOverlay').classList.add('show');
+}
+
+function closeAppointmentDetail() {
+  document.getElementById('appointmentDetailOverlay').classList.remove('show');
+}
+
+function openSupplyDetail(itemNo) {
+  const supply = DB.supply.find(item => String(item.itemNo) === String(itemNo));
+  if (!supply) return;
+
+  document.getElementById('supply-title').textContent = supply.name + ' (' + supply.itemNo + ')';
+  document.getElementById('supply-meta').innerHTML = `
+    <span>📦 ${supply.qty || 0} units in stock</span>
+    <span>🔁 Reorder at ${supply.reorder || 0}</span>
+    <span>£${Number(supply.cost || 0).toFixed(2)} / unit</span>
+  `;
+
+  document.getElementById('supply-details').innerHTML = `
+    <div class="supCard" style="margin-top:8px">
+      <div class="drugPhoto">
+        ${supply.photo
+          ? `<img src="${supply.photo}" alt="${supply.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='📦';">`
+          : '📦'}
+      </div>
+      <div>
+        <b style="display:block;font-size:16px;color:var(--primary-dk)">${supply.name}</b>
+        <span style="font-size:12px;color:#567">${supply.desc || 'Medical supply item'}</span>
+      </div>
+    </div>
+
+    <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Item No</th><td style="padding:8px;border:1px solid var(--bd)">${supply.itemNo || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Description</th><td style="padding:8px;border:1px solid var(--bd)">${supply.desc || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Qty in Stock</th><td style="padding:8px;border:1px solid var(--bd)">${supply.qty || 0}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Reorder Level</th><td style="padding:8px;border:1px solid var(--bd)">${supply.reorder || 0}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Cost</th><td style="padding:8px;border:1px solid var(--bd)">£${Number(supply.cost || 0).toFixed(2)}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('supplyDetailOverlay').classList.add('show');
+}
+
+function closeSupplyDetail() {
+  document.getElementById('supplyDetailOverlay').classList.remove('show');
+}
+
+function openSupplierDetail(supNo) {
+  const supplier = DB.supplier.find(item => String(item.supNo) === String(supNo));
+  if (!supplier) return;
+
+  document.getElementById('supplier-title').textContent = supplier.name + ' (' + supplier.supNo + ')';
+  document.getElementById('supplier-meta').innerHTML = `
+    <span>🏢 Supplier</span>
+    <span>☎️ ${supplier.tel || '-'}</span>
+    <span>📠 ${supplier.fax || '-'}</span>
+  `;
+
+  document.getElementById('supplier-details').innerHTML = `
+    <div class="supCard" style="margin-top:8px">
+      <div class="drugPhoto">
+        ${supplier.photo
+          ? `<img src="${supplier.photo}" alt="${supplier.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='🏢';">`
+          : '🏢'}
+      </div>
+      <div>
+        <b style="display:block;font-size:16px;color:var(--primary-dk)">${supplier.name}</b>
+        <span style="font-size:12px;color:#567">${supplier.address || 'No address on file'}</span>
+      </div>
+    </div>
+
+    <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Supplier No</th><td style="padding:8px;border:1px solid var(--bd)">${supplier.supNo || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Address</th><td style="padding:8px;border:1px solid var(--bd)">${supplier.address || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Telephone</th><td style="padding:8px;border:1px solid var(--bd)">${supplier.tel || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Fax</th><td style="padding:8px;border:1px solid var(--bd)">${supplier.fax || '-'}</td></tr>
+    </table>
+  `;
+
+  document.getElementById('supplierDetailOverlay').classList.add('show');
+}
+
+function closeSupplierDetail() {
+  document.getElementById('supplierDetailOverlay').classList.remove('show');
+}
+
+function openMedicationDetail(patNo) {
+  const patientMeds = DB.medication.filter(item => String(item.patNo) === String(patNo));
+  if (!patientMeds.length) return;
+
+  const patientName = patientMeds[0].patName || 'Patient';
+  const wardNo = patientMeds[0].ward || '-';
+  const bedNo = patientMeds[0].bed || '-';
+
+  document.getElementById('medication-title').textContent = patientName + ' (' + patNo + ')';
+  document.getElementById('medication-meta').innerHTML = `
+    <span>🏥 Ward ${wardNo}</span>
+    <span>🛏️ Bed ${bedNo}</span>
+    <span>💊 ${patientMeds.length} medication entries</span>
+  `;
+
+  let html = '<table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff"><tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Drug</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Dose</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Method</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Units/Day</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Start</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Finish</th></tr>';
+
+  patientMeds.forEach(med => {
+    html += `<tr><td style="padding:8px;border:1px solid var(--bd)">${med.drugName || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.dosage || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.method || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.units || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.start || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.finish || '-'}</td></tr>`;
+  });
+
+  html += '</table>';
+  document.getElementById('medication-details').innerHTML = html;
+  document.getElementById('medicationDetailOverlay').classList.add('show');
+}
+
+function closeMedicationDetail() {
+  document.getElementById('medicationDetailOverlay').classList.remove('show');
+}
+
+const overlayIds = [
+  'wardDetailOverlay',
+  'drugDetailOverlay',
+  'supplyDetailOverlay',
+  'supplierDetailOverlay',
+  'patientDetailOverlay',
+  'staffDetailOverlay',
+  'appointmentDetailOverlay',
+  'medicationDetailOverlay',
+  'userProfileOverlay'
+];
+
+overlayIds.forEach(id => {
+  const overlay = document.getElementById(id);
+  if (!overlay) return;
+
+  overlay.addEventListener('click', event => {
+    if (event.target.id === id) {
+      if (id === 'wardDetailOverlay') closeWardDetail();
+      if (id === 'drugDetailOverlay') closeDrugDetail();
+      if (id === 'supplyDetailOverlay') closeSupplyDetail();
+      if (id === 'supplierDetailOverlay') closeSupplierDetail();
+      if (id === 'patientDetailOverlay') closePatientDetail();
+      if (id === 'staffDetailOverlay') closeStaffDetail();
+      if (id === 'appointmentDetailOverlay') closeAppointmentDetail();
+      if (id === 'medicationDetailOverlay') closeMedicationDetail();
+      if (id === 'userProfileOverlay') closeUserProfile();
+    }
+  });
 });
 
+function syncBedQueue() {
+  if (!Array.isArray(DB.bedQueue)) DB.bedQueue = [];
+
+  const existing = new Map(DB.bedQueue.map(entry => [entry.id, entry]));
+  const waiting = DB.patient.filter(patient => {
+    const status = String(patient.status || '').toLowerCase();
+    return status === 'waiting list' || status === 'queued' || status === 'waiting';
+  });
+
+  waiting.forEach(patient => {
+    const patientName = `${patient.first || ''} ${patient.last || ''}`.trim();
+    const ward = patient.ward || '';
+    const match = DB.bedQueue.find(entry => entry.patientNo === patient.patNo && String(entry.ward) === String(ward));
+    if (!match) {
+      const newId = 'Q-' + String(Date.now() + Math.random()).slice(-6);
+      DB.bedQueue.push({
+        id: newId,
+        patientNo: patient.patNo,
+        patientName,
+        ward,
+        priority: patient.priority || 'Normal',
+        status: 'Waiting',
+        requestedAt: patient.waitDate || new Date().toISOString().slice(0, 10)
+      });
+    }
+  });
+
+  DB.bedQueue = DB.bedQueue.filter(entry => {
+    if (entry.status === 'Admitted') return false;
+    const patient = DB.patient.find(item => item.patNo === entry.patientNo);
+    const isStillWaiting = !patient || ['waiting list', 'queued', 'waiting'].includes(String(patient.status || '').toLowerCase());
+    return isStillWaiting;
+  });
+
+  save();
+  return DB.bedQueue;
+}
+
+function admitQueuePatient(queueId, wardNo) {
+  const queue = syncBedQueue();
+  const entry = queue.find(item => item.id === queueId);
+  if (!entry) return;
+
+  const patient = DB.patient.find(item => item.patNo === entry.patientNo);
+  if (!patient) return;
+
+  const targetWard = wardNo || entry.ward || patient.ward;
+  const freeBed = ((DB.ward.find(ward => String(ward.number) === String(targetWard)) || {}).beds || 0) - DB.patient.filter(item => String(item.ward) === String(targetWard) && String(item.status).toLowerCase() === 'in ward').length;
+
+  patient.status = 'In Ward';
+  patient.ward = targetWard;
+  patient.placedDate = patient.placedDate || new Date().toISOString().slice(0, 10);
+  if (freeBed > 0) patient.bed = patient.bed || 'B-' + targetWard + '-' + (Math.floor(Math.random() * 90) + 10);
+
+  entry.status = 'Admitted';
+  entry.admittedAt = new Date().toISOString();
+  patient.priority = entry.priority || patient.priority || 'Normal';
+
+  DB.bedQueue = DB.bedQueue.filter(item => item.id !== queueId);
+  save();
+  renderBeds();
+  render('patient');
+}
+
+function updateQueuePriority(queueId, priority) {
+  const entry = (DB.bedQueue || []).find(item => item.id === queueId);
+  if (!entry) return;
+  entry.priority = priority;
+  save();
+  renderBeds();
+}
+
+function addBedQueueEntry(entry) {
+  const queue = Array.isArray(DB.bedQueue) ? DB.bedQueue : [];
+  const clean = {
+    id: entry.id || 'Q-' + Date.now(),
+    patientNo: entry.patientNo || '',
+    patientName: entry.patientName || '',
+    ward: entry.ward || '',
+    priority: entry.priority || 'Normal',
+    status: entry.status || 'Waiting',
+    requestedAt: entry.requestedAt || new Date().toISOString().slice(0, 10)
+  };
+
+  if (!clean.patientNo && !clean.patientName) {
+    alert('Enter patient details before saving to the queue.');
+    return;
+  }
+
+  const index = queue.findIndex(item => item.id === clean.id);
+  if (index >= 0) {
+    queue[index] = { ...queue[index], ...clean };
+  } else {
+    queue.push(clean);
+  }
+
+  DB.bedQueue = queue;
+  save();
+  renderBeds();
+}
+
+function editBedQueueEntry(queueId) {
+  const entry = (DB.bedQueue || []).find(item => item.id === queueId);
+  if (!entry) return;
+
+  document.getElementById('queue-patient-no').value = entry.patientNo || '';
+  document.getElementById('queue-patient-name').value = entry.patientName || '';
+  document.getElementById('queue-ward').value = entry.ward || '';
+  document.getElementById('queue-priority').value = entry.priority || 'Normal';
+  document.getElementById('queue-status').value = entry.status || 'Waiting';
+  document.getElementById('queue-requested-at').value = entry.requestedAt || '';
+  document.getElementById('queue-edit-id').value = entry.id;
+  document.getElementById('queue-form-title').textContent = 'Edit Queue Entry';
+}
+
+function removeBedQueueEntry(queueId) {
+  DB.bedQueue = (DB.bedQueue || []).filter(item => item.id !== queueId);
+  save();
+  renderBeds();
+}
+
+function submitBedQueueForm() {
+  const patientNo = document.getElementById('queue-patient-no').value.trim();
+  const patientName = document.getElementById('queue-patient-name').value.trim();
+  const ward = document.getElementById('queue-ward').value.trim();
+  const priority = document.getElementById('queue-priority').value;
+  const status = document.getElementById('queue-status').value;
+  const requestedAt = document.getElementById('queue-requested-at').value;
+  const editId = document.getElementById('queue-edit-id').value;
+
+  if (!patientNo && !patientName) {
+    alert('Patient number or name is required.');
+    return;
+  }
+
+  addBedQueueEntry({
+    id: editId || undefined,
+    patientNo,
+    patientName,
+    ward,
+    priority,
+    status,
+    requestedAt
+  });
+
+  document.getElementById('queue-patient-no').value = '';
+  document.getElementById('queue-patient-name').value = '';
+  document.getElementById('queue-ward').value = '';
+  document.getElementById('queue-priority').value = 'Normal';
+  document.getElementById('queue-status').value = 'Waiting';
+  document.getElementById('queue-requested-at').value = new Date().toISOString().slice(0, 10);
+  document.getElementById('queue-edit-id').value = '';
+  document.getElementById('queue-form-title').textContent = 'Add Queue Entry';
+}
+
 function renderBeds() {
-  document.getElementById('bedGrid').innerHTML = DB.ward.map(ward => {
+  syncBedQueue();
+
+  const queuePanel = document.getElementById('bedQueuePanel');
+  const bedsHtml = DB.ward.map(ward => {
     const occupied = DB.patient.filter(patient => String(patient.ward) === String(ward.number) && patient.status === 'In Ward').length;
     const free = ward.beds - occupied;
     const percent = Math.min(100, Math.round((occupied / ward.beds) * 100));
+    const queueItems = (DB.bedQueue || []).filter(item => String(item.ward) === String(ward.number));
 
-    return `<div class="wardbox"><h3>Ward ${ward.number} – ${ward.name}</h3><span class="tag">${ward.location}</span>
+    return `<div class="wardbox" style="padding:12px;border:1px solid var(--bd);border-radius:12px;background:#fff;">
+      <h3>Ward ${ward.number} – ${ward.name}</h3>
+      <span class="tag">${ward.location}</span>
       <div class="bar"><div style="width:${percent}%"></div></div>
       <div>${occupied}/${ward.beds} occupied</div>
-      <div class="${free > 0 ? 'free' : 'full'}">${free > 0 ? free + ' beds free' : 'FULL'}</div></div>`;
+      <div class="${free > 0 ? 'free' : 'full'}">${free > 0 ? free + ' beds free' : 'FULL'}</div>
+      <div style="margin-top:12px;font-size:12px;color:#456;">
+        <strong>Queue (${queueItems.length})</strong>
+        ${queueItems.length ? queueItems.slice(0, 3).map(item => `<div style="margin-top:6px;display:flex;justify-content:space-between;gap:6px;align-items:center;"><span>${item.patientName}</span><span style="font-size:11px;padding:2px 6px;border-radius:999px;background:#eef5ff;color:#234;">${item.priority}</span></div>`).join('') : '<div style="margin-top:6px; color:#678;">No patients waiting</div>'}
+      </div>
+      <div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap;">
+        <button class="act" onclick="admitQueuePatient('${queueItems[0] ? queueItems[0].id : ''}', ${ward.number})" ${queueItems.length ? '' : 'disabled'}>Admit next</button>
+      </div>
+    </div>`;
   }).join('');
+
+  document.getElementById('bedGrid').innerHTML = bedsHtml;
+
+  const queueRows = (DB.bedQueue || []).map(item => `
+    <tr>
+      <td>${item.patientName}</td>
+      <td>${item.patientNo}</td>
+      <td>${item.ward || '-'}</td>
+      <td>
+        <select onchange="updateQueuePriority('${item.id}', this.value)">
+          <option value="Urgent" ${item.priority === 'Urgent' ? 'selected' : ''}>Urgent</option>
+          <option value="Normal" ${item.priority === 'Normal' ? 'selected' : ''}>Normal</option>
+          <option value="Routine" ${item.priority === 'Routine' ? 'selected' : ''}>Routine</option>
+        </select>
+      </td>
+      <td>${item.status || 'Waiting'}</td>
+      <td>${item.requestedAt || '-'}</td>
+      <td>
+        <button class="infoBtn" onclick="editBedQueueEntry('${item.id}')">Edit</button>
+        <button class="act" onclick="admitQueuePatient('${item.id}', ${item.ward || 0})">Admit</button>
+        <button class="del" onclick="removeBedQueueEntry('${item.id}')">Del</button>
+      </td>
+    </tr>
+  `).join('');
+
+  queuePanel.innerHTML = `
+    <div style="border:1px solid var(--bd); border-radius:12px; padding:14px; background:#fff;">
+      <h3 style="margin:0 0 10px;">Bed Queue Management</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px; margin-bottom:12px; border:1px solid var(--bd); border-radius:8px; padding:10px; background:#f8fbff;">
+        <div><label style="display:block;font-size:11px;color:#456;">Patient No</label><input id="queue-patient-no" style="width:100%;"></div>
+        <div><label style="display:block;font-size:11px;color:#456;">Patient Name</label><input id="queue-patient-name" style="width:100%;"></div>
+        <div><label style="display:block;font-size:11px;color:#456;">Ward</label><input id="queue-ward" style="width:100%;"></div>
+        <div><label style="display:block;font-size:11px;color:#456;">Priority</label><select id="queue-priority" style="width:100%;"><option value="Urgent">Urgent</option><option value="Normal" selected>Normal</option><option value="Routine">Routine</option></select></div>
+        <div><label style="display:block;font-size:11px;color:#456;">Status</label><select id="queue-status" style="width:100%;"><option value="Waiting" selected>Waiting</option><option value="Review">Review</option><option value="Admitted">Admitted</option></select></div>
+        <div><label style="display:block;font-size:11px;color:#456;">Requested</label><input id="queue-requested-at" type="date" style="width:100%;" value="${new Date().toISOString().slice(0, 10)}"></div>
+        <input id="queue-edit-id" type="hidden" value="">
+      </div>
+      <div style="display:flex;gap:8px;align-items:center; margin-bottom:12px;">
+        <strong id="queue-form-title">Add Queue Entry</strong>
+        <button class="act" onclick="submitBedQueueForm()">Save Queue Entry</button>
+      </div>
+      <table style="width:100%; border-collapse:collapse;">
+        <thead>
+          <tr><th>Patient</th><th>Patient No</th><th>Ward</th><th>Priority</th><th>Status</th><th>Requested</th><th>Action</th></tr>
+        </thead>
+        <tbody>${queueRows || '<tr><td colspan="7" style="padding:10px; color:#678;">No patients in the bed queue.</td></tr>'}</tbody>
+      </table>
+    </div>
+  `;
 }
 
 show('dashboard');
@@ -1094,6 +2655,109 @@ function toggleAuth(which) {
   document.getElementById('registerBox').style.display = which === 'register' ? 'block' : 'none';
 }
 
+function updateAuthButton() {
+  const stored = sessionStorage.getItem('wmSession');
+  const btn = document.getElementById('authBtn');
+  const userText = document.getElementById('authBtnUser');
+  if (!btn || !userText) return;
+
+  if (!stored) {
+    userText.textContent = 'Login';
+    btn.onclick = () => {
+      document.getElementById('authOverlay').style.display = 'flex';
+      toggleAuth('login');
+    };
+    return;
+  }
+
+  const current = JSON.parse(stored);
+  const username = (current.user || 'User').trim();
+  userText.textContent = username;
+  btn.onclick = openUserProfile;
+}
+
+function populateProfileFields(current) {
+  if (!current) return;
+  document.getElementById('profile-username').textContent = current.user || 'User';
+  document.getElementById('profile-role').textContent = current.role || 'No role';
+  document.getElementById('profile-user-name').textContent = current.user || '-';
+  document.getElementById('profile-user-role').textContent = current.role || '-';
+  document.getElementById('profile-full-name').value = current.fullName || current.user || '';
+  document.getElementById('profile-email').value = current.email || '';
+  document.getElementById('profile-phone').value = current.phone || '';
+  document.getElementById('profile-current-pass').value = '';
+  document.getElementById('profile-new-pass').value = '';
+}
+
+function openUserProfile() {
+  const stored = sessionStorage.getItem('wmSession');
+  if (!stored) {
+    document.getElementById('authOverlay').style.display = 'flex';
+    toggleAuth('login');
+    return;
+  }
+
+  const current = JSON.parse(stored);
+  populateProfileFields(current);
+  document.getElementById('userProfileOverlay').classList.add('show');
+}
+
+function closeUserProfile() {
+  const overlay = document.getElementById('userProfileOverlay');
+  if (overlay) overlay.classList.remove('show');
+}
+
+function saveProfileSettings() {
+  const stored = sessionStorage.getItem('wmSession');
+  if (!stored) return;
+
+  const current = JSON.parse(stored);
+  const fullName = document.getElementById('profile-full-name').value.trim();
+  const email = document.getElementById('profile-email').value.trim();
+  const phone = document.getElementById('profile-phone').value.trim();
+
+  const userMatch = USERS.find(user => user.user === current.user);
+  if (userMatch) {
+    userMatch.fullName = fullName || current.user;
+    userMatch.email = email;
+    userMatch.phone = phone;
+    saveUsers();
+  }
+
+  const updated = { ...current, fullName: fullName || current.user, email, phone };
+  sessionStorage.setItem('wmSession', JSON.stringify(updated));
+  populateProfileFields(updated);
+  alert('Profile information updated.');
+}
+
+function changePassword() {
+  const stored = sessionStorage.getItem('wmSession');
+  if (!stored) return;
+
+  const current = JSON.parse(stored);
+  const currentPass = document.getElementById('profile-current-pass').value;
+  const newPass = document.getElementById('profile-new-pass').value;
+
+  if (!currentPass || !newPass) {
+    alert('Enter the current password and the new password.');
+    return;
+  }
+
+  const userMatch = USERS.find(user => user.user === current.user);
+  if (!userMatch || userMatch.pass !== currentPass) {
+    alert('Current password is incorrect.');
+    return;
+  }
+
+  userMatch.pass = newPass;
+  current.pass = newPass;
+  sessionStorage.setItem('wmSession', JSON.stringify(current));
+  saveUsers();
+  document.getElementById('profile-current-pass').value = '';
+  document.getElementById('profile-new-pass').value = '';
+  alert('Password updated successfully.');
+}
+
 function doLogin() {
   const username = document.getElementById('li-user').value.trim();
   const password = document.getElementById('li-pass').value;
@@ -1106,13 +2770,16 @@ function doLogin() {
 
   sessionStorage.setItem('wmSession', JSON.stringify(found));
   document.getElementById('authOverlay').style.display = 'none';
-  document.getElementById('authBtn').textContent = 'Logout (' + found.user + ')';
+  updateAuthButton();
 }
 
 function doRegister() {
   const username = document.getElementById('rg-user').value.trim();
   const password = document.getElementById('rg-pass').value;
   const role = document.getElementById('rg-role').value;
+  const fullName = document.getElementById('rg-full-name') ? document.getElementById('rg-full-name').value.trim() : '';
+  const email = document.getElementById('rg-email') ? document.getElementById('rg-email').value.trim() : '';
+  const phone = document.getElementById('rg-phone') ? document.getElementById('rg-phone').value.trim() : '';
 
   if (!username || !password) {
     document.getElementById('rg-err').textContent = 'Username and password required';
@@ -1124,7 +2791,7 @@ function doRegister() {
     return;
   }
 
-  USERS.push({ user: username, pass: password, role });
+  USERS.push({ user: username, pass: password, role, fullName: fullName || username, email, phone });
   saveUsers();
   document.getElementById('rg-err').textContent = '';
   toggleAuth('login');
@@ -1133,14 +2800,18 @@ function doRegister() {
 
 function logout() {
   sessionStorage.removeItem('wmSession');
+  closeUserProfile();
   document.getElementById('authOverlay').style.display = 'flex';
   toggleAuth('login');
+  updateAuthButton();
 }
 
 const session = sessionStorage.getItem('wmSession');
 if (session) {
   document.getElementById('authOverlay').style.display = 'none';
-  document.getElementById('authBtn').textContent = 'Logout (' + JSON.parse(session).user + ')';
+  updateAuthButton();
+} else {
+  updateAuthButton();
 }
 
 
@@ -1151,7 +2822,7 @@ function printPDF() {
   const clone = activePage.cloneNode(true);
 
   /* this line is for removing unwanted elements from the print view */
-  clone.querySelectorAll('button, input, select, .search, .grid2, #printBtn, #nothingBtn, nav, header, #authOverlay, #loginBox, #registerBox').forEach(node => node.remove());
+  clone.querySelectorAll('button, input, select, .search, .searchWrap, .searchType, .grid2, #printBtn, #nothingBtn, nav, header, #authOverlay, #loginBox, #registerBox').forEach(node => node.remove());
 
   /* this line is for adding a title to the print view */
   const printWindow = window.open('', '_blank', 'width=980,height=700');
