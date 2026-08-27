@@ -81,7 +81,7 @@
 
   body {
     margin: 0;
-    background: #dfeaf3;
+    background: #ffffff;
     color: #22303f;
   }
 
@@ -146,32 +146,81 @@
     text-overflow: ellipsis;
   }
 
+  .navOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 26, 39, 0.32);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 110;
+  }
+
+  .navOverlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
   nav {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 120;
+    width: min(280px, 82vw);
+    height: 100vh;
+    padding: 80px 12px 18px;
     background: #fff;
-    border-bottom: 2px solid var(--bd);
+    border-right: 1px solid var(--bd);
+    box-shadow: 12px 0 30px rgba(22, 42, 55, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateX(-110%);
+    transition: transform 0.22s ease;
+    overflow-y: auto;
+  }
+
+  nav.open {
+    transform: translateX(0);
   }
 
   nav button {
+    width: 100%;
     padding: 12px 14px;
     border: none;
-    border-bottom: 3px solid transparent;
-    background: none;
+    border-radius: 8px;
+    background: transparent;
     color: #456;
     font-size: 13.5px;
+    text-align: left;
     cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
   }
 
   nav button.active {
     color: var(--primary-dk);
-    border-bottom-color: var(--primary-dk);
+    background: var(--primary-lt);
     font-weight: 600;
   }
 
   nav button:hover {
     background: var(--primary-lt);
+    transform: translateX(2px);
+  }
+
+  #navToggleBtn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 22px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
   }
 
   main {
@@ -194,6 +243,136 @@
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
     gap: 14px;
     margin-bottom: 20px;
+  }
+
+  .dashboardSlideshow {
+    margin-top: 28px;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(15, 38, 54, 0.08);
+  }
+
+  .dashboardSlides {
+    position: relative;
+    height: 360px;
+    background: #eef5f8;
+  }
+
+  .dashboardSlide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .dashboardSlide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dashboardSlide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .dashboardSlideCaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 18px 22px 16px;
+    background: linear-gradient(to top, rgba(9, 29, 42, 0.72), rgba(9, 29, 42, 0.15));
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dashboardSlideCaption span {
+    font-size: 12px;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+
+  .dashboardSlideshowDots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px 16px;
+    background: #fff;
+  }
+
+  .dashboardDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd7e3;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dashboardDot.active {
+    background: var(--primary);
+    transform: scale(1.15);
+  }
+
+  .dashboardImageModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 18, 25, 0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 24px;
+  }
+
+  .dashboardImageModal.show {
+    display: flex;
+  }
+
+  .dashboardImageModalBox {
+    position: relative;
+    max-width: min(1200px, 92vw);
+    max-height: 88vh;
+    background: rgba(255,255,255,0.96);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+  }
+
+  .dashboardImageModalBox img {
+    display: block;
+    max-width: 100%;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+  }
+
+  .dashboardImageModalClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(16, 38, 46, 0.92);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
   }
 
   .card {
@@ -254,6 +433,43 @@
     background: #f7fafd;
   }
 
+  .tableWindow {
+    position: relative;
+    margin: 18px 0;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(15, 38, 54, 0.10);
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .tableWindowHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, var(--primary-dk), var(--primary));
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15px;
+    cursor: default;
+  }
+
+  .tableWindowBody {
+    max-height: 68vh;
+    overflow: auto;
+    background: #fff;
+  }
+
+  .tableWindow table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 980px;
+  }
+
   .grid2 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
@@ -281,18 +497,65 @@
     font-size: 13px;
   }
 
+  #uploadDialogBody {
+    max-height: 72vh;
+    overflow: auto;
+  }
+
+  #upload-form-root {
+    width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
+
+  .req-item-row {
+    min-width: 680px;
+    width: max-content;
+    box-sizing: border-box;
+  }
+
+  .req-item-row > div {
+    min-width: 0;
+  }
+
+  .req-item-row input {
+    min-width: 0;
+    width: 100%;
+  }
+
   .btnrow {
     margin-top: 10px;
   }
 
-  button.act {
-    padding: 8px 16px;
+  button,
+  .infoBtn,
+  .printBtn,
+  .NothingBtn {
+    box-sizing: border-box;
+    font: inherit;
+  }
+
+  button.act,
+  button.del,
+  .infoBtn,
+  .printBtn,
+  .NothingBtn {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
     border: none;
     border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  button.act {
     background: var(--primary-dk);
     color: #fff;
-    font-size: 13px;
-    cursor: pointer;
   }
 
   button.act:hover {
@@ -300,13 +563,30 @@
   }
 
   button.del {
-    padding: 4px 9px;
-    border: none;
-    border-radius: 5px;
     background: var(--warn);
     color: #fff;
-    font-size: 11px;
-    cursor: pointer;
+  }
+
+  .infoBtn {
+    padding: 6px 10px;
+    min-height: 30px;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+  }
+
+  .printBtn,
+  .NothingBtn {
+    min-height: 34px;
+  }
+
+  .printBtn {
+    background: var(--ok);
+    color: #fff;
+  }
+
+  .NothingBtn {
+    background: var(--warn);
+    color: #fff;
   }
 
   .searchWrap {
@@ -673,14 +953,10 @@
   }
 
   .infoBtn {
-    padding: 4px 10px;
     border: 1px solid var(--bd);
     border-radius: 6px;
     background: var(--primary-lt);
     color: var(--primary-dk);
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
   }
 
   .infoBtn:hover {
@@ -689,24 +965,10 @@
   }
 
   .printBtn {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 6px;
-    background: var(--ok);
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
     margin-top: 10px;
   }
 
   .NothingBtn {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 6px;
-    background: var(--warn);
-    color: #fff;
-    font-size: 13px;
-    cursor: pointer;
     margin-top: 10px;
   }
 
@@ -960,11 +1222,14 @@
 
 <!-- Literally header on every page -->
 <header>
-  <div class="headerBrand">
-    <div class="headerBadge" aria-label="Wellmeadows Hospital logo"></div>
-    <div class="headerText">
-      <h1>Wellmeadows Hospital</h1>
-      <span>Edinburgh • Elderly Care • Management System</span>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <button id="navToggleBtn" aria-label="Open navigation menu" onclick="toggleNav()" style="margin-right:20px;">☰</button>
+    <div class="headerBrand">
+      <div class="headerBadge" aria-label="Wellmeadows Hospital logo"></div>
+      <div class="headerText">
+        <h1>Wellmeadows Hospital</h1>
+        <span>Edinburgh • Elderly Care • Management System</span>
+      </div>
     </div>
   </div>
   <button id="authBtn" onclick="openUserProfile()">
@@ -973,13 +1238,17 @@
   </button>
 </header>
 
+<div id="navOverlay" class="navOverlay" onclick="toggleNav(false)"></div>
+<nav id="nav" aria-label="Main navigation"></nav>
+
 <!-- Dashboard page -->
-  <nav id="nav"></nav>
   <main>
     
   <div id="dashboard" class="page"><h2>Dashboard</h2><div class="cards" id="dashCards"></div>
   <h2>Staff on Duty</h2><div class="staffWidget" id="staffWidget"></div>
-  <h2>Wards Overview</h2><table id="wardOverview"></table></div>
+  <h2>Wards Overview</h2><table id="wardOverview"></table>
+  <div id="dashboardSlideshow" class="dashboardSlideshow" aria-label="Hospital gallery slideshow"></div>
+  </div>
 
 
 
@@ -1007,14 +1276,18 @@
   <div id="staff" class="page"><h2>Staff</h2>
   <div class="grid2" id="f-staff" style="display:none"></div><button class="act" onclick="openUploadDialog('staff')">Upload</button>
   <div class="searchWrap">
-    <input class="search" id="search-staff" placeholder="Search staff (name/position/qualification)..." oninput="render('staff', this.value, document.getElementById('type-staff').value)">
+    <input class="search" id="search-staff" list="staff-search-suggestions" placeholder="Search staff by name or code..." oninput="render('staff', this.value, document.getElementById('type-staff').value)">
+    <datalist id="staff-search-suggestions"></datalist>
     <select class="searchType" id="type-staff" onchange="render('staff', document.getElementById('search-staff').value, this.value)">
       <option value="all">All</option>
       <option value="staffNo">Staff No</option>
       <option value="name">Name</option>
       <option value="position">Position</option>
-      <option value="qual">Qualification</option>
+      <option value="qualification">Qualification</option>
       <option value="ward">Ward Assigned</option>
+    </select>
+    <select class="searchType" id="staff-qualification-select" onchange="render('staff', this.value, 'qualification')">
+      <option value="">All qualifications</option>
     </select>
   </div>
   <table id="t-staff"></table></div>
@@ -1023,15 +1296,16 @@
   <div id="patients" class="page"><h2>Patients (In-ward / Waiting List)</h2>
   <div class="grid2" id="f-patient" style="display:none"></div><button class="act" onclick="openUploadDialog('patient')">Upload</button>
   <div class="searchWrap">
-    <input class="search" id="search-patient" placeholder="Search patients..." oninput="render('patient', this.value, document.getElementById('type-patient').value)">
-    <select class="searchType" id="type-patient" onchange="render('patient', document.getElementById('search-patient').value, this.value)">
-      <option value="all">All</option>
-      <option value="patNo">Patient No</option>
-      <option value="name">Name</option>
-      <option value="status">Status</option>
-      <option value="ward">Ward</option>
-      <option value="localDoctor">Local Doctor</option>
-      <option value="allergies">Allergies</option>
+    <input class="search" id="search-patient" list="patient-search-suggestions" placeholder="Search patients by name or code..." oninput="render('patient', this.value, 'all')">
+    <datalist id="patient-search-suggestions"></datalist>
+    <select class="searchType" id="patient-allergy-select" onchange="render('patient', this.value, 'allergies')">
+      <option value="">All allergies</option>
+    </select>
+    <select class="searchType" id="patient-medication-select" onchange="render('patient', this.value, 'medication')">
+      <option value="">All medications</option>
+    </select>
+    <select class="searchType" id="patient-illness-select" onchange="render('patient', this.value, 'illness')">
+      <option value="">All illness records</option>
     </select>
   </div>
   <table id="t-patient"></table></div>
@@ -1210,7 +1484,7 @@
 </div>
 
 <div class="wdOverlay" id="uploadDialogOverlay">
- <div class="wdBox" style="max-width:720px;width:min(90vw,720px);">
+ <div class="wdBox" style="max-width:980px;width:min(96vw,980px);">
   <button class="wdClose" onclick="closeUploadDialog()">✕</button>
   <div class="wdHead">
    <div>
@@ -1229,8 +1503,8 @@ const SCHEMA = {
     labels: ['Ward No', 'Ward Name', 'Location', 'Total Beds', 'Tel Extn']
   },
   staff: {
-    fields: ['staffNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'nin', 'position', 'salary', 'scale', 'ward', 'hours', 'contract', 'pay', 'qual', 'institution', 'workExperience', 'photo', 'file'],
-    labels: ['Staff No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'NIN', 'Position', 'Salary', 'Salary Scale', 'Ward Assigned', 'Hours/Week', 'Perm/Temp', 'Pay(W/M)', 'Qualification', 'Institution', 'Working Experience', 'Photo URL', 'Attachment']
+    fields: ['staffNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'nin', 'position', 'salary', 'scale', 'ward', 'hours', 'contract', 'pay', 'qual', 'institution', 'workExperience', 'medicalRecord', 'photo', 'file'],
+    labels: ['Staff No', 'First Name', 'Last Name', 'Address', 'Tel No', 'DOB', 'Sex', 'NIN', 'Position', 'Salary', 'Salary Scale', 'Ward Assigned', 'Hours/Week', 'Perm/Temp', 'Pay(W/M)', 'Qualification', 'Institution', 'Working Experience', 'Medical Record', 'Photo URL', 'Attachment']
   },
   patient: {
     fields: ['patNo', 'first', 'last', 'address', 'tel', 'dob', 'sex', 'marital', 'kinName', 'kinRel', 'localDoctor', 'allergies', 'medicalRecord', 'ward', 'bed', 'waitDate', 'placedDate', 'expLeave', 'actualLeave', 'status', 'refDoc', 'file'],
@@ -1272,12 +1546,12 @@ let DB = {
     { number: 12, name: 'Cardiology', location: 'Block E', beds: 18, extn: 7712 }
   ],
   staff: [
-    { staffNo: 'S011', first: 'Moira', last: 'Samuel', address: '49 School Road, Broxburn', tel: '01506-45633', dob: '1961-05-30', sex: 'Female', nin: 'WB123423D', position: 'Charge Nurse', salary: 18760, scale: '1C', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: 'BSc Nursing Studies', institution: 'Edinburgh University', workExperience: '12 years in acute elder care; led nurse training and ward coordination; previous experience in surgical recovery and rehabilitation.', photo: 'photos/staff2.png' },
-    { staffNo: 'S098', first: 'Carol', last: 'Cummings', address: '15 High Street Edinburgh', tel: '0131-334-5677', dob: '1975-02-14', sex: 'Female', nin: '', position: 'Staff Nurse', salary: 15000, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '6 years in general ward nursing; experience with post-op care, patient assessment, and medication administration.', photo: 'photos/staff5.png' },
-    { staffNo: 'S123', first: 'Morgan', last: 'Russell', address: '23A George Street Broxburn', tel: '01506-67676', dob: '1980-07-01', sex: 'Male', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'T', pay: 'M', qual: '', institution: '', workExperience: '4 years in community nursing and emergency support; prior role in district health visiting.', photo: 'photos/staff4.png' },
-    { staffNo: 'S167', first: 'Robin', last: 'Plevin', address: '7 Glen Terrace Edinburgh', tel: '0131-339-6123', dob: '1978-03-22', sex: 'Male', nin: '', position: 'Staff Nurse', salary: 15200, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '8 years in medical and geriatric wards; trained in observation rounds and rehabilitation support.', photo: 'photos/staff1.png' },
-    { staffNo: 'S234', first: 'Amy', last: "O'Donnell", address: '234 Princes Street Edinburgh', tel: '0131-334-9099', dob: '1985-11-09', sex: 'Female', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '3 years in cardiology and elderly inpatient support; experience with medication rounds and patient education.', photo: '' },
-    { staffNo: 'S344', first: 'Laurence', last: 'Burns', address: '1 Apple Drive Edinburgh', tel: '0131-334-9100', dob: '1970-01-15', sex: 'Male', nin: '', position: 'Consultant', salary: 45000, scale: 'CON', ward: 11, hours: 40, contract: 'P', pay: 'M', qual: 'MD', institution: 'Edinburgh University', workExperience: '18 years in specialist medicine; previous consultant posts in general medicine, cardiology, and long-term care oversight.', photo: 'photos/staff3.png' }
+    { staffNo: 'S011', first: 'Moira', last: 'Samuel', address: '49 School Road, Broxburn', tel: '01506-45633', dob: '1961-05-30', sex: 'Female', nin: 'WB123423D', position: 'Charge Nurse', salary: 18760, scale: '1C', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: 'BSc Nursing Studies', institution: 'Edinburgh University', workExperience: '12 years in acute elder care; led nurse training and ward coordination; previous experience in surgical recovery and rehabilitation.', medicalRecord: 'Experienced senior charge nurse with strong clinical leadership, medication administration oversight, and patient safety monitoring.', photo: 'photos/staff2.png' },
+    { staffNo: 'S098', first: 'Carol', last: 'Cummings', address: '15 High Street Edinburgh', tel: '0131-334-5677', dob: '1975-02-14', sex: 'Female', nin: '', position: 'Staff Nurse', salary: 15000, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '6 years in general ward nursing; experience with post-op care, patient assessment, and medication administration.', medicalRecord: 'General ward nurse with post-operative care experience and routine patient education responsibilities.', photo: 'photos/staff5.png' },
+    { staffNo: 'S123', first: 'Morgan', last: 'Russell', address: '23A George Street Broxburn', tel: '01506-67676', dob: '1980-07-01', sex: 'Male', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'T', pay: 'M', qual: '', institution: '', workExperience: '4 years in community nursing and emergency support; prior role in district health visiting.', medicalRecord: 'Community and emergency care nurse with assessment skills and care-plan documentation experience.', photo: 'photos/staff4.png' },
+    { staffNo: 'S167', first: 'Robin', last: 'Plevin', address: '7 Glen Terrace Edinburgh', tel: '0131-339-6123', dob: '1978-03-22', sex: 'Male', nin: '', position: 'Staff Nurse', salary: 15200, scale: '1B', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '8 years in medical and geriatric wards; trained in observation rounds and rehabilitation support.', medicalRecord: 'Medical and geriatric ward nurse focused on observations, rehabilitation support, and patient monitoring.', photo: 'photos/staff1.png' },
+    { staffNo: 'S234', first: 'Amy', last: "O'Donnell", address: '234 Princes Street Edinburgh', tel: '0131-334-9099', dob: '1985-11-09', sex: 'Female', nin: '', position: 'Nurse', salary: 14000, scale: '1A', ward: 11, hours: 37.5, contract: 'P', pay: 'M', qual: '', institution: '', workExperience: '3 years in cardiology and elderly inpatient support; experience with medication rounds and patient education.', medicalRecord: 'Cardiology support nurse with medication round experience and patient education duties.', photo: '' },
+    { staffNo: 'S344', first: 'Laurence', last: 'Burns', address: '1 Apple Drive Edinburgh', tel: '0131-334-9100', dob: '1970-01-15', sex: 'Male', nin: '', position: 'Consultant', salary: 45000, scale: 'CON', ward: 11, hours: 40, contract: 'P', pay: 'M', qual: 'MD', institution: 'Edinburgh University', workExperience: '18 years in specialist medicine; previous consultant posts in general medicine, cardiology, and long-term care oversight.', medicalRecord: 'Consultant physician with specialist practice in medical oversight, patient review, and treatment planning.', photo: 'photos/staff3.png' }
   ],
   patient: [
     { patNo: 'P10451', first: 'Robert', last: 'Drumtree', address: '', tel: '', dob: '', sex: '', marital: '', kinName: '', kinRel: '', localDoctor: 'Dr. A. Morrison', allergies: 'Penicillin', medicalRecord: 'History of hip surgery and post-operative pain management. Allergic to penicillin. Regular monitoring for mobility and medication tolerance.', ward: 11, bed: 84, waitDate: '2004-01-12', placedDate: '2004-01-12', expLeave: '2004-01-17', actualLeave: '2004-01-16', status: 'Discharged' },
@@ -1344,6 +1618,10 @@ function save() {
 
 function formatMoney(value) {
   return '£' + Number(value || 0).toFixed(2);
+}
+
+function yesNo(value) {
+  return value && String(value).trim() ? 'Yes' : 'No';
 }
 
 function calculateTax(amount, taxRate) {
@@ -1414,6 +1692,17 @@ document.getElementById('nav').innerHTML = PAGES
   .map(p => `<button data-p="${p[0]}" onclick="show('${p[0]}')">${p[1]}</button>`)
   .join('');
 
+function toggleNav(forceOpen = null) {
+  const nav = document.getElementById('nav');
+  const overlay = document.getElementById('navOverlay');
+  if (!nav || !overlay) return;
+
+  const nextState = forceOpen === null ? !nav.classList.contains('open') : forceOpen;
+  nav.classList.toggle('open', nextState);
+  overlay.classList.toggle('show', nextState);
+  document.body.style.overflow = nextState ? 'hidden' : '';
+}
+
 function show(p) {
   document.querySelectorAll('.page').forEach(e => e.classList.remove('active'));
   document.getElementById(p).classList.add('active');
@@ -1423,10 +1712,16 @@ function show(p) {
     button.classList.toggle('active', button.dataset.p === p);
   });
 
+  toggleNav(false);
+
   if (p === 'dashboard') renderDash();
   if (p === 'beds') renderBeds();
   if (p === 'reports') renderReportsHub();
 }
+
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') toggleNav(false);
+});
 
 function renderReportsHub() {
   const reportHub = document.getElementById('reportHub');
@@ -1528,7 +1823,7 @@ function buildForm(key, targetBox = null, editIndex = null) {
         <strong>Items</strong>
         <button type="button" class="act" onclick="addRequisitionItemRow()">+ Add Item</button>
       </div>
-      <div id="requisition-item-list" style="grid-column:1/-1;display:grid;gap:10px;"></div>
+      <div id="requisition-item-list" style="grid-column:1/-1;display:grid;gap:10px;overflow-x:auto;padding-bottom:8px;min-width:0;align-items:start;"></div>
       <div><label>Attachment</label><input type="file" id="in-requisition-file"></div>
     `;
 
@@ -1563,12 +1858,16 @@ function addRequisitionItemRow(existing = null) {
   const row = document.createElement('div');
   row.className = 'req-item-row';
   row.style.display = 'grid';
-  row.style.gridTemplateColumns = 'repeat(6, minmax(110px, 1fr))';
+  row.style.gridTemplateColumns = 'repeat(6, minmax(110px, 1fr)) 68px';
   row.style.gap = '8px';
   row.style.padding = '10px';
   row.style.border = '1px solid var(--bd)';
   row.style.borderRadius = '8px';
   row.style.background = '#f8fbff';
+  row.style.alignItems = 'end';
+  row.style.minWidth = '700px';
+  row.style.width = 'max-content';
+  row.style.maxWidth = '100%';
 
   const fields = [
     ['itemNo', 'Item No'],
@@ -1618,7 +1917,7 @@ function openUploadDialog(key, editIndex = null) {
   window.__uploadEditContext = { key, index: editIndex };
   document.getElementById('uploadDialogTitle').textContent = titleMap[key] || 'Upload';
   body.innerHTML = `
-    <div id="upload-form-root" class="grid2"></div>
+    <div id="upload-form-root" class="grid2" style="overflow-x:auto; padding:10px 12px 14px;"></div>
     <div class="btnrow" style="margin-top:12px;display:flex;justify-content:flex-end;gap:8px;">
       <button class="act" onclick="submitUploadDialog('${key}')">Save</button>
       <button class="del" onclick="closeUploadDialog()">Cancel</button>
@@ -1826,8 +2125,47 @@ function delRow(key, index) {
   render(key);
 }
 
+function setSelectOptions(selectId, values, placeholder = 'Select an option') {
+  const select = document.getElementById(selectId);
+  if (!select) return;
+
+  const opts = Array.from(new Set(values.filter(Boolean))).sort();
+  select.innerHTML = `<option value="">${placeholder}</option>` + opts.map(value => `<option value="${value}">${value}</option>`).join('');
+}
+
+function buildSearchSuggestions() {
+  const staffQuals = Array.from(new Set((DB.staff || []).map(s => s.qual).filter(Boolean))).sort();
+  const patientAllergies = Array.from(new Set((DB.patient || []).map(p => p.allergies).filter(Boolean))).sort();
+  const patientMedications = Array.from(new Set((DB.medication || []).map(m => m.drugName).filter(Boolean))).sort();
+  const patientIllnesses = Array.from(new Set((DB.patient || [])
+    .map(p => p.medicalRecord)
+    .filter(Boolean)
+    .map(text => text.split(/[.;]/)[0].trim())
+    .filter(Boolean))).sort();
+
+  setSelectOptions('staff-qualification-select', staffQuals, 'All qualifications');
+  setSelectOptions('patient-allergy-select', patientAllergies, 'All allergies');
+  setSelectOptions('patient-medication-select', patientMedications, 'All medications');
+  setSelectOptions('patient-illness-select', patientIllnesses, 'All illness records');
+
+  const staffList = document.getElementById('staff-search-suggestions');
+  if (staffList) {
+    staffList.innerHTML = staffQuals.map(value => `<option value="${value}"></option>`).join('');
+  }
+
+  const patientList = document.getElementById('patient-search-suggestions');
+  if (patientList) {
+    patientList.innerHTML = [...patientAllergies, ...patientMedications, ...patientIllnesses].map(value => `<option value="${value}"></option>`).join('');
+  }
+}
+
 function getSearchFieldValue(row, field) {
   if (!row) return '';
+
+  const medicationValues = (DB.medication || [])
+    .filter(m => m.patNo === row.patNo)
+    .map(m => m.drugName)
+    .join(' ');
 
   const map = {
     all: () => Object.values(row).join(' '),
@@ -1835,11 +2173,15 @@ function getSearchFieldValue(row, field) {
     staffNo: () => row.staffNo || '',
     position: () => row.position || '',
     qual: () => row.qual || '',
+    qualification: () => row.qual || '',
     ward: () => `${row.ward || ''} ${row.wardNo || ''}`,
     patNo: () => row.patNo || '',
     status: () => row.status || '',
     localDoctor: () => row.localDoctor || '',
     allergies: () => row.allergies || '',
+    medication: () => medicationValues || '',
+    illness: () => row.medicalRecord || '',
+    medicalRecord: () => row.medicalRecord || '',
     number: () => row.number || '',
     location: () => row.location || '',
     beds: () => row.beds || '',
@@ -1857,6 +2199,7 @@ function getSearchFieldValue(row, field) {
 }
 
 function render(key, query = '', filterType = 'all') {
+  buildSearchSuggestions();
   const schema = SCHEMA[key];
   const rows = DB[key] || [];
   const normalized = rows.map((row, index) => ({ ...normalizePaymentRow(row, key), __index: index }));
@@ -1885,6 +2228,9 @@ function render(key, query = '', filterType = 'all') {
       if (field === 'uploadedAt') {
         return `<td>${row.uploadedAt ? new Date(row.uploadedAt).toLocaleString() : '-'}</td>`;
       }
+      if (field === 'medicalRecord' || field === 'workExperience') {
+        return `<td>${yesNo(row[field])}</td>`;
+      }
       return `<td>${row[field] ?? ''}</td>`;
     }).join('')
       + (key === 'ward' ? `<td><button class="infoBtn" onclick="openWardDetail('${row.number}')">ℹ️ Info</button></td>` : '')
@@ -1902,9 +2248,190 @@ function render(key, query = '', filterType = 'all') {
   });
 
   const targetTable = document.getElementById('t-' + key);
-  if (targetTable) targetTable.innerHTML = html;
+  if (targetTable) {
+    targetTable.innerHTML = html;
+    setupTableWindow(targetTable);
+  }
 
   if (['supply', 'requisition', 'appointment'].includes(key)) renderPaymentSummary(key);
+}
+
+function printSpecificReport(type, id) {
+  let target = null;
+  let title = '';
+  let rows = [];
+  let extras = '';
+
+  if (type === 'patient') {
+    target = DB.patient.find(item => String(item.patNo) === String(id));
+    if (!target) return;
+    title = `${target.first || ''} ${target.last || ''} — Patient Report`;
+    rows = [
+      ['Patient No', target.patNo || '-'],
+      ['Name', `${target.first || ''} ${target.last || ''}`.trim() || '-'],
+      ['Status', target.status || '-'],
+      ['Ward', target.ward || '-'],
+      ['Bed', target.bed || '-'],
+      ['DOB', target.dob || '-'],
+      ['Sex', target.sex || '-'],
+      ['Marital Status', target.marital || '-'],
+      ['Local Doctor', target.localDoctor || '-'],
+      ['Allergies', target.allergies || '-'],
+      ['Medical Record', yesNo(target.medicalRecord)],
+      ['Next of Kin', `${target.kinName || ''} (${target.kinRel || '-'})`],
+      ['Waitlist Date', target.waitDate || '-'],
+      ['Placed Date', target.placedDate || '-'],
+      ['Expected Leave', target.expLeave || '-'],
+      ['Actual Leave', target.actualLeave || '-']
+    ];
+    extras = `<h3>Clinical Summary</h3><p>${target.medicalRecord || 'No medical record summary recorded.'}</p>`;
+  }
+
+  if (type === 'staff') {
+    target = DB.staff.find(item => String(item.staffNo) === String(id));
+    if (!target) return;
+    title = `${target.first || ''} ${target.last || ''} — Staff Report`;
+    rows = [
+      ['Staff No', target.staffNo || '-'],
+      ['Name', `${target.first || ''} ${target.last || ''}`.trim() || '-'],
+      ['Position', target.position || '-'],
+      ['Qualification', target.qual || '-'],
+      ['Ward', target.ward || '-'],
+      ['Address', target.address || '-'],
+      ['Telephone', target.tel || '-'],
+      ['DOB', target.dob || '-'],
+      ['Sex', target.sex || '-'],
+      ['NIN', target.nin || '-'],
+      ['Contract', target.contract === 'P' ? 'Permanent' : target.contract === 'T' ? 'Temporary' : (target.contract || '-')],
+      ['Medical Record', target.medicalRecord || '-'],
+      ['Working Experience', yesNo(target.workExperience)],
+      ['Hours / Week', target.hours || '-'],
+      ['Salary', formatMoney(target.salary || 0)]
+    ];
+    extras = `<h3>Experience Summary</h3><p>${target.workExperience || 'No work experience details recorded.'}</p><h3>Clinical Notes</h3><p>${target.medicalRecord || 'No medical record details recorded for this staff member.'}</p>`;
+  }
+
+  if (type === 'drug') {
+    target = DB.pharma.find(item => String(item.drugNo) === String(id));
+    if (!target) return;
+    title = `${target.name || 'Drug'} — Pharmaceutical Report`;
+    rows = [
+      ['Drug No', target.drugNo || '-'],
+      ['Name', target.name || '-'],
+      ['Category', target.category || '-'],
+      ['Description', target.desc || '-'],
+      ['Dosage', target.dosage || '-'],
+      ['Route', target.method || '-'],
+      ['Qty in Stock', target.qty || 0],
+      ['Reorder Level', target.reorder || 0],
+      ['Cost / Unit', formatMoney(target.cost || 0)],
+      ['Primary Use', target.uses || '-'],
+      ['Common Side Effects', target.sideEffects || '-'],
+      ['Warnings', target.warnings || '-']
+    ];
+    extras = `<h3>Detailed Notes</h3><p>${target.desc || 'No detailed description provided.'}</p>`;
+  }
+
+  if (type === 'supplier') {
+    target = DB.supplier.find(item => String(item.supNo) === String(id));
+    if (!target) return;
+    title = `${target.name || 'Supplier'} — Supplier Report`;
+    rows = [
+      ['Supplier No', target.supNo || '-'],
+      ['Name', target.name || '-'],
+      ['Address', target.address || '-'],
+      ['Tel', target.tel || '-'],
+      ['Fax', target.fax || '-'],
+      ['Status', 'Active Supplier']
+    ];
+    extras = `<h3>Supplier Summary</h3><p>${target.name || 'Supplier'} provides supply and pharmaceutical support to the hospital. Contact records and address details are listed above.</p>`;
+  }
+
+  if (type === 'ward') {
+    target = DB.ward.find(item => String(item.number) === String(id));
+    if (!target) return;
+    title = `Ward ${target.number || id} — Ward Report`;
+    const occupied = DB.patient.filter(patient => String(patient.ward) === String(target.number) && patient.status === 'In Ward').length;
+    rows = [
+      ['Ward No', target.number || '-'],
+      ['Ward Name', target.name || '-'],
+      ['Location', target.location || '-'],
+      ['Total Beds', target.beds || 0],
+      ['Occupied Beds', occupied],
+      ['Free Beds', Number(target.beds || 0) - occupied],
+      ['Telephone Extn', target.extn || '-']
+    ];
+    extras = `<h3>Ward Summary</h3><p>Ward ${target.number || id} is located at ${target.location || '-'} and currently has ${occupied} occupied and ${Number(target.beds || 0) - occupied} free beds.</p>`;
+  }
+
+  if (type === 'appointment') {
+    target = DB.appointment.find(item => String(item.apptNo) === String(id));
+    if (!target) return;
+    const patient = DB.patient.find(item => String(item.patNo) === String(target.patNo)) || {};
+    title = `Appointment ${target.apptNo} — Appointment Report`;
+    rows = [
+      ['Appointment No', target.apptNo || '-'],
+      ['Patient No', target.patNo || '-'],
+      ['Patient Name', `${patient.first || ''} ${patient.last || ''}`.trim() || '-'],
+      ['Consultant', target.consultant || '-'],
+      ['Staff No', target.staffNo || '-'],
+      ['Date', target.date || '-'],
+      ['Time', target.time || '-'],
+      ['Room', target.room || '-'],
+      ['Referral Source', target.referral || '-'],
+      ['Reason / Notes', target.reason || '-'],
+      ['Local Doctor', target.localDoctor || patient.localDoctor || '-']
+    ];
+    extras = `<h3>Visit Summary</h3><p>${target.reason || 'No appointment notes recorded.'}</p>`;
+  }
+
+  if (type === 'supply') {
+    target = DB.supply.find(item => String(item.itemNo) === String(id));
+    if (!target) return;
+    title = `${target.name || 'Supply'} — Supply Report`;
+    rows = [
+      ['Item No', target.itemNo || '-'],
+      ['Name', target.name || '-'],
+      ['Description', target.desc || '-'],
+      ['Qty in Stock', target.qty || 0],
+      ['Reorder Level', target.reorder || 0],
+      ['Cost / Unit', formatMoney(target.cost || 0)],
+      ['Status', 'Available']
+    ];
+    extras = `<h3>Supply Summary</h3><p>${target.desc || 'No description recorded for this item.'}</p>`;
+  }
+
+  if (type === 'medication') {
+    const meds = DB.medication.filter(item => String(item.patNo) === String(id));
+    target = meds[0] || null;
+    if (!target) return;
+    title = `${target.patName || target.patNo || 'Medication'} — Medication Report`;
+    rows = meds.map(med => [
+      med.drugName || med.drugNo || '-',
+      med.dosage || '-',
+      med.method || '-',
+      med.units || '-',
+      med.start || '-',
+      med.finish || '-'
+    ]);
+    const medTable = rows.map(([drug, dose, method, units, start, finish]) => `<tr><td>${drug}</td><td>${dose}</td><td>${method}</td><td>${units}</td><td>${start}</td><td>${finish}</td></tr>`).join('');
+    extras = `<h3>Medication Summary</h3><p>Medication schedule for patient ${target.patName || target.patNo || '-'}.</p><table style="width:100%;border-collapse:collapse;margin-top:12px;"><tr><th>Drug</th><th>Dose</th><th>Method</th><th>Units</th><th>Start</th><th>Finish</th></tr>${medTable}</table>`;
+    const printWindow = window.open('', '_blank', 'width=980,height=720');
+    printWindow.document.write(`<!DOCTYPE html><html><head><title>${title}</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#22303f;} table{border-collapse:collapse;width:100%;margin-top:12px;} th,td{border:1px solid #d3ddec;padding:10px;text-align:left;vertical-align:top;} th{background:#eef2f8;} h1,h2,h3{color:#33507a;} p{line-height:1.5;}</style></head><body><h1>${title}</h1>${extras}</body></html>`);
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    return;
+  }
+
+  if (!target) return;
+
+  const tableHtml = rows.map(([label, value]) => `<tr><th>${label}</th><td>${value}</td></tr>`).join('');
+  const printWindow = window.open('', '_blank', 'width=980,height=720');
+  printWindow.document.write(`<!DOCTYPE html><html><head><title>${title}</title><style>body{font-family:Arial,sans-serif;margin:24px;color:#22303f;} table{border-collapse:collapse;width:100%;margin-top:12px;} th,td{border:1px solid #d3ddec;padding:10px;text-align:left;vertical-align:top;} th{background:#eef2f8;width:220px;} h1,h2,h3{color:#33507a;} p{line-height:1.5;}</style></head><body><h1>${title}</h1>${extras}<table>${tableHtml}</table></body></html>`);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
 }
 
 function renderPaymentSummary(key) {
@@ -1931,7 +2458,37 @@ function updateRequisitionStatus(index, status) {
   render('requisition');
 }
 
+function setupTableWindow(table) {
+  if (!table || table.closest('.tableWindow')) return;
+
+  const parent = table.parentNode;
+  if (!parent) return;
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'tableWindow';
+
+  const header = document.createElement('div');
+  header.className = 'tableWindowHeader';
+  header.innerHTML = `<span>${(table.id || 'Table').replace(/^t-/, '').replace(/([A-Z])/g, ' $1').replace(/^./, c => c.toUpperCase())}</span><span>↕</span>`;
+
+  const body = document.createElement('div');
+  body.className = 'tableWindowBody';
+
+  parent.replaceChild(wrapper, table);
+  wrapper.appendChild(header);
+  wrapper.appendChild(body);
+  body.appendChild(table);
+}
+
 Object.keys(SCHEMA).forEach(key => render(key));
+
+Object.keys(SCHEMA).forEach(key => {
+  const table = document.getElementById('t-' + key);
+  if (table) setupTableWindow(table);
+});
+
+const wardOverview = document.getElementById('wardOverview');
+if (wardOverview) setupTableWindow(wardOverview);
 
 function renderDash() {
   const totalBeds = DB.ward.reduce((sum, ward) => sum + Number(ward.beds || 0), 0);
@@ -2032,6 +2589,144 @@ function renderDash() {
     panel.innerHTML = dashboardInfo;
     dashboardRoot.appendChild(panel);
   }
+
+  renderDashboardSlideshow();
+}
+
+const DASHBOARD_SLIDES = [
+  {
+    image: 'commerical_ai_pics/761291241_1093017636483498_4900345277200282031_n_1.png',
+    title: 'Hospital Team',
+    subtitle: 'Care staff in action'
+  },
+  {
+    image: 'commerical_ai_pics/766072564_1073995725288291_5783160787099337244_n.png',
+    title: 'Doctor Consultation',
+    subtitle: 'Treatment and care'
+  },
+  {
+    image: 'commerical_ai_pics/68810e9e-cab6-4609-ac9b-2db3746e8fae.png',
+    title: 'Medical Care',
+    subtitle: 'Hospital environment'
+  },
+  {
+    image: 'commerical_ai_pics/9e347304-1f72-4f50-bbce-5e8c29e8ee8c.png',
+    title: 'Clinical Setting',
+    subtitle: 'Professional healthcare scene'
+  },
+  {
+    image: 'commerical_ai_pics/2d5fff2f-2a36-4537-863b-eaeeaf404995.png',
+    title: 'Ward Activity',
+    subtitle: 'Patient support environment'
+  },
+  {
+    image: 'commerical_ai_pics/3d484efa-65e8-42b1-a1cf-53d6f2d0969b.png',
+    title: 'Care Coordination',
+    subtitle: 'Modern healthcare service'
+  },
+  {
+    image: 'commerical_ai_pics/86b09cec-3dc5-458b-8933-e0d80dd915dd.png',
+    title: 'Clinical Team',
+    subtitle: 'Health professionals at work'
+  },
+  {
+    image: 'commerical_ai_pics/d7582806-dc03-44da-85fc-cf047ea02e3d.png',
+    title: 'Recovery Room',
+    subtitle: 'Patient-centered treatment'
+  }
+];
+
+function renderDashboardSlideshow() {
+  const host = document.getElementById('dashboardSlideshow');
+  if (!host) return;
+
+  if (window.dashboardSlideInterval) {
+    clearInterval(window.dashboardSlideInterval);
+  }
+
+  host.innerHTML = `
+    <div class="dashboardSlides">
+      ${DASHBOARD_SLIDES.map((slide, index) => `
+        <figure class="dashboardSlide ${index === 0 ? 'active' : ''}" data-index="${index}">
+          <img src="${slide.image}" alt="${slide.title}">
+          <figcaption class="dashboardSlideCaption">
+            ${slide.title}
+            <span>${slide.subtitle}</span>
+          </figcaption>
+        </figure>
+      `).join('')}
+    </div>
+    <div class="dashboardSlideshowDots">
+      ${DASHBOARD_SLIDES.map((slide, index) => `
+        <button class="dashboardDot ${index === 0 ? 'active' : ''}" data-index="${index}" aria-label="Show slide ${index + 1}"></button>
+      `).join('')}
+    </div>
+  `;
+
+  const slides = host.querySelectorAll('.dashboardSlide');
+  const dots = host.querySelectorAll('.dashboardDot');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+    dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+  }
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', (event) => {
+      event.stopPropagation();
+      const index = Number(dot.dataset.index);
+      showSlide(index);
+      window.dashboardSlideIndex = index;
+    });
+  });
+
+  slides.forEach((slide, index) => {
+    slide.addEventListener('click', () => openDashboardImageModal(index));
+  });
+
+  let slideIndex = 0;
+  window.dashboardSlideIndex = 0;
+  window.dashboardSlideInterval = setInterval(() => {
+    slideIndex = (slideIndex + 1) % DASHBOARD_SLIDES.length;
+    window.dashboardSlideIndex = slideIndex;
+    showSlide(slideIndex);
+  }, 3500);
+}
+
+function openDashboardImageModal(index) {
+  const modal = document.getElementById('dashboardImageModal');
+  const img = DASHBOARD_SLIDES[index];
+  if (!modal || !img) return;
+
+  const modalImage = modal.querySelector('img');
+  const title = modal.querySelector('.dashboardImageModalTitle');
+  if (modalImage) modalImage.src = img.image;
+  if (title) title.textContent = img.title;
+  modal.classList.add('show');
+}
+
+function closeDashboardImageModal() {
+  const modal = document.getElementById('dashboardImageModal');
+  if (modal) modal.classList.remove('show');
+}
+
+const dashboardImageModal = document.getElementById('dashboardImageModal');
+if (!dashboardImageModal) {
+  const modal = document.createElement('div');
+  modal.id = 'dashboardImageModal';
+  modal.className = 'dashboardImageModal';
+  modal.setAttribute('aria-modal', 'true');
+  modal.innerHTML = `
+    <div class="dashboardImageModalBox">
+      <button class="dashboardImageModalClose" aria-label="Close image viewer" onclick="closeDashboardImageModal()">×</button>
+      <img src="" alt="Expanded hospital image">
+      <div class="dashboardImageModalTitle" style="margin-top:10px;font-weight:700;color:#1c364d;text-align:center;">Hospital image</div>
+    </div>
+  `;
+  modal.addEventListener('click', (event) => {
+    if (event.target === modal) closeDashboardImageModal();
+  });
+  document.body.appendChild(modal);
 }
 
 const SHIFTS = ['Early', 'Late', 'Night', 'Off'];
@@ -2075,9 +2770,14 @@ function openWardDetail(wardNo) {
   `;
 
   const supervisor = staffList.find(staff => staff.position === 'Charge Nurse') || staffList.find(staff => staff.position === 'Consultant');
-  document.getElementById('wd-supervisor').innerHTML = supervisor
-    ? `<div class="supCard"><img src="${staffAvatar(supervisor)}" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=${supervisor.first}${supervisor.last}&backgroundColor=4a6fa5'"><div><b style="display:block;font-size:15px;color:var(--primary-dk)">${supervisor.first} ${supervisor.last} — Ward Supervisor</b><span style="font-size:12px;color:#567">${supervisor.position} • ☎️ ${supervisor.tel || '-'} • ${supervisor.qual || 'No qualification on file'}</span></div></div>`
-    : '<div style="color:#889;font-size:13px;margin-bottom:16px">No Charge Nurse currently assigned to this ward.</div>';
+  document.getElementById('wd-supervisor').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('ward', '${ward.number}')">Print ward report</button>
+    </div>
+    ${supervisor
+      ? `<div class="supCard"><img src="${staffAvatar(supervisor)}" onerror="this.src='https://api.dicebear.com/7.x/initials/svg?seed=${supervisor.first}${supervisor.last}&backgroundColor=4a6fa5'"><div><b style="display:block;font-size:15px;color:var(--primary-dk)">${supervisor.first} ${supervisor.last} — Ward Supervisor</b><span style="font-size:12px;color:#567">${supervisor.position} • ☎️ ${supervisor.tel || '-'} • ${supervisor.qual || 'No qualification on file'}</span></div></div>`
+      : '<div style="color:#889;font-size:13px;margin-bottom:16px">No Charge Nurse currently assigned to this ward.</div>'}
+  `;
 
   if (staffList.length === 0) {
     document.getElementById('wd-staffTable').innerHTML = '';
@@ -2119,6 +2819,9 @@ function openDrugDetail(drugNo) {
   `;
 
   document.getElementById('drug-details').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('drug', '${drug.drugNo}')">Print drug report</button>
+    </div>
     <div class="supCard" style="margin-top:8px">
       <div class="drugPhoto">
         ${drug.photo
@@ -2159,6 +2862,9 @@ function openPatientDetail(patNo) {
   `;
 
   document.getElementById('patient-details').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('patient', '${patient.patNo}')">Print patient report</button>
+    </div>
     <div class="supCard" style="margin-top:8px">
       <div class="drugPhoto" style="border-radius:50%">👤</div>
       <div>
@@ -2201,6 +2907,9 @@ function openStaffDetail(staffNo) {
   `;
 
   document.getElementById('staff-details').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('staff', '${staff.staffNo}')">Print staff report</button>
+    </div>
     <div class="supCard" style="margin-top:8px">
       <div class="drugPhoto" style="border-radius:50%">
         ${staff.photo
@@ -2221,6 +2930,7 @@ function openStaffDetail(staffNo) {
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Sex</th><td style="padding:8px;border:1px solid var(--bd)">${staff.sex || '-'}</td></tr>
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">NIN</th><td style="padding:8px;border:1px solid var(--bd)">${staff.nin || '-'}</td></tr>
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Qualification</th><td style="padding:8px;border:1px solid var(--bd)">${staff.qual || '-'}</td></tr>
+      <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Medical Record</th><td style="padding:8px;border:1px solid var(--bd)">${staff.medicalRecord || '-'}</td></tr>
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Working Experience</th><td style="padding:8px;border:1px solid var(--bd)">${staff.workExperience || '-'}</td></tr>
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Contract</th><td style="padding:8px;border:1px solid var(--bd)">${staff.contract === 'P' ? 'Permanent' : staff.contract === 'T' ? 'Temporary' : (staff.contract || '-')}</td></tr>
     </table>
@@ -2247,6 +2957,9 @@ function openAppointmentDetail(apptNo) {
   `;
 
   document.getElementById('appointment-details').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('appointment', '${appointment.apptNo}')">Print appointment report</button>
+    </div>
     <table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff">
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Patient No</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.patNo || '-'}</td></tr>
       <tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Consultant</th><td style="padding:8px;border:1px solid var(--bd)">${appointment.consultant || '-'}</td></tr>
@@ -2277,6 +2990,9 @@ function openSupplyDetail(itemNo) {
   `;
 
   document.getElementById('supply-details').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('supply', '${supply.itemNo}')">Print supply report</button>
+    </div>
     <div class="supCard" style="margin-top:8px">
       <div class="drugPhoto">
         ${supply.photo
@@ -2317,6 +3033,9 @@ function openSupplierDetail(supNo) {
   `;
 
   document.getElementById('supplier-details').innerHTML = `
+    <div style="display:flex;justify-content:flex-end;margin:8px 0 12px;">
+      <button class="act" onclick="printSpecificReport('supplier', '${supplier.supNo}')">Print supplier report</button>
+    </div>
     <div class="supCard" style="margin-top:8px">
       <div class="drugPhoto">
         ${supplier.photo
@@ -2359,7 +3078,7 @@ function openMedicationDetail(patNo) {
     <span>💊 ${patientMeds.length} medication entries</span>
   `;
 
-  let html = '<table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff"><tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Drug</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Dose</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Method</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Units/Day</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Start</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Finish</th></tr>';
+  let html = '<div style="display:flex;justify-content:flex-end;margin:8px 0 12px;"><button class="act" onclick="printSpecificReport(\'medication\', \'${patNo}\')">Print medication report</button></div><table style="width:100%;margin-top:10px;border-collapse:collapse;background:#fff"><tr><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Drug</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Dose</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Method</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Units/Day</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Start</th><th style="padding:8px;border:1px solid var(--bd);background:var(--primary-lt);text-align:left">Finish</th></tr>';
 
   patientMeds.forEach(med => {
     html += `<tr><td style="padding:8px;border:1px solid var(--bd)">${med.drugName || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.dosage || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.method || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.units || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.start || '-'}</td><td style="padding:8px;border:1px solid var(--bd)">${med.finish || '-'}</td></tr>`;
