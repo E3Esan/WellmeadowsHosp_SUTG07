@@ -1,3 +1,20 @@
+# Warning! Please Read This Before Anything Else!
+
+Hi, it’s Pun here. The head and lead programmer of this work.
+
+First of all, I just wanted to say that what you are seeing here is surely one of the worst GitHub repositories someone can ever encounter, and I am willingly to blame for it.
+
+But before any heroic moment, I would like to clarify that we hated this project. It was something we never wanted to make. We had to do a big project each semester, which was really miserable in itself, too many unclear topics and frankly, one of the advisors was really just a pure pain machine to all of us.
+
+For me personally, at that time, I had my own worst heartbreak, which I would not like to elaborate any further, and for many of my teammates, I am sure they had their own struggles at that time just like I did.
+
+Even with all the reasons above, I do not wish to be understood or forgiven for the mess we made, but I would like to say that if someone ever has to judge my teammates’ skills in coding, for a job interview or anything else, this is not what they should take into account for. I would like to take full responsibility for all the worst things we did, and only my lack of management skills and knowledge is what I cannot make this thing easier or smoother. If it were not for them, maybe this project might never have reached its goal. No matter how badly I messed it up, all the other three could fix and make it work; if it were not for them, I would not have had the chance to become who I am now.
+
+I owe them everything, and they owe me nothing.
+Please take my request into consideration, sincerely.
+
+— Pun (E3Esan)
+
 # Wellmeadows Hospital — Administrator System (G07)
 
 A web-based hospital administration system based on the Wellmeadows Hospital
