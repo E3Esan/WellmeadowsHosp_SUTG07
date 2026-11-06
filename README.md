@@ -561,76 +561,63 @@ These are intentionally **not** changed yet (outside the migration scope):
 ## 14. File role summary
 This section explains the purpose of each main file so it is easy to write short GitHub commit messages.
 
-Core app
-index.php — Loads the shared app shell, page content, modals, and frontend scripts.
-header.php — Renders the global header and common UI chrome.
-nav.php — Builds the sidebar and role-based navigation menu.
-auth-modal.php — Handles login and registration modal UI.
-detail-modals.php — Displays reusable record detail popups.
-style.css — Contains the project’s shared styling, layout, forms, tables, and dashboard visuals.
-API backend
-config.php — Stores database and application configuration constants.
-db.php — Sets up database connections, session checks, and shared API utilities.
-sqlsrv_helpers.php — Converts PHP values to SQL Server-compatible types and formats errors.
-table.php — Provides generic CRUD operations for all hospital tables.
-auth.php — Handles login, logout, registration, profile updates, and password changes.
-users.php — Implements admin-only account management functions.
-status.php — Returns database and server status information for the settings page.
-Page modules
-dashboard.php — Displays the hospital overview, summary cards, charts, and slideshow.
-beds.php — Implements the bed monitoring queue and admission workflow.
-staff.php — Manages staff records and staff-related administration.
-patients.php — Handles inpatients and patient records.
-outpatients.php — Tracks outpatient data and visits.
-appointments.php — Manages consultant appointments and payment details.
-medication.php — Stores medication and treatment records.
-supplies.php — Manages stock levels, costs, and inventory controls.
-pharma.php — Oversees pharmaceutical stock and drug catalogue details.
-requisitions.php — Handles requisition requests and approval flow.
-suppliers.php — Maintains supplier records and supply partner info.
-wards.php — Defines ward data and bed-related metadata.
-leave.php — Implements leave application and approval screens.
-reports.php — Provides report generation and printable report views.
-profile.php — Lets users edit their personal profile and account details.
-settings.php — Manages app preferences, theme controls, and live system status.
-users.php — Gives admins the interface to manage user accounts and roles.
-Frontend JavaScript
-data.js — Defines shared schema, API helpers, and app state loading logic.
-app-init.js — Initializes the app after the page loads.
-auth.js — Handles authentication actions and user session behavior.
-login.js — Controls the login form flow and response handling.
-nav.js — Updates the navigation based on the logged-in user role.
-permissions.js — Enforces page access permissions by role.
-crud.js — Provides reusable create, read, update, and delete functions.
-render-table.js — Builds HTML tables from API-returned records.
-detail-views.js — Opens and populates detail panels for records.
-forms.js — Builds dynamic edit/create forms and form validation behavior.
-profile.js — Handles profile updates and personal preferences.
-settings.js — Controls settings page actions and app preferences.
-admin-users.js — Manages admin user-management actions in the UI.
-roles.js — Handles role-specific UI logic and permissions mapping.
-utils.js — Stores shared helper functions for date, format, and validation tasks.
-beds-queue.js — Manages bed queue logic and admissions.
-charts.js — Handles charts and dashboard visual components.
-dashboard-charts.js — Loads and renders the dashboard chart data.
-dashboard-render.js — Renders dashboard summary cards and stats.
-dashboard-reports.js — Builds report-related dashboard information.
-dashboard-slideshow.js — Controls the rotating dashboard slideshow.
-report-explanations.js — Adds explanatory notes to generated reports.
-reports-hub.js — Manages the report hub and report actions.
-print-options.js — Adds print-friendly settings and report output controls.
-Database and migration tools
-DatabaseG07.sql — Creates the full hospital database schema and seed data.
-add_role_accounts.sql — Adds the predefined user roles and accounts to an existing database.
-add_staff_board_positions.sql — Adds staff board-position fields for the hospital administration app.
-add_bed_monitor_wards.sql — Adds ward records needed by the bed-monitor feature.
-add_sample_data_G07.sql — Inserts demo rows for testing and presentation.
-check_env.php — Verifies PHP, SQL Server driver, database, and environment readiness.
-migrate_mysql_to_mssql.php — Migrates legacy MySQL data into the SQL Server database.
-verify_migration.php — Confirms data integrity and migration correctness.
-Example commit wording
-feat(api): add SQL Server-backed CRUD and auth endpoints
-feat(ui): implement hospital dashboard, roles, and management pages
-fix(frontend): improve permission handling and dashboard rendering
-chore(db): create schema and seed data for the hospital system
-chore(migration): add MySQL-to-SQL Server migration and verification scripts
+- **Main app**
+index.php — App entry point; loads the layout, modals, and page scripts.
+header.php — Shared page header and top-level app shell.
+nav.php — Sidebar navigation and role-based menu rendering.
+auth-modal.php — Login and registration modal UI.
+detail-modals.php — Reusable record detail popups.
+style.css — Shared styling for the hospital administration interface.
+
+- **API backend**
+config.php — Database and app configuration settings.
+db.php — Database bootstrap, session handling, and shared API helpers.
+sqlsrv_helpers.php — SQL Server conversions and API error handling.
+table.php — Generic CRUD API for all tables.
+auth.php — Login, logout, profile, and password endpoints.
+users.php — Admin-only account management.
+status.php — System status and database row-count reporting.
+
+- **Pages**
+dashboard.php — Dashboard overview with charts and summary cards.
+beds.php — Bed monitoring and admission queue.
+staff.php — Staff records and management.
+patients.php — Inpatient management.
+outpatients.php — Outpatient tracking.
+appointments.php — Appointment management.
+medication.php — Medication records.
+supplies.php — Inventory and stock management.
+pharma.php — Pharmaceutical stock and drug data.
+requisitions.php — Requisition workflow and approval.
+suppliers.php — Supplier records.
+wards.php — Ward definitions and settings.
+leave.php — Leave request handling.
+reports.php — Reporting hub and printable reports.
+profile.php — User profile and account settings.
+settings.php — Application preferences and system status.
+users.php — Admin user-management interface.
+
+- **JavaScript**
+data.js — Shared data layer and API helper functions.
+app-init.js — App startup and initialization logic.
+auth.js — Auth UI and session handling.
+nav.js — Navigation and role-based visibility.
+permissions.js — Role and page access rules.
+crud.js — Reusable create, read, update, and delete actions.
+render-table.js — Table rendering from API data.
+forms.js — Dynamic form generation and validation.
+beds-queue.js — Bed queue, admissions, and reassignments.
+charts.js — Chart rendering and dashboard widgets.
+dashboard-render.js — Dashboard summary and metric cards.
+reports-hub.js — Report hub interaction and export actions.
+utils.js — Shared helper functions and formatting utilities.
+
+- **Database and migration tools**
+DatabaseG07.sql — Creates the hospital database schema and seed data.
+add_role_accounts.sql — Adds role-based login accounts.
+add_staff_board_positions.sql — Adds staff board-position data.
+add_bed_monitor_wards.sql — Adds ward rows for the bed monitor.
+add_sample_data_G07.sql — Inserts demo data for testing.
+check_env.php — Verifies PHP, SQL Server, and environment setup.
+migrate_mysql_to_mssql.php — Migrates legacy MySQL data into SQL Server.
+verify_migration.php — Checks migration correctness and data integrity.
