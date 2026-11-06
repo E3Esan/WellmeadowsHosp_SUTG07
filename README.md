@@ -57,42 +57,116 @@ Other behaviour:
 
 ## 2. Project structure
 
-```
+The project is organized by application layer. The descriptions below summarize
+the responsibility of each main file and make it easier to navigate the codebase.
+
+```text
 WellmeadowsHosp/
-├── index.php                   Entry point: header, nav, pages, modals, scripts
-├── README.md                   This file
-├── MIGRATION-REPORT-G07.md     MySQL → SQL Server migration report
+├── index.php
+├── README.md
+├── MIGRATION-REPORT-G07.md
 │
-├── api/                        JSON backend (PHP + pdo_sqlsrv)
-│   ├── config.php              ★ connection settings — the only file you edit
-│   ├── sqlsrv_helpers.php      connection, type conversion, error messages
-│   ├── db.php                  bootstrap: connect, JSON errors, session, permissions
-│   ├── table.php               generic CRUD for all data tables (column whitelist)
-│   ├── auth.php                login, register, logout, session, profile, password
-│   ├── users.php               admin-only user management
-│   └── status.php              connection + row counts for Settings page
+├── api/                              JSON backend (PHP + pdo_sqlsrv)
+│   ├── config.php                    Database and application configuration
+│   ├── db.php                        Database bootstrap, sessions, and shared API utilities
+│   ├── sqlsrv_helpers.php            SQL Server type conversion and API error formatting
+│   ├── table.php                     Generic CRUD API for hospital data tables
+│   ├── auth.php                      Login, logout, registration, session, password, and profile endpoints
+│   ├── users.php                     Admin-only account management endpoints
+│   └── status.php                    Database and system status reporting
+│
+├── includes/                         Shared layout and reusable interface components
+│   ├── header.php                    Common page header and application shell markup
+│   ├── nav.php                       Side navigation and role-based menu rendering
+│   ├── auth-modal.php                Login and registration modal interface
+│   └── detail-modals.php             Reusable detail popups for records and metadata
+│
+├── pages/                            One PHP file for each application page
+│   ├── dashboard.php                 Main dashboard and analytics overview
+│   ├── beds.php                      Bed monitoring and admission queue
+│   ├── staff.php                     Staff records and management
+│   ├── patients.php                  Inpatient management and patient details
+│   ├── outpatients.php                Outpatient records and visits
+│   ├── appointments.php              Appointment scheduling and billing details
+│   ├── medication.php                Medication tracking and treatment records
+│   ├── supplies.php                  Inventory and stock management
+│   ├── pharma.php                    Pharmaceutical stock and drug catalogue
+│   ├── requisitions.php              Requisition requests and approval workflow
+│   ├── suppliers.php                 Supplier and supply-chain records
+│   ├── wards.php                     Hospital ward setup and management
+│   ├── leave.php                     Staff leave requests and approval
+│   ├── reports.php                   Reporting hub and printable reports
+│   ├── profile.php                   Personal profile and account settings
+│   ├── settings.php                  App preferences and live system status
+│   └── users.php                     Admin-facing user management interface
+│
+├── assets/
+│   ├── css/
+│   │   └── style.css                 Main hospital administration interface styling
+│   └── js/                           Frontend data, interaction, and rendering logic
+│       ├── data.js                   Shared data layer, schema, and API fetch helpers
+│       ├── app-init.js               Starts the application after page load
+│       ├── auth.js                   Frontend authentication actions and session logic
+│       ├── login.js                  Login form behavior and response handling
+│       ├── nav.js                    Navigation and role visibility logic
+│       ├── permissions.js             Role-based access control rules
+│       ├── crud.js                   Reusable create, read, update, and delete logic
+│       ├── render-table.js            Data table rendering
+│       ├── detail-views.js            Record detail view behavior and population
+│       ├── forms.js                   Dynamic form building and validation
+│       ├── profile.js                 Profile editing and personal settings
+│       ├── settings.js                System settings interface and logic
+│       ├── admin-users.js              Admin user management client logic
+│       ├── roles.js                   Role-specific UI behavior and mappings
+│       ├── utils.js                   Shared helpers and formatting utilities
+│       ├── beds-queue.js               Bed queue and admission workflow actions
+│       ├── charts.js                  Chart rendering and dashboard visual widgets
+│       ├── dashboard-charts.js         Dashboard chart data and setup
+│       ├── dashboard-render.js          Dashboard summary panel rendering
+│       ├── dashboard-reports.js         Dashboard report-related logic
+│       ├── dashboard-slideshow.js       Rotating dashboard image slideshow
+│       ├── report-explanations.js       Explanatory text for reports
+│       ├── reports-hub.js               Report hub interface logic
+│       └── print-options.js             Print settings and report output controls
 │
 ├── sql/
-│   ├── DatabaseG07.sql         creates database, 13 tables, seed data (RESETS data)
-│   ├── add_role_accounts.sql   upgrade: add role accounts to an existing DB
-│   ├── add_staff_board_positions.sql  upgrade: staff.boardX / boardY
-│   └── add_bed_monitor_wards.sql      upgrade: wards 1–10 for the bed monitor
+│   ├── DatabaseG07.sql                Creates the database schema and seed data
+│   ├── add_role_accounts.sql          Adds role-based accounts to an existing database
+│   ├── add_staff_board_positions.sql  Adds board-position fields for staff
+│   ├── add_bed_monitor_wards.sql      Adds ward records required by the bed monitor
+│   └── add_sample_data_G07.sql        Inserts demo data for testing and presentation
 │
-├── tools/                      command-line only (blocked from the browser)
-│   ├── check_env.php           step-by-step environment check
-│   ├── migrate_mysql_to_mssql.php   copy live data from MySQL
-│   └── verify_migration.php    prove the data and its format are correct
+├── tools/                             Command-line setup and migration utilities
+│   ├── check_env.php                  Validates PHP, SQL Server driver, and database setup
+│   ├── migrate_mysql_to_mssql.php     Migrates legacy MySQL data into SQL Server
+│   └── verify_migration.php           Validates migrated data and formatting integrity
 │
-├── includes/                   header, nav, login modal, detail modals
-├── pages/                      one PHP file per page section
-├── assets/
-│   ├── css/style.css
-│   └── js/                     front end (see load order below)
-└── commerical_ai_pics/         images for the dashboard slideshow
+└── commerical_ai_pics/                Images used by the dashboard slideshow
 ```
 
+### Main application files
+
+- **`index.php`** is the application entry point. It loads the shared layout,
+  page content, and JavaScript stack.
+- **`README.md`** documents the project, installation, configuration, API,
+  database, testing, and maintenance procedures.
+- **`MIGRATION-REPORT-G07.md`** records the MySQL-to-SQL Server migration,
+  including defects, fixes, and verification results.
+
+### Backend and frontend responsibilities
+
+- **`api/`** contains the PHP JSON endpoints. The frontend communicates with
+  this layer rather than issuing SQL directly.
+- **`includes/`** contains shared layout markup, navigation, and reusable modals.
+- **`pages/`** contains the PHP page sections rendered by the application.
+- **`assets/css/`** contains the main interface stylesheet.
+- **`assets/js/`** contains the frontend data layer, authentication, permissions,
+  CRUD behavior, forms, tables, dashboard widgets, and report interactions.
+- **`sql/`** contains the database creation script and incremental SQL updates.
+- **`tools/`** contains command-line-only environment and migration utilities.
+
 **Script load order matters.** `index.php` loads `data.js` first (it defines
-`SCHEMA`, `DB`, `apiGet`, `loadAll`) and `app-init.js` last (it starts the
+`SCHEMA`, `DB`, `apiGet`, and `loadAll`) and `app-init.js` last (it starts the
 app). Do not reorder the `<script>` tags.
 
 The front end never contains SQL; it only talks to `api/` over JSON. That is
@@ -224,7 +298,6 @@ should say *Connected to SQL Server database wellmeadows on Enterprise
 Evaluation Edition …*.
 
 ---
-
 ## 5. Configuration
 
 All connection settings are in **`api/config.php`**:
