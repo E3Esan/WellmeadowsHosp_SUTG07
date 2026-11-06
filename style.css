@@ -1,0 +1,2465 @@
+  /* ===== Global theme and base styles ===== */
+  :root { /* main color scheme */
+    --primary: #005EB8;
+    --primary-dk: #144e97;
+    --primary-lt: #eef2f8;
+    --bd: #d3ddec;
+    --ok: #2e8b57;
+    --warn: #c0392b;
+  }
+
+  * {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+  }
+
+  /* Global form element normalization for consistent UI */
+  input, select, textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--bd);
+    background: #fff;
+    color: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: box-shadow 120ms ease, border-color 120ms ease;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    box-shadow: 0 6px 18px rgba(20,78,151,0.08);
+    border-color: var(--primary-dk);
+  }
+
+  select { appearance: none; -webkit-appearance:none; -moz-appearance:none; padding-right:32px }
+
+  body {
+    margin: 0;
+    background: #ffffff;
+    color: #22303f;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  /* ===== Dark mode (GitHub Dark palette) =====
+     Canvas #0d1117, raised surface #161b22, borders #30363d.
+     Body text is white; headers/labels/table headers use GitHub's bright
+     dark-mode blue (#58a6ff). Button background colors are left as-is —
+     only near-white button backgrounds are swapped for a dark surface —
+     but button text is always forced white. */
+  body.dark-mode {
+    background: #0d1117;
+    color: #ffffff;
+  }
+
+  /* Raised surfaces: cards, panels, tables, nav, modals, widgets */
+  body.dark-mode .page,
+  body.dark-mode .wardbox,
+  body.dark-mode .card,
+  body.dark-mode .widget,
+  body.dark-mode .panel,
+  body.dark-mode .box,
+  body.dark-mode .modalContent,
+  body.dark-mode .profileCard,
+  body.dark-mode table,
+  body.dark-mode tr,
+  body.dark-mode td,
+  body.dark-mode th,
+  body.dark-mode nav,
+  body.dark-mode .userProfileBox,
+  body.dark-mode #reportHub > div,
+  body.dark-mode .staffWidget,
+  body.dark-mode .staffList,
+  body.dark-mode .beds,
+  body.dark-mode .dashboardSlideshow,
+  body.dark-mode .dashboardSlideshowDots,
+  body.dark-mode .grid2,
+  body.dark-mode .tableWindow,
+  body.dark-mode .tableWindowBody,
+  body.dark-mode .tableWindowHeader,
+  body.dark-mode .wdBox,
+  body.dark-mode .settingsCard,
+  body.dark-mode .chartCard,
+  body.dark-mode .staffCard,
+  body.dark-mode .supCard,
+  body.dark-mode .paymentSummary,
+  body.dark-mode .drugPhoto,
+  body.dark-mode .toast {
+    background: #161b22 !important;
+    color: #ffffff !important;
+    border-color: #30363d !important;
+  }
+
+  /* Plain UI text stays white in dark mode, including previously-muted grays */
+  body.dark-mode .page h2,
+  body.dark-mode .wdBox h2,
+  body.dark-mode .card h3,
+  body.dark-mode .customerInfo,
+  body.dark-mode strong,
+  body.dark-mode p,
+  body.dark-mode span,
+  body.dark-mode label,
+  body.dark-mode li,
+  body.dark-mode small,
+  body.dark-mode .navBrandText,
+  body.dark-mode .navBrandText span,
+  body.dark-mode .userProfileMeta,
+  body.dark-mode .wdClose,
+  body.dark-mode .wdMeta span,
+  body.dark-mode .wdNote,
+  body.dark-mode nav button,
+  body.dark-mode .grid2 label,
+  body.dark-mode .authSwitch,
+  body.dark-mode .settingsRow label,
+  body.dark-mode .profileCard label,
+  body.dark-mode .profileCard label .caption {
+    color: #ffffff !important;
+  }
+
+  /* Bright blue for headers/labels: table headers, section titles, headings */
+  body.dark-mode th,
+  body.dark-mode .wdSectionTitle,
+  body.dark-mode .wdBox h3,
+  body.dark-mode .wardbox h3,
+  body.dark-mode .chartCard h3,
+  body.dark-mode .settingsCard h3,
+  body.dark-mode .statusTable th,
+  body.dark-mode .staffList .status,
+  body.dark-mode nav button.active {
+    color: #58a6ff !important;
+  }
+
+  body.dark-mode nav button.active { background: rgba(88, 166, 255, 0.15) !important; }
+  body.dark-mode nav button:hover { background: rgba(88, 166, 255, 0.1) !important; }
+
+  /* Buttons keep their existing accent colors; text is always white in dark mode */
+  body.dark-mode button,
+  body.dark-mode .infoBtn,
+  body.dark-mode .printBtn,
+  body.dark-mode .NothingBtn,
+  body.dark-mode .act,
+  body.dark-mode .chartTypeBtn,
+  body.dark-mode .chartTypeBtn.active {
+    color: #ffffff !important;
+  }
+
+  /* Buttons that were near-white backgrounds become dark surfaces instead */
+  body.dark-mode .infoBtn,
+  body.dark-mode .act.secondary,
+  body.dark-mode .act.suggest,
+  body.dark-mode .chartTypeBtn {
+    background: #21262d !important;
+    border-color: #30363d !important;
+  }
+
+  /* Badges / tags / status pills: tinted dark backgrounds instead of pastel white */
+  body.dark-mode .tag { background: rgba(88, 166, 255, 0.15) !important; color: #58a6ff !important; }
+  body.dark-mode .sh-Early { background: rgba(63, 185, 80, 0.15) !important; color: #3fb950 !important; }
+  body.dark-mode .sh-Late  { background: rgba(210, 153, 34, 0.15) !important; color: #d29922 !important; }
+  body.dark-mode .sh-Night { background: rgba(88, 166, 255, 0.15) !important; color: #79c0ff !important; }
+  body.dark-mode .sh-Off   { background: rgba(255, 255, 255, 0.08) !important; color: #8b949e !important; }
+  body.dark-mode .statusPill.ok  { background: rgba(63, 185, 80, 0.15) !important; color: #3fb950 !important; }
+  body.dark-mode .statusPill.bad { background: rgba(248, 81, 73, 0.15) !important; color: #f85149 !important; }
+
+  /* ApexCharts paints its own white canvas background unless told otherwise */
+  body.dark-mode .apexcharts-canvas,
+  body.dark-mode .apexcharts-canvas svg {
+    background: transparent !important;
+  }
+
+  /* Override specific SVG white/bright fills used for chart backgrounds so they appear dark in dark-mode */
+  body.dark-mode svg rect[fill="#f9fbff"],
+  body.dark-mode svg rect[fill="#ffffff"],
+  body.dark-mode svg rect[fill="#fff"],
+  body.dark-mode svg rect[fill="#dfefff"],
+  body.dark-mode svg rect[fill="#fff0f6"],
+  body.dark-mode svg rect[fill="#eaf4ff"] {
+    fill: #161b22 !important;
+  }
+
+  /* Keep colored bars (greens, blues, accents) unchanged */
+
+  body.dark-mode input,
+  body.dark-mode select,
+  body.dark-mode textarea {
+    background: #0d1117;
+    color: #ffffff;
+    border-color: #30363d;
+    color-scheme: dark;
+  }
+
+  input[type="date"] { color-scheme: light; }
+  body.dark-mode input[type="date"] { color-scheme: dark; }
+  body.dark-mode input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.9;
+    cursor: pointer;
+  }
+
+  /* Bed queue contains inline light-mode backgrounds, so override them as a
+     group instead of relying on each generated child to inherit dark colors. */
+  body.dark-mode #bedQueuePanel,
+  body.dark-mode #bedQueuePanel > div,
+  body.dark-mode #bedQueuePanel > section,
+  body.dark-mode #bedQueuePanel > div > div,
+  body.dark-mode #bedQueuePanel table,
+  body.dark-mode #bedQueuePanel tr,
+  body.dark-mode #bedQueuePanel td,
+  body.dark-mode #bedQueuePanel th {
+    background: #161b22 !important;
+    color: #ffffff !important;
+    border-color: #30363d !important;
+  }
+
+  body.dark-mode #bedQueuePanel input,
+  body.dark-mode #bedQueuePanel select {
+    background: #0d1117 !important;
+    color: #ffffff !important;
+    border-color: #30363d !important;
+  }
+
+  body.dark-mode #bedQueuePanel label,
+  body.dark-mode #bedQueuePanel span,
+  body.dark-mode #bedQueuePanel strong,
+  body.dark-mode #bedQueuePanel h3,
+  body.dark-mode #bedQueuePanel p {
+    color: #ffffff !important;
+  }
+
+  body.dark-mode #bedQueuePanel .free { color: #3fb950 !important; }
+  body.dark-mode #bedQueuePanel .full { color: #f85149 !important; }
+  body.dark-mode #bedQueuePanel .bed-block.available { background: #b9efcf !important; color: #22303f !important; }
+  body.dark-mode #bedQueuePanel .bed-block.occupied { background: #f5c2c7 !important; color: #22303f !important; }
+  body.dark-mode #bedQueuePanel .bed-block.attention { background: #ffe29a !important; color: #22303f !important; }
+  body.dark-mode #bedQueuePanel .bed-block strong,
+  body.dark-mode #bedQueuePanel .bed-block span,
+  body.dark-mode #bedQueuePanel .bed-block small { color: #22303f !important; }
+
+  /* The profile control remains a light pill in dark mode for readability. */
+  body.dark-mode #authBtn,
+  body.dark-mode #authBtn:hover,
+  body.dark-mode #authBtn:focus {
+    background: #ffffff !important;
+    color: var(--primary-dk) !important;
+    border-color: rgba(9, 108, 148, 0.15) !important;
+  }
+
+  body.dark-mode #authBtn #authBtnUser {
+    color: var(--primary-dk) !important;
+  }
+
+  /* NOTE: .authAvatar's background/color are intentionally NOT forced
+     with !important here (they used to be) — JS (renderAuthAvatar in
+     auth.js) sets an inline background/color per user: transparent for
+     an uploaded photo, or a role-tinted color for the initial-letter
+     fallback. Forcing them here with !important made every avatar look
+     identical in dark mode regardless of the user's actual role/photo. */
+
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+    padding: 14px 22px;
+    background: linear-gradient(90deg, var(--primary-dk), var(--primary));
+    color: #fff;
+    border-bottom: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 3px 12px rgba(20, 78, 151, 0.2);
+  }
+
+  .headerBrand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .headerBadge {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.8);
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.08);
+    font-size: 22px;
+    transform: rotate(45deg);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+    flex-shrink: 0;
+  }
+
+  .headerBadge::before {
+    content: "✚";
+    display: block;
+    transform: rotate(-45deg);
+  }
+
+  .headerText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .headerText h1 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    font-family: Georgia, 'Times New Roman', serif;
+  }
+
+  .headerText span {
+    font-size: 12px;
+    opacity: 0.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Print link styles: hover and active (clicked) indicators */
+  .printLink {
+    color: var(--primary);
+    text-decoration: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: background 140ms ease, transform 120ms ease, box-shadow 120ms ease, color 100ms ease;
+    display: inline-block;
+    font-weight: 600;
+  }
+  .printLink:hover {
+    background: rgba(0,94,184,0.08);
+    transform: translateY(-2px);
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba(5,50,100,0.06);
+  }
+  .printLink:focus { outline: 3px solid rgba(0,94,184,0.14); outline-offset: 2px }
+  .printLink.active {
+    background: linear-gradient(180deg,var(--primary-lt),var(--primary-dk));
+    color: #fff !important;
+    transform: translateY(0);
+    box-shadow: 0 6px 22px rgba(5,50,100,0.18), inset 0 -2px 0 rgba(0,0,0,0.06);
+    border-radius: 8px;
+  }
+
+  .print-options-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px;
+    background: rgba(7, 18, 28, 0.58);
+  }
+
+  .print-options-box {
+    width: min(520px, 94vw);
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    border: 1px solid var(--bd);
+    border-radius: 12px;
+    background: #fff;
+    color: #22303f;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+  }
+
+  .print-options-box h3 { margin: 0; color: var(--primary-dk); }
+  .print-options-help { margin: 5px 0 14px; color: #678; font-size: 12px; }
+  .print-section-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+  .print-option-card,
+  .print-chart-card,
+  .print-chart-heading { display: flex; align-items: center; gap: 8px; min-width: 0; padding: 10px; border: 1px solid var(--bd); border-radius: 8px; background: #f8fbff; cursor: pointer; }
+  .print-option-card input,
+  .print-chart-card input,
+  .print-chart-heading input { flex: 0 0 auto; accent-color: var(--primary); }
+  .print-option-card > span:last-child { display: grid; gap: 2px; }
+  .print-option-card small,
+  .print-chart-heading small { color: #678; font-size: 10px; }
+  .print-option-swatch { width: 9px; height: 28px; border-radius: 5px; flex: 0 0 auto; }
+  .swatch-blue { background: #2b7bd3; }
+  .swatch-green { background: #61b878; }
+  .swatch-pink { background: #d96c9b; }
+  .swatch-yellow { background: #f0a63a; }
+  .print-chart-heading { margin-top: 12px; border: none; background: #eef6ff; }
+  .print-chart-heading span { display: grid; }
+  .print-chart-type-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 8px; padding: 8px 10px; border: 1px solid var(--bd); border-radius: 8px; background: #f8fbff; font-size: 12px; color: #33507a; font-weight: 600; }
+  .print-chart-type-row select { padding: 5px 8px; border-radius: 6px; border: 1px solid var(--bd); background: #fff; font-size: 12px; color: #22303f; }
+  .print-chart-type-row select:disabled { opacity: .5; }
+  .print-chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; margin-top: 7px; }
+  .print-chart-card { font-size: 11px; transition: border-color 120ms ease, transform 120ms ease; }
+  .print-chart-card:hover { transform: translateY(-1px); border-color: var(--primary); }
+  .chart-color-0 { border-left: 4px solid #c0392b; }
+  .chart-color-1 { border-left: 4px solid #2b7bd3; }
+  .chart-color-2 { border-left: 4px solid #005EB8; }
+  .chart-color-3 { border-left: 4px solid #8b6eb4; }
+  .chart-color-4 { border-left: 4px solid #61b878; }
+  .chart-color-5 { border-left: 4px solid #f0a63a; }
+  .print-options-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+
+  body.dark-mode .print-options-box { background: #fff !important; color: #22303f !important; }
+  body.dark-mode .print-options-box h3 { color: var(--primary-dk) !important; }
+  body.dark-mode .print-options-help,
+  body.dark-mode .print-option-card small,
+  body.dark-mode .print-chart-heading small { color: #678 !important; }
+  body.dark-mode .print-option-card,
+  body.dark-mode .print-chart-card { background: #f8fbff !important; color: #22303f !important; border-color: var(--bd) !important; }
+  body.dark-mode .print-chart-heading { background: #eef6ff !important; color: #22303f !important; }
+  body.dark-mode .print-chart-type-row { background: #f8fbff !important; color: #33507a !important; border-color: var(--bd) !important; }
+  body.dark-mode .print-chart-type-row select { background: #fff !important; color: #22303f !important; }
+
+  /* =====================================================================
+     POPUPS ALWAYS RENDER IN LIGHT THEME — independent of the global
+     dark-mode toggle. This covers every pop-up dialog in the app: the
+     "Print Dashboard Report" modal, all detail-view modals (.wdOverlay/
+     .wdBox — ward/staff/patient/drug/supply/supplier/appointment/
+     medication/upload/change-password), the login/register modal
+     (#authOverlay), and the footer credits modal (.footerModal).
+
+     Root cause of the "white text on white background" bug: generic
+     dark-mode rules above (e.g. `body.dark-mode strong/span/label/small`)
+     match any matching element ANYWHERE in the page, including inside a
+     popup whose box background was separately forced back to white —
+     so text inside popup cards (like "Ward Overview") turned invisible.
+
+     Fix: every selector below is scoped 3+ classes deep (e.g.
+     `body.dark-mode .print-options-overlay .print-options-box *`), which
+     always outranks the generic single/double-class dark-mode rules
+     regardless of where either rule sits in this file, so popups keep
+     their normal light appearance no matter the site-wide theme. ===== */
+  body.dark-mode .wdOverlay .wdBox,
+  body.dark-mode .wdOverlay .wdBox .grid2,
+  body.dark-mode .wdOverlay .wdBox .req-item-row,
+  body.dark-mode #authOverlay .authBox,
+  body.dark-mode .print-options-overlay .print-options-box,
+  body.dark-mode .footerModal .footerModalBox {
+    background: #ffffff !important;
+    color: #22303f !important;
+    border-color: var(--bd) !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox *,
+  body.dark-mode #authOverlay .authBox *,
+  body.dark-mode .print-options-overlay .print-options-box *,
+  body.dark-mode .footerModal .footerModalBox * {
+    color: #22303f !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox h2,
+  body.dark-mode .wdOverlay .wdBox h3,
+  body.dark-mode .wdOverlay .wdBox .wdSectionTitle,
+  body.dark-mode #authOverlay .authBox h2,
+  body.dark-mode .print-options-overlay .print-options-box h3,
+  body.dark-mode .footerModal .footerModalBox .footerModalTitle,
+  body.dark-mode .footerModal .footerModalBox .footerModalTitle .brandLink {
+    color: var(--primary-dk) !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox .wdMeta span,
+  body.dark-mode .wdOverlay .wdBox .wdNote,
+  body.dark-mode .print-options-overlay .print-options-box .print-options-help,
+  body.dark-mode .print-options-overlay .print-options-box .print-option-card small,
+  body.dark-mode .print-options-overlay .print-options-box .print-chart-heading small,
+  body.dark-mode .footerModal .footerModalBox .footerModalCredit {
+    color: #678 !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox input,
+  body.dark-mode .wdOverlay .wdBox select,
+  body.dark-mode .wdOverlay .wdBox textarea,
+  body.dark-mode #authOverlay .authBox input,
+  body.dark-mode #authOverlay .authBox select,
+  body.dark-mode .print-options-overlay .print-options-box select,
+  body.dark-mode .footerModal .footerModalBox input {
+    background: #ffffff !important;
+    color: #22303f !important;
+    border-color: var(--bd) !important;
+    color-scheme: light !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox table,
+  body.dark-mode .wdOverlay .wdBox tr,
+  body.dark-mode .wdOverlay .wdBox td,
+  body.dark-mode .wdOverlay .wdBox th,
+  body.dark-mode .footerModal .footerModalBox table,
+  body.dark-mode .footerModal .footerModalBox tr,
+  body.dark-mode .footerModal .footerModalBox td,
+  body.dark-mode .footerModal .footerModalBox th {
+    background: #ffffff !important;
+    color: #22303f !important;
+    border-color: var(--bd) !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox .wdClose,
+  body.dark-mode .footerModal .footerModalBox .footerModalClose {
+    color: #22303f !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox button.act,
+  body.dark-mode .wdOverlay .wdBox button.del,
+  body.dark-mode #authOverlay .authBox button.act,
+  body.dark-mode .print-options-overlay .print-options-box button.act {
+    color: #ffffff !important;
+  }
+
+  body.dark-mode .wdOverlay .wdBox .infoBtn,
+  body.dark-mode .wdOverlay .wdBox .act.secondary,
+  body.dark-mode .wdOverlay .wdBox .act.suggest,
+  body.dark-mode .print-options-overlay .print-options-box .infoBtn {
+    background: #eef2f8 !important;
+    color: #22303f !important;
+    border-color: var(--bd) !important;
+  }
+
+  /* Keep the standard status/role colors intact inside popups too —
+     these already carry their own correctly-scoped light-mode colors,
+     this just re-asserts them at the same specificity as the wildcard
+     reset above so they don't get flattened to plain navy text. */
+  body.dark-mode .wdOverlay .wdBox .statusPill.ok,
+  body.dark-mode .wdOverlay .wdBox .tag,
+  body.dark-mode .wdOverlay .wdBox .sh-Early,
+  body.dark-mode .wdOverlay .wdBox .sh-Late,
+  body.dark-mode .wdOverlay .wdBox .sh-Night,
+  body.dark-mode .wdOverlay .wdBox .sh-Off { color: inherit; }
+  body.dark-mode .wdOverlay .wdBox .statusPill.ok { background: #e3f0e6 !important; color: var(--ok) !important; }
+  body.dark-mode .wdOverlay .wdBox .statusPill.bad { background: #fbe6e3 !important; color: var(--warn) !important; }
+  body.dark-mode .wdOverlay .wdBox .tag { background: var(--primary-lt) !important; color: var(--primary-dk) !important; }
+  body.dark-mode .wdOverlay .wdBox .sh-Early { background: #e3f0e6 !important; color: var(--ok) !important; }
+  body.dark-mode .wdOverlay .wdBox .sh-Late { background: #fdf1da !important; color: #a5720c !important; }
+  body.dark-mode .wdOverlay .wdBox .sh-Night { background: #e6e9f5 !important; color: #3d4ba0 !important; }
+  body.dark-mode .wdOverlay .wdBox .sh-Off { background: #f1f1f1 !important; color: #888 !important; }
+
+  /* Profile page styles */
+  .profilePage {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 18px;
+    align-items: start;
+  }
+
+  .profileCard {
+    background: #fff;
+    border: 1px solid var(--bd);
+    padding: 14px;
+    border-radius: 10px;
+    box-shadow: 0 6px 18px rgba(17,30,44,0.06);
+  }
+
+  .profilePicWidget {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.28s ease, box-shadow 0.28s ease;
+  }
+
+  .profilePicWidget:hover {
+    transform: translateY(-6px) rotate(-0.6deg);
+    box-shadow: 0 18px 36px rgba(20,78,151,0.12);
+  }
+
+  .profilePicWidget img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profilePicOverlay {
+    position: absolute;
+    right: 8px;
+    bottom: 8px;
+    display: flex;
+    gap: 8px;
+    background: rgba(0,0,0,0.32);
+    padding: 6px;
+    border-radius: 8px;
+  }
+
+  .profileInfoBlock {
+    display: grid;
+    gap: 8px;
+  }
+
+  .profileInfoBlock .editable {
+    padding: 10px;
+    border: 1px dashed var(--bd);
+    border-radius: 8px;
+    min-height: 60px;
+    background: transparent;
+  }
+
+  .profileDisplayName {
+    font-size: 19px;
+    font-weight: 800;
+    color: var(--primary-dk);
+    line-height: 1.25;
+    word-break: break-word;
+  }
+
+  .profileSubRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+
+  .profileUsername {
+    font-size: 13px;
+    color: #667;
+  }
+
+  .profileUsername:not(:empty)::before {
+    content: '@';
+  }
+
+  /* Role status badge — colored per role via getRoleColor()/roleBadgeHtml()
+     in assets/js/roles.js. Colors come in through the --role-* custom
+     properties set inline on the element, so this class works for any
+     role string without needing a rule per role. */
+  .roleBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    background: var(--role-bg, #eef2f8);
+    color: var(--role-color, #33507a);
+    border: 1px solid var(--role-border, var(--bd));
+    white-space: nowrap;
+  }
+
+  .roleBadge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--role-color, #33507a);
+    flex: 0 0 auto;
+  }
+
+  .roleBadge-sm {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  /* The app-wide "body.dark-mode span { color: #fff !important }" rule
+     (above) would otherwise flatten every role badge to plain white text
+     in dark mode, defeating the whole point of color-coding roles. This
+     selector is more specific, so the role color wins back. */
+  body.dark-mode .roleBadge {
+    color: var(--role-color, #9db3d6) !important;
+  }
+
+  .profileMetaList {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--bd);
+    display: grid;
+    gap: 8px;
+  }
+
+  .profileMetaRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    font-size: 12.5px;
+  }
+
+  .profileMetaRow span {
+    color: #667;
+  }
+
+  .profileMetaRow b {
+    color: #22303f;
+    font-weight: 700;
+    text-align: right;
+  }
+
+  body.dark-mode .profileMetaRow b { color: #dce6f2; }
+  body.dark-mode .profileDisplayName { color: #58a6ff; }
+
+  /* Page transition animations */
+  .page {
+    position: relative;
+    transition: transform 360ms cubic-bezier(.2,.9,.2,1), opacity 360ms ease;
+    will-change: transform, opacity;
+  }
+
+  .page.anim-enter {
+    position: absolute;
+    inset: 0;
+    transform: translateX(100%);
+    opacity: 0.98;
+    z-index: 25;
+  }
+
+  .page.anim-enter.anim-enter-active {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+
+  .page.anim-exit {
+    position: absolute;
+    inset: 0;
+    transform: translateX(0%);
+    z-index: 20;
+  }
+
+  .page.anim-exit.anim-exit-active {
+    transform: translateX(-100%);
+    opacity: 0.9;
+  }
+
+  /* Settings panel improved UI */
+  .settingsPanel {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 300ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease;
+    opacity: 0;
+    display: block;
+    padding-top: 0;
+  }
+
+  .settingsPanel.open {
+    max-height: 720px;
+    opacity: 1;
+    padding-top: 12px;
+  }
+
+  .profileCard label { display:block; font-size:13px; color:#22303f; }
+  .profileCard label .caption { font-size:12px; color:#667; margin-bottom:6px; display:block }
+  .profileCard input.wide, .profileCard select, .profileCard input[type="text"], .profileCard input[type="email"], .profileCard input[type="password"] {
+    width:100%; padding:10px 12px; border:1px solid var(--bd); border-radius:10px; background:#fff; box-shadow:inset 0 1px 0 rgba(0,0,0,0.02);
+  }
+
+  .profileCard .formRow { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+
+  #profile-settings-toggle { border:1px solid var(--bd); background:transparent; padding:8px 10px; border-radius:8px; cursor:pointer; color:var(--primary-dk); }
+  #profile-settings-toggle.open { background:var(--primary); color:#fff; border-color:var(--primary-dk); }
+
+  .profileCard .act { padding:8px 12px; border-radius:8px; border:none; cursor:pointer; background:var(--primary); color:#fff }
+  .profileCard .act.secondary { background:#f3f6fb; color:var(--primary-dk); border:1px solid var(--bd) }
+  .profileCard .act.save { background: var(--ok); border-color: var(--ok); }
+  .profileCard .act.danger { background: var(--warn); border-color: var(--warn); }
+  .profileCard .act.suggest { background: #f3f6fb; color:var(--primary-dk); border:1px solid var(--bd); }
+
+  .profileCard .actions { display:flex; gap:10px; }
+
+  /* Password toggle UI */
+  .pw-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--primary-dk);
+    padding: 4px;
+    line-height: 1;
+  }
+  .pw-toggle.showing { color: var(--primary); }
+  .pw-wrap { position: relative; }
+  .pw-wrap input { padding-right: 40px; }
+
+  /* keep consistent styling even when input type switches to text */
+  .pw-input {
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--bd);
+    border-radius:10px;
+    background:#fff;
+    box-shadow:inset 0 1px 0 rgba(0,0,0,0.02);
+    font-family: inherit;
+    font-size: 14px;
+    color: inherit;
+  }
+
+  /* Change password modal styling to match Settings UI */
+  #changePassOverlay .wdBox { padding:18px; border-radius:12px; }
+  #changePassOverlay input[type="password"] { width:100%; padding:10px 12px; border:1px solid var(--bd); border-radius:10px; margin-bottom:6px; }
+  #changePassOverlay .act { padding:8px 12px; border-radius:8px; }
+  #changePassOverlay .actions { display:flex; gap:10px; justify-content:flex-end; margin-top:6px }
+  #changePassOverlay .act.suggest { background:#f3f6fb; color:var(--primary-dk); border:1px solid var(--bd) }
+  #changePassOverlay .act.danger { background:var(--warn); color:#fff }
+  #changePassOverlay .act.secondary { background:#f3f6fb; color:var(--primary-dk); border:1px solid var(--bd) }
+
+  /* Admin > User Management edit modal — same button treatment as the
+     change-password modal above, scoped to its own overlay id. */
+  #userEditOverlay .wdBox { padding:18px; border-radius:12px; }
+  #userEditOverlay input, #userEditOverlay select { width:100%; margin-bottom:2px; }
+  #userEditOverlay .act { padding:8px 12px; border-radius:8px; border:none; cursor:pointer; background:var(--primary); color:#fff }
+  #userEditOverlay .act.save { background: var(--ok); border-color: var(--ok); }
+  #userEditOverlay .act.danger { background:var(--warn); color:#fff }
+  #userEditOverlay .act.secondary { background:#f3f6fb; color:var(--primary-dk); border:1px solid var(--bd) }
+  #userEditOverlay .act.suggest { background:#f3f6fb; color:var(--primary-dk); border:1px solid var(--bd) }
+
+  /* Read-only role display on the Profile page (replaces the old
+     self-editable role <select> — see pages/profile.php) */
+  .profileRoleReadonly { display:inline-block; margin:4px 0; }
+  .profileCard label .caption { display:block; font-weight:400; color:#678; font-size:11px; margin-top:2px; }
+
+  /* Short explanatory line under a page's <h2> (currently just used on
+     the admin User Management page). */
+  .pageIntro { color:#678; font-size:13px; margin:-6px 0 14px; max-width:720px; }
+  body.dark-mode .pageIntro { color:#8b949e !important; }
+
+
+  .navOverlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 26, 39, 0.32);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 110;
+  }
+
+  .navOverlay.show {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 120;
+    width: min(280px, 82vw);
+    height: 100vh;
+    padding: 18px 12px 18px;
+    background: #fff;
+    border-right: 1px solid var(--bd);
+    box-shadow: 12px 0 30px rgba(22, 42, 55, 0.18);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transform: translateX(-110%);
+    transition: transform 0.22s ease;
+    overflow-y: auto;
+  }
+
+  nav.open {
+    transform: translateX(0);
+  }
+
+  .navBrand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 8px 14px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgba(17, 30, 44, 0.08);
+  }
+
+  .navBrand .headerBadge {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .navBrandText {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .navBrandText strong {
+    color: var(--primary-dk);
+    font-size: 15px;
+    line-height: 1.2;
+    font-family: Georgia, 'Times New Roman', serif;
+    letter-spacing: 0.5px;
+  }
+
+  .navBrandText span {
+    color: #667;
+    font-size: 11px;
+  }
+
+  .navBrandLink {
+    display: inline-block;
+    margin-top: 6px;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+    cursor: pointer;
+  }
+
+  .navBrandLink:hover {
+    color: var(--primary-dk);
+  }
+
+  .themeToggle {
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    border-radius: 999px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  .reportSearch {
+    width: min(420px, 100%);
+    padding: 10px 12px;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .passwordRow {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .passwordRow button {
+    white-space: nowrap;
+  }
+
+  .bubble {
+    animation: bubbleRise 0.9s ease-out both;
+  }
+
+  @keyframes bubbleRise {
+    from {
+      opacity: 0;
+      transform: translateY(8px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  nav button {
+    width: 100%;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #456;
+    font-size: 13.5px;
+    text-align: left;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  nav button.active {
+    color: var(--primary-dk);
+    background: var(--primary-lt);
+    font-weight: 600;
+  }
+
+  nav button:hover {
+    background: var(--primary-lt);
+    transform: translateX(2px);
+  }
+
+  #navToggleBtn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 22px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+
+  main {
+    max-width: 1300px;
+    margin: auto;
+    padding: 20px;
+    background: transparent;
+  }
+
+  .page {
+    display: none;
+  }
+
+  .page.active {
+    display: block;
+  }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .dashboardSlideshow {
+    margin-top: 28px;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 14px 30px rgba(15, 38, 54, 0.08);
+  }
+
+  .dashboardSlides {
+    position: relative;
+    height: 360px;
+    background: #eef5f8;
+  }
+
+  .dashboardSlide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+  }
+
+  .dashboardSlide.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .dashboardSlide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .dashboardSlideCaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 18px 22px 16px;
+    background: linear-gradient(to top, rgba(9, 29, 42, 0.72), rgba(9, 29, 42, 0.15));
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .dashboardSlideCaption span {
+    font-size: 12px;
+    opacity: 0.8;
+    font-weight: 500;
+  }
+
+  .dashboardSlideshowDots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px 16px;
+    background: #fff;
+  }
+
+  .dashboardDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #cbd7e3;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .dashboardDot.active {
+    background: var(--primary);
+    transform: scale(1.15);
+  }
+
+  .dashboardImageModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 18, 25, 0.72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    padding: 24px;
+  }
+
+  .dashboardImageModal.show {
+    display: flex;
+  }
+
+  .dashboardImageModalBox {
+    position: relative;
+    max-width: min(1200px, 92vw);
+    max-height: 88vh;
+    background: rgba(255,255,255,0.96);
+    border-radius: 16px;
+    padding: 14px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+  }
+
+  .dashboardImageModalBox img {
+    display: block;
+    max-width: 100%;
+    max-height: 82vh;
+    width: auto;
+    height: auto;
+    border-radius: 10px;
+    object-fit: contain;
+  }
+
+  .dashboardImageModalClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(16, 38, 46, 0.92);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .card {
+    padding: 16px;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(50, 80, 120, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .card:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-6px);
+    box-shadow: 0 18px 26px rgba(20, 44, 62, 0.12);
+    border-color: rgba(18, 92, 124, 0.25);
+  }
+
+  .card b {
+    display: block;
+    font-size: 26px;
+    color: var(--ok);
+  }
+
+  /* Dashboard card color variants with gradients, white text, and accent borders */
+  .card.patients { background: linear-gradient(180deg,#ff8c42,#ff6b00); color: #fff; border: 3px solid #cc5800 }
+  .card.patients b, .card.patients span { color: #fff }
+  .card.waiting { background: linear-gradient(180deg,#ff7aa3,#c2185b); color: #fff; border: 3px solid #a31547 }
+  .card.waiting b, .card.waiting span { color: #fff }
+  .card.beds { background: linear-gradient(180deg,#5fb0ff,#2b7bd3); color: #fff; border: 3px solid #185f9f }
+  .card.beds b, .card.beds span { color: #fff }
+  .card.members { background: linear-gradient(180deg,#61b878,#1f6f3f); color: #fff; border: 3px solid #1a5a35 }
+  .card.members b, .card.members span { color: #fff }
+  .card.wards { background: linear-gradient(180deg,#61b878,#1f6f3f); color: #fff; border: 3px solid #1a5a35 }
+  .card.wards b, .card.wards span { color: #fff }
+  .card.supplier, .card.small { background: linear-gradient(180deg,#61b878,#1f6f3f); color: #fff; border: 3px solid #1a5a35 }
+  .card.supplier b, .card.supplier span, .card.small b, .card.small span { color: #fff }
+  .card.large { grid-column: span 2; }
+  .card.big { grid-column: span 2; }
+  .card.medium { grid-column: span 1; }
+  .card.small { grid-column: span 1; font-size:13px; padding:10px }
+
+  .card span {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.25);
+  }
+
+  /* ensure numbers are white on colored cards */
+  .card.patients b, .card.waiting b, .card.beds b, .card.members b, .card.wards b, .card.supplier b, .card.small b { color: #fff; text-shadow: 0 1px 0 rgba(0,0,0,0.25) }
+
+  h2 {
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--bd);
+    color: var(--primary-dk);
+    font-size: 18px;
+  }
+
+  table {
+    width: 100%;
+    margin-top: 8px;
+    border-collapse: collapse;
+    background: #fff;
+    font-size: 13px;
+  }
+
+  th,
+  td {
+    padding: 7px 9px;
+    border: 1px solid var(--bd);
+    text-align: left;
+  }
+
+  th {
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+  }
+
+  tr:hover td {
+    background: #f7fafd;
+  }
+
+  .tableWindow {
+    position: relative;
+    margin: 18px 0;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(15, 38, 54, 0.10);
+    overflow: hidden;
+    user-select: none;
+  }
+
+  .tableWindowHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px 14px;
+    background: linear-gradient(90deg, var(--primary-dk), var(--primary));
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15px;
+    cursor: default;
+  }
+
+  .tableWindowBody {
+    max-height: 68vh;
+    overflow: auto;
+    background: #fff;
+  }
+
+  .tableWindow table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 980px;
+  }
+
+  .grid2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+  }
+
+  .grid2 label {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 12px;
+    color: #456;
+  }
+
+  .grid2 input,
+  .grid2 select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid var(--bd);
+    border-radius: 5px;
+    font-size: 13px;
+  }
+
+  /* The upload/edit modal's form (#upload-form-root, class="grid2") gets
+     its own distinct card look — separate from whatever the global
+     light/dark toggle is doing — so it reads as a deliberately designed
+     panel rather than a bare list of browser-default inputs. Matches the
+     rounded-card + accent-border language used by .chartCard/.settingsCard
+     on the dashboard. Scoped to .wdBox .grid2 only: the sole other place
+     .grid2 appears is the hidden legacy per-page containers (display:none),
+     so this never touches anything else. */
+  .wdBox .grid2 {
+    background: linear-gradient(180deg, #f8fbff 0%, #eef4fc 100%);
+    border: 1px solid rgba(25, 76, 128, 0.14);
+    border-left: 4px solid var(--primary);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+
+  .wdBox .grid2 label {
+    color: var(--primary-dk);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  .wdBox .grid2 input,
+  .wdBox .grid2 select,
+  .wdBox .grid2 textarea {
+    background: #ffffff;
+    border: 1px solid var(--bd);
+    border-radius: 7px;
+    padding: 8px 10px;
+    transition: border-color .15s ease, box-shadow .15s ease;
+  }
+
+  .wdBox .grid2 input:focus,
+  .wdBox .grid2 select:focus,
+  .wdBox .grid2 textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 94, 184, 0.15);
+  }
+
+  .wdBox .grid2 input[type="file"] {
+    padding: 6px;
+    background: #fff;
+  }
+
+  #uploadDialogBody {
+    max-height: 72vh;
+    overflow: auto;
+  }
+
+  #upload-form-root {
+    width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+  }
+
+  .req-item-row {
+    min-width: 680px;
+    width: max-content;
+    box-sizing: border-box;
+  }
+
+  .req-item-row > div {
+    min-width: 0;
+  }
+
+  .req-item-row input {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .btnrow {
+    margin-top: 10px;
+  }
+
+  button,
+  .infoBtn,
+  .printBtn,
+  .NothingBtn {
+    box-sizing: border-box;
+    font: inherit;
+  }
+
+  button.act,
+  button.del,
+  .infoBtn,
+  .printBtn,
+  .NothingBtn {
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  button.act {
+    background: var(--primary-dk);
+    color: #fff;
+  }
+
+  button.act:hover {
+    background: var(--primary-dk);
+  }
+
+  button.del {
+    background: var(--warn);
+    color: #fff;
+  }
+
+  .infoBtn {
+    padding: 6px 10px;
+    min-height: 30px;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+  }
+
+  .printBtn,
+  .NothingBtn {
+    min-height: 34px;
+  }
+
+  .printBtn {
+    background: var(--ok);
+    color: #fff;
+  }
+
+  .NothingBtn {
+    background: var(--warn);
+    color: #fff;
+  }
+
+  .searchWrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+  }
+
+  .search {
+    width: 260px;
+    padding: 7px;
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  .searchType {
+    width: 180px;
+    padding: 7px;
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+    color: #22303f;
+  }
+
+  .beds {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 14px;
+  }
+
+  .wardbox {
+    padding: 12px;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .wardbox:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(-2deg) translateY(-5px);
+    box-shadow: 0 16px 24px rgba(20, 44, 62, 0.12);
+    border-color: rgba(18, 92, 124, 0.24);
+  }
+
+  .wardbox h3 {
+    margin: 0 0 6px;
+    font-size: 14px;
+    color: var(--primary-dk);
+  }
+
+  .bar {
+    height: 10px;
+    margin: 6px 0;
+    background: #e3eaf3;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .bar div {
+    height: 100%;
+    background: var(--primary);
+  }
+
+  .free {
+    color: var(--ok);
+    font-weight: 600;
+  }
+
+  .full {
+    color: var(--warn);
+    font-weight: 600;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 2px 7px;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+    border-radius: 10px;
+    font-size: 11px;
+  }
+
+  .bed-mode-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #678;
+    font-size: 12px;
+  }
+
+  .bed-block-panel {
+    padding: 16px;
+    border: 1px solid var(--bd);
+    border-radius: 12px;
+    background: #fff;
+  }
+
+  .bed-block-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .bed-block-toolbar h3 { margin: 0 0 4px; color: var(--primary-dk); }
+  .bed-block-toolbar p { margin: 0; color: #678; font-size: 12px; }
+  .bed-block-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+  .bed-block-filters label { display: grid; gap: 4px; color: #456; font-size: 11px; font-weight: 600; }
+  .bed-block-filters select { min-width: 150px; }
+  .bed-block-legend { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0 10px; color: #456; font-size: 12px; }
+  .bed-block-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .legend-dot { width: 10px; height: 10px; display: inline-block; border-radius: 50%; }
+  .legend-dot.available { background: #b9efcf; }
+  .legend-dot.occupied { background: #f5c2c7; }
+  .legend-dot.attention { background: #ffe29a; }
+  .bed-block-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(145px, 1fr)); gap: 10px; }
+  .bed-block { min-height: 132px; padding: 12px; display: flex; flex-direction: column; gap: 7px; border: 2px solid #6d7784; border-radius: 12px; color: #22303f; cursor: default; transition: transform 120ms ease, box-shadow 120ms ease; }
+  .bed-block[draggable="true"] { cursor: grab; }
+  .bed-block[draggable="true"]:active { cursor: grabbing; }
+  .bed-block:hover { transform: translateY(-2px); box-shadow: 0 7px 14px rgba(20, 44, 62, 0.12); }
+  .bed-block.available { background: #b9efcf; }
+  .bed-block.occupied { background: #f5c2c7; }
+  .bed-block.attention { background: #ffe29a; }
+  .bed-block-top { display: flex; justify-content: space-between; gap: 5px; font-size: 12px; }
+  .bed-block-top span { font-size: 10px; opacity: .75; }
+  .bed-block-icon { font-size: 31px; line-height: 1; text-align: center; transform: rotate(90deg); }
+  .bed-block small { min-height: 28px; font-size: 11px; line-height: 1.3; }
+  .bed-block-note { margin: 12px 0 0; color: #678; font-size: 11px; }
+  .bed-block-empty { color: #678; font-size: 13px; }
+
+  body.dark-mode .bed-block-panel { background: #161b22; }
+  body.dark-mode .bed-block-toolbar h3 { color: #58a6ff; }
+  body.dark-mode .bed-block-toolbar p,
+  body.dark-mode .bed-block-note,
+  body.dark-mode .bed-block-filters label,
+  body.dark-mode .bed-block-legend { color: #fff; }
+
+  /* ===== Header and navigation styles ===== */
+  #authBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px;
+    border: 1px solid rgba(9, 108, 148, 0.15);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--primary-dk);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 0;
+    box-shadow: 0 6px 18px rgba(17, 64, 82, 0.08);
+  }
+
+  #authBtn .authAvatar {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 1;
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+
+  /* Uploaded profile photo, sized to fill the round header button. */
+  #authBtn .authAvatar .authAvatarImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #userProfileOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(8, 24, 39, 0.38);
+  }
+
+  #userProfileOverlay.show {
+    display: flex;
+  }
+
+  .userProfileBox {
+    width: min(360px, 90vw);
+    background: #fff;
+    border-radius: 12px;
+    padding: 22px 20px 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.22);
+    transition: transform 0.18s ease, box-shadow 0.22s ease;
+  }
+
+  .userProfileBox:hover {
+    transform: perspective(1000px) rotateX(1deg) rotateY(-1deg) translateY(-3px);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  }
+
+  .userProfileTop {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .userProfileAvatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+    display: grid;
+    place-items: center;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .userProfileMeta {
+    font-size: 12px;
+    color: #567;
+  }
+
+  /* ===== Authentication panel styles ===== */
+  #authOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #0054b3 0%, #0051a8 100%);
+    overflow: hidden;
+  }
+
+  #authOverlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at center, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 18%, transparent 19%, transparent 100%),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 100%),
+      linear-gradient(rgba(255,255,255,0.03) 0 1px, transparent 1px 100%);
+    background-size: 120px 120px, 32px 32px, 32px 32px;
+    opacity: 0.6;
+  }
+
+  .authBrand {
+    position: absolute;
+    top: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 1;
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+
+  .authBadge {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    border: 3px solid rgba(255,255,255,0.8);
+    display: grid;
+    place-items: center;
+    background: rgba(255,255,255,0.08);
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    transform: rotate(45deg);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .authBadge::before {
+    content: "✚";
+    display: block;
+    transform: rotate(-45deg);
+  }
+
+  .authBrandText {
+    font-size: clamp(26px, 3vw, 40px);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    font-family: Georgia, 'Times New Roman', serif;
+    white-space: nowrap;
+  }
+
+  .authBox {
+    position: relative;
+    z-index: 2;
+    width: 320px;
+    padding: 30px 34px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+    transition: transform 0.18s ease, box-shadow 0.22s ease;
+  }
+
+  .authBox:hover {
+    transform: perspective(1000px) rotateX(1.5deg) rotateY(-1.5deg) translateY(-4px);
+    box-shadow: 0 16px 30px rgba(0, 0, 0, 0.28);
+  }
+
+  .authBox h2 {
+    margin-top: 0;
+    border: none;
+  }
+
+  .authBox input {
+    width: 100%;
+    margin: 6px 0;
+    padding: 9px;
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+
+  .authBox button.act {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .authSwitch {
+    margin-top: 12px;
+    color: #456;
+    font-size: 12.5px;
+    text-align: center;
+  }
+
+  .authSwitch a {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .authFooter {
+    margin-top: 14px;
+    text-align: center;
+    color: rgba(17, 30, 44, 0.72);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+  }
+
+  /* The login/register screen keeps its light appearance in every app theme. */
+  body.dark-mode #authOverlay,
+  body.dark-mode #authOverlay .authBox {
+    color: #22303f !important;
+  }
+
+  body.dark-mode #authOverlay .authBox {
+    background: #fff !important;
+    border-color: transparent !important;
+  }
+
+  body.dark-mode #authOverlay .authBox h2,
+  body.dark-mode #authOverlay .authSwitch,
+  body.dark-mode #authOverlay .authFooter {
+    color: #22303f !important;
+  }
+
+  body.dark-mode #authOverlay .authBox .authFooter .brandLink,
+  #authOverlay .authBox .authFooter .brandLink {
+    color: var(--primary) !important;
+    text-decoration: underline;
+  }
+
+  body.dark-mode #authOverlay .authBox .authSwitch a,
+  #authOverlay .authBox .authSwitch a {
+    color: var(--primary) !important;
+  }
+
+  body.dark-mode #authOverlay .authBox input,
+  body.dark-mode #authOverlay .authBox select {
+    background: #fff !important;
+    color: #22303f !important;
+    border-color: var(--bd) !important;
+    color-scheme: light;
+  }
+
+  #authOverlay .authBox input[type="password"],
+  #authOverlay .authBox #li-pass,
+  #authOverlay .authBox #rg-pass {
+    background: #0d1117 !important;
+    color: #fff !important;
+    border-color: #30363d !important;
+    color-scheme: dark;
+  }
+
+  #authOverlay .authBox input[type="password"]::placeholder,
+  #authOverlay .authBox #li-pass::placeholder,
+  #authOverlay .authBox #rg-pass::placeholder {
+    color: #d7dee8 !important;
+    opacity: 1;
+  }
+
+  #authOverlay .authBox input[type="password"]:-webkit-autofill,
+  #authOverlay .authBox input[type="password"]:-webkit-autofill:hover,
+  #authOverlay .authBox input[type="password"]:-webkit-autofill:focus,
+  #authOverlay .authBox #li-pass:-webkit-autofill,
+  #authOverlay .authBox #rg-pass:-webkit-autofill {
+    -webkit-text-fill-color: #fff !important;
+    -webkit-box-shadow: 0 0 0 1000px #0d1117 inset !important;
+    box-shadow: 0 0 0 1000px #0d1117 inset !important;
+    caret-color: #fff;
+  }
+
+  body.dark-mode #authOverlay .authBox button.act {
+    color: #fff !important;
+  }
+
+  .pageFooter {
+    text-align: center;
+    padding: 16px 12px 24px;
+    color: rgba(17, 30, 44, 0.72);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .brandLink {
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition: color 0.15s ease, opacity 0.15s ease;
+  }
+
+  .brandLink:hover {
+    color: var(--primary-dk);
+    opacity: 0.95;
+  }
+
+  .footerModal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7, 18, 28, 0.62);
+    z-index: 260;
+    padding: 20px;
+  }
+
+  .footerModal.show {
+    display: flex;
+  }
+
+  .footerModalBox {
+    width: min(760px, 92vw);
+    max-height: 80vh;
+    overflow: auto;
+    background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%);
+    border-radius: 14px;
+    padding: 18px 18px 12px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    border: 1px solid rgba(25, 76, 128, 0.12);
+  }
+
+  .footerModalTitle {
+    margin: 0 0 12px;
+    font-size: 20px;
+    color: var(--primary-dk);
+  }
+
+  .footerModalCredit {
+    margin: 12px 0 2px;
+    text-align: center;
+    color: #567;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  body.dark-mode .footerModalCredit { color: #22303f !important; }
+
+  .footerModalTableWrap {
+    background: linear-gradient(135deg, rgba(38, 123, 195, 0.06), rgba(86, 174, 255, 0.1));
+    border: 1px solid rgba(25, 76, 128, 0.12);
+    border-radius: 10px;
+    padding: 8px;
+  }
+
+  .footerModal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: rgba(255,255,255,0.82);
+  }
+
+  .footerModal th,
+  .footerModal td {
+    border: 1px solid var(--bd);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .footerModal th {
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+  }
+
+  .footerModalClose {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    border: none;
+    background: rgba(20, 78, 151, 0.12);
+    color: var(--primary-dk);
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+  }
+
+  /* Keep the Birth But With Me team modal identical in both themes. */
+  body.dark-mode .footerModalBox {
+    background: linear-gradient(180deg, #ffffff 0%, #f4f9ff 100%) !important;
+    color: #22303f !important;
+    border-color: rgba(25, 76, 128, 0.12) !important;
+  }
+
+  body.dark-mode .footerModalTitle,
+  body.dark-mode .footerModalTitle .brandLink {
+    color: var(--primary-dk) !important;
+  }
+
+  body.dark-mode .footerModalTableWrap {
+    background: linear-gradient(135deg, rgba(38, 123, 195, 0.06), rgba(86, 174, 255, 0.1)) !important;
+    border-color: rgba(25, 76, 128, 0.12) !important;
+  }
+
+  body.dark-mode .footerModal table,
+  body.dark-mode .footerModal tr,
+  body.dark-mode .footerModal td {
+    background: rgba(255, 255, 255, 0.82) !important;
+    color: #22303f !important;
+    border-color: var(--bd) !important;
+  }
+
+  body.dark-mode .footerModal th {
+    background: var(--primary-lt) !important;
+    color: var(--primary-dk) !important;
+    border-color: var(--bd) !important;
+  }
+
+  body.dark-mode .footerModalCredit {
+    color: #567 !important;
+  }
+
+  body.dark-mode .footerModalClose,
+  body.dark-mode .footerModalClose:hover,
+  body.dark-mode .footerModalClose:focus {
+    background: rgba(20, 78, 151, 0.12) !important;
+    color: var(--primary-dk) !important;
+  }
+
+  .paymentSummary {
+    margin: 12px 0 16px;
+    padding: 12px 14px;
+    background: linear-gradient(135deg, #eef6ff, #f8fbff);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    color: var(--primary-dk);
+    font-size: 13px;
+  }
+
+  .paymentSummary strong {
+    font-size: 15px;
+  }
+
+  .authErr {
+    min-height: 16px;
+    color: var(--warn);
+    font-size: 12px;
+  }
+
+  .staffWidget {
+    display: block;
+    margin-bottom: 20px;
+    border: 1px solid var(--bd);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  /* Dashboard block backgrounds */
+  .cards { background: #ffffff; padding:12px; border-radius:10px }
+  #dashboard .staffWidget { background: #ffffff; padding:12px; border: none; box-shadow: none }
+  #wardOverview { width:100%; border-collapse:collapse; background: #ffffff; border: none; border-radius:8px; overflow:hidden }
+  #dashboardSlideshow { background: #ffffff; padding:10px; border: none; box-shadow: none; border-radius:12px }
+
+  /* Remove shadows for dashboard cards but allow per-card borders (accent borders) */
+  #dashboard .card { box-shadow: none }
+
+  .staffList {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .staffList th, .staffList td {
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--bd);
+    text-align: left;
+    font-size: 13px;
+  }
+
+  .staffList th { background: linear-gradient(90deg, #f6f9ff, #ffffff); font-weight:700 }
+
+  .staffList tr:last-child td { border-bottom: none }
+
+  .staffList .status { color: var(--primary-dk); font-weight:600 }
+
+  .staffCard {
+    overflow: hidden;
+    background: #fff;
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(50, 80, 120, 0.08);
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .staffCard:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-5px);
+    box-shadow: 0 16px 24px rgba(20, 44, 62, 0.14);
+    border-color: rgba(18, 92, 124, 0.25);
+  }
+
+  .staffCard img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .staffCard .sc-body {
+    padding: 8px;
+  }
+
+  .staff-board-panel {
+    margin: 18px 0 24px;
+    padding: 16px;
+    border: 1px solid var(--bd);
+    border-radius: 12px;
+    background: #f8fbff;
+  }
+
+  .staff-board-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .staff-board-head h2 { margin: 0 0 4px; color: var(--primary-dk); }
+  .staff-board-head p { margin: 0; color: #678; font-size: 12px; }
+  .staff-board-permission { color: #678; font-size: 11px; }
+  .staff-board-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 12px; }
+  .staff-ward-space { position: relative; min-height: 300px; overflow: hidden; border: 2px dashed #aabbd0; border-radius: 10px; background: rgba(255,255,255,.78); }
+  .staff-ward-label { position: absolute; z-index: 2; inset: 10px 10px auto; display: grid; gap: 2px; pointer-events: none; }
+  .staff-ward-label strong { color: var(--primary-dk); font-size: 14px; }
+  .staff-ward-label span { color: #456; font-size: 12px; font-weight: 600; }
+  .staff-ward-label small { color: #789; font-size: 10px; }
+  .staff-board-card { position: absolute; z-index: 3; width: 108px; min-height: 62px; padding: 7px 8px; display: grid; align-content: center; gap: 2px; border: 2px solid rgba(34,48,63,.5); border-radius: 8px; background: var(--staff-card-color); color: #22303f; box-shadow: 0 5px 12px rgba(20,44,62,.1); transform: translate(0,0); }
+  .staff-board-card[draggable="true"] { cursor: grab; }
+  .staff-board-card[draggable="true"]:active { cursor: grabbing; }
+  .staff-board-card:hover { box-shadow: 0 8px 16px rgba(20,44,62,.18); }
+  .staff-board-card strong { overflow: hidden; font-size: 11px; line-height: 1.2; text-overflow: ellipsis; white-space: nowrap; }
+  .staff-board-card span { overflow: hidden; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+  .staff-board-card small { font-size: 9px; opacity: .72; }
+  .staff-ward-empty { position: absolute; inset: 50% 0 auto; text-align: center; color: #789; font-size: 11px; pointer-events: none; }
+
+  body.dark-mode .staff-board-panel { background: #161b22; border-color: #30363d; }
+  body.dark-mode .staff-board-head h2,
+  body.dark-mode .staff-ward-label strong { color: #58a6ff; }
+  body.dark-mode .staff-board-head p,
+  body.dark-mode .staff-board-permission,
+  body.dark-mode .staff-ward-label span,
+  body.dark-mode .staff-ward-label small,
+  body.dark-mode .staff-ward-empty { color: #fff; }
+  body.dark-mode .staff-ward-space { background: rgba(13,17,23,.72); border-color: #586779; }
+
+  .staffCard b {
+    display: block;
+    color: var(--primary-dk);
+    font-size: 13px;
+  }
+
+  .staffCard span {
+    color: var(--primary-dk);
+    opacity: 0.8;
+    font-size: 11px;
+  }
+
+  .infoBtn {
+    border: 1px solid var(--bd);
+    border-radius: 6px;
+    background: var(--primary-lt);
+    color: var(--primary-dk);
+  }
+
+  .infoBtn:hover {
+    background: var(--primary);
+    color: #fff;
+  }
+
+  .printBtn {
+    margin-top: 10px;
+  }
+
+  .NothingBtn {
+    margin-top: 10px;
+  }
+
+  .wdOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    overflow: auto;
+    padding: 40px 16px;
+    background: rgba(20, 30, 45, 0.55);
+  }
+
+  .wdOverlay.show {
+    display: flex;
+  }
+
+  .wdBox {
+    position: relative;
+    width: 100%;
+    max-width: 920px;
+    padding: 26px 30px 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  }
+
+  .wdClose {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    border: none;
+    background: none;
+    color: #678;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .wdClose:hover {
+    color: var(--warn);
+  }
+
+  .wdHead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--bd);
+  }
+
+  .wdMeta span {
+    display: inline-block;
+    margin-right: 16px;
+    color: #456;
+    font-size: 12.5px;
+  }
+
+  .supCard {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding: 12px 16px;
+    background: var(--primary-lt);
+    border: 1px solid var(--bd);
+    border-radius: 10px;
+    transition: transform 0.18s ease, box-shadow 0.22s ease, border-color 0.18s ease;
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0);
+  }
+
+  .supCard:hover {
+    transform: perspective(1000px) rotateX(2deg) rotateY(2deg) translateY(-4px);
+    box-shadow: 0 14px 22px rgba(20, 44, 62, 0.12);
+    border-color: rgba(18, 92, 124, 0.24);
+  }
+
+  .drugPhoto {
+    width: 110px;
+    height: 110px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #dfeaf6, #eef2f8);
+    border: 1px solid var(--bd);
+    color: var(--primary-dk);
+    font-size: 32px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+
+  .drugPhoto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .supCard img {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  table img {
+    width: 58px;
+    height: 48px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--bd);
+    background: #f7f9fc;
+    display: block;
+  }
+
+  .wdSectionTitle {
+    margin: 0 0 8px;
+    color: var(--primary-dk);
+    font-size: 15px;
+  }
+
+  .shiftTag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+
+  .sh-Early {
+    background: #e3f0e6;
+    color: var(--ok);
+  }
+
+  .sh-Late {
+    background: #fdf1da;
+    color: #a5720c;
+  }
+
+  .sh-Night {
+    background: #e6e9f5;
+    color: #3d4ba0;
+  }
+
+  .sh-Off {
+    background: #f1f1f1;
+    color: #888;
+  }
+
+  .wdNote {
+    margin-top: 10px;
+    color: #889;
+    font-size: 11.5px;
+    font-style: italic;
+  }
+
+/* ===== Toast notifications ===== */
+.toastHost {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #22303f;
+  color: #fff;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.toast.show { opacity: 1; transform: translateY(0); }
+.toast-error { background: var(--warn); }
+.toast-icon { font-size: 14px; }
+
+body.dark-mode .toast { background: #0e1a2b; border: 1px solid rgba(255,255,255,0.08); }
+
+/* ===== Settings page ===== */
+.settingsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.settingsCard {
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+body.dark-mode .settingsCard { background: #0e1a2b; border-color: rgba(255,255,255,0.08); }
+
+.settingsCard h3 {
+  margin: 0 0 10px;
+  color: var(--primary-dk);
+  font-size: 14px;
+}
+
+.settingsRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed var(--bd);
+}
+
+.settingsRow:last-child { border-bottom: none; }
+.settingsRow label { font-size: 13px; color: #456; }
+
+.statusPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.statusPill.ok { background: #e3f0e6; color: var(--ok); }
+.statusPill.bad { background: #fbe6e3; color: var(--warn); }
+
+.statusTable { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.5px; }
+.statusTable th, .statusTable td { border: 1px solid var(--bd); padding: 6px 8px; text-align: left; }
+.statusTable th { background: var(--primary-lt); color: var(--primary-dk); }
+
+/* Compact table density preference (Settings > Preferences) */
+body.density-compact table th,
+body.density-compact table td { padding: 3px 6px; font-size: 12px; }
+
+/* ===== Dashboard charts ===== */
+.chartsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 18px 0 24px;
+}
+
+.chartCard {
+  background: #fff;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  padding: 14px;
+}
+
+body.dark-mode .chartCard { background: #0e1a2b; border-color: rgba(255,255,255,0.08); }
+
+.chartCard h3 {
+  margin: 0 0 10px;
+  color: var(--primary-dk);
+  font-size: 14px;
+}
+
+.chartCardHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.chartCardHead h3 { margin: 0 0 10px; }
+
+.chartTypeSwitch {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.chartTypeBtn {
+  border: 1px solid var(--bd);
+  background: #fff;
+  color: #456;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+}
+
+.chartTypeBtn:hover { border-color: var(--primary); }
+.chartTypeBtn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+body.dark-mode .chartTypeBtn { background: #0e1a2b; border-color: rgba(255,255,255,0.12); color: #cdd8e6; }
+body.dark-mode .chartTypeBtn.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+
+.chartCard .apexcharts-canvas { margin: 0 auto; }
